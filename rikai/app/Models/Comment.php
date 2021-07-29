@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use LikeComment;
+
+class Comment extends Model
+{
+    use HasFactory;
+
+    public function user() {
+        return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function review() {
+        return $this->belongsTo(Review::class,'review_id');
+    }
+
+    public function likeComments() {
+        return $this->hasMany(LikeComment::class,'comment_id');
+    }
+}
