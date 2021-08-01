@@ -146,8 +146,14 @@
         'Forget_password'=>'Quên mật khẩu',
         'Or_via_social'=>'Qua mạng xã hội',
         'Share it'=>'Chia sẻ',
-        ''=>'',
-        ''=>'',
-        ''=>'',
+        'Email'=>'Email của người dùng',
+        'Logout'=>'Đăng xuất',
+        'Confirm_Password'=>'Xác nhận lại mật khẩu',
+        'required' => 'Bạn cần điền vào trường :attribute ',
+        'unique' => ':attribute đã tồn tại ',
+        'confirmed' => ':attribute không trùng khớp',
+        'min' => [
+            'string' => ':attribute phải có ít nhất :min chữ cái',
+        ],
     ]
 ?>

@@ -34,3 +34,5 @@ Route::resource('book',BookController1::class);
 Route::resource('home',HomePageController1::class);
 Route::resource('profile',ProfileController1::class);
 Route::resource('comment',CommentController1::class);
+Auth::routes();
+
