@@ -8491,3 +8491,8 @@ td:last-child {
 a h3 {
   text-align: right;
 }
+.btn-search {
+  height: 46px;
+  color: #00b9ef;
+  background-color: #233a50;
+}

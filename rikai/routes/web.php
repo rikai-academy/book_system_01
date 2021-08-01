@@ -35,4 +35,4 @@ Route::resource('home',HomePageController1::class);
 Route::resource('profile',ProfileController1::class);
 Route::resource('comment',CommentController1::class);
 Auth::routes();
-
+Route::get('search',[BookController1::class,'search']);

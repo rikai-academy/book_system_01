@@ -92,15 +92,19 @@
                               <div class="col-md-4 col-xs-12 col-sm-12">
                                  <div class="sb-it">
                                     <h6>{{__('message.Author')}}: </h6>
-                                    <p><a href="#">Joss Whedon,</a> <a href="#">Stan Lee</a></p>
+                                    <p><a href="#">{{$book->author}}</a>
                                  </div>
                                  <div class="sb-it">
                                     <h6>{{__('message.Category_Book')}}:</h6>
-                                    <p><a href="#">{{__('message.Action')}}, </a> <a href="#"> Sci-Fi,</a> <a href="#">{{__('message.Adventure')}}</a></p>
+                                    <p>
+                                       @foreach($categorys as $category)
+                                       <a href="#">{{__("message.$category->title")}} </a>
+                                       @endforeach
+                                    </p>
                                  </div>
                                  <div class="sb-it">
                                     <h6>{{__('message.Release_Date')}}:</h6>
-                                    <p>{{__('message.May')}} 1, 2015 (U.S.A)</p>
+                                    <p>{{__('message.May')}} {{$book->publish_at}}</p>
                                  </div>
                                  <div class="ads">
                                     <img src="images/uploads/ads1.png" alt="">

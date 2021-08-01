@@ -144,5 +144,10 @@
         'Or_via_social'=>'Or via social',
         'Or_via_social'=>'Qua mạng xã hội',
         'Share_it'=>'Share it',
+        'Search_book'=>'Search book',
+        'is_not_null'=>'This field is not null',
+        'number_of_page'=>'number of page',
+        'price'=>'price',
+        'no_book'=>'Could not find the book you were looking for',
     ]
 ?>
