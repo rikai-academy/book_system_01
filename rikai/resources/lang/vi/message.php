@@ -160,7 +160,16 @@
         'number_of_page'=>'Số trang',
         'price'=>'giá',
         'no_book'=>'Không có sách bạn tìm',
-        
-        'needLogin' => 'Bạn cần đăng nhập để sử dụng chức năng này'
+        'needLogin' => 'Bạn cần đăng nhập để sử dụng chức năng này',
+        'title_is_not_null'=>'Trường tiêu đề này là bắt buộc',
+        'body_is_not_null'=>'Trường nội dung này là bắt buộc',
+        'rate_is_not_null'=>'Đánh giá sao là bắt buộc',
+        'add_review_success'=>'Thêm đánh giá thành công',
+        'update_review_success'=>'Cập nhật đánh giá thành công',
+        'delete_review_success'=>'Xóa đánh giá thành công ',
+        'sufficient_permissions'=>'Bạn không có đủ quyền',
+        'overview_tony'=>' Tony Stark tạo ra Chương trình Ultron để bảo vệ thế giới, nhưng khi chương trình gìn giữ hòa bình trở nên thù địch, The Avengers bắt tay vào hành động để cùng nhau cố gắng đánh bại một kẻ thù gần như không thể. Những anh hùng mạnh nhất của Trái đất phải cùng nhau một lần nữa để bảo vệ thế giới khỏi sự tuyệt chủng toàn cầu.',
+        'this_is'=>'Đây là một trong những bộ phim yêu thích của tôi từ MCU. Việc giới thiệu các Nhân vật mới cả tốt lẫn xấu cũng làm cho bộ phim trở nên hấp dẫn hơn. để các nhân vật có nhiều câu chuyện ngược hơn cũng có thể giúp khán giả liên hệ nhiều hơn với các nhân vật khác nhau tốt hơn và nó kết nối sự gắn kết giữa khán giả và diễn viên hoặc nhân vật. Tôi đã xem bộ phim ba lần không làm phiền tôi ở đây vì nó là ly kỳ và thú vị mỗi lần tôi xem nó. Nói cách khác, bộ phim hay hơn nhiều so với các bộ phim trước (và tôi thực sự yêu thích mọi thứ của Marvel), cốt truyện tuyệt vời (họ thực sự thể hiện mình trong mỗi bộ phim, không có vấn đề gì khi xem nó nhiều hơn một lần.',
+        'Best_Marvel'=>'Phim Marvel hay nhất theo ý kiến của tôi',
     ]
 ?>

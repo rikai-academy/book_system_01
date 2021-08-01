@@ -149,6 +149,16 @@
         'price'=>'price',
         'no_book'=>'Could not find the book you were looking for',
         'needLogin' => 'You need to login to use this function',
-        'Logout' => 'Logout'
+        'Logout' => 'Logout',
+        'title_is_not_null'=>'title is not null',
+        'body_is_not_null'=>'body is not null',
+        'rate_is_not_null'=>'rate is not null',
+        'add_review_success'=>'Add review success',
+        'update_review_success'=>'Update review success',
+        'delete_review_success'=>'delete review success',
+        'sufficient_permissions'=>'You have not sufficient permissions',
+        'overview_tony'=>'Tony Stark creates the Ultron Program to protect the world, but when the peacekeeping program becomes hostile, The Avengers go into action to try and defeat a virtually impossible enemy together. Earth s mightiest heroes must come together once again to protect the world from global extinction.',
+        'this_is'=>'This is by far one of my favorite movies from the MCU. The introduction of new Characters both good and bad also makes the movie more exciting. giving the characters more of a back story can also help audiences relate more to different characters better, and it connects a bond between the audience and actors or characters. Having seen the movie three times does not bother me here as it is as thrilling and exciting every time I am watching it. In other words, the movie is by far better than previous movies (and I do love everything Marvel), the plotting is splendid (they really do out do themselves in each film, there are no problems watching it more than once.',
+        'Best_Marvel'=>'Best Marvel movie in my opinion',
     ]
 ?>

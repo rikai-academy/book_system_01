@@ -73,8 +73,11 @@
                </li>
                <li><a href="#">{{__('message.Help')}}</a></li>
                @guest
-               <li class="loginLink"><a href="#">{{__('message.LOG_In')}}</a></li>
+               <li class="loginLink" id="loginLink"><a href="#">{{__('message.LOG_In')}}</a></li>
                <li class="btn signupLink"><a href="#">{{__('message.sign_up')}}</a></li>
+               @if(Session::has('openlogin') && Session::get('openlogin') == 5)
+                  <script src="js/login.js"></script>
+               @endif
                @else 
                <li class="dropdown first">
                   <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
