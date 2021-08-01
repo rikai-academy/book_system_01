@@ -183,6 +183,9 @@
         'add_review_fail'=>'Thêm đánh giá thất bại',
         'profileChangeSuccess' => 'Cập nhật hồ sơ thành công',
         'activity' => 'Hoạt động',
-        'atBook' => 'Tại sách'
+        'atBook' => 'Tại sách',
+        'List_User'=>'Tất Cả Người Dùng',
+        'no_activity'=>'Không có hoạt động nào',
+        'Users'=>'Người dùng',
     ]
 ?>

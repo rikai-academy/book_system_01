@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Activity;
+use App\Models\ActivityType;
+use App\Models\Book;
+use App\Models\Book_Category;
+
 
 class ProfileController extends Controller
 {
@@ -89,7 +94,16 @@ class ProfileController extends Controller
     }
 
     public function favoriteBook($userId){
-        return view('users.profile.favorite');
+        $user = User::UserId($userId)->first();
+        $activities = Activity::ActivityOfBooksUser()->get();
+        if ($activities){
+            $books = Book::BookActivityUser($user->id)->paginate(5);
+            $count = $books->count();
+            return view('users.profile.favorite',compact('user','books','count'));
+        } else {
+            $message = 'message.no_activity';
+            return redirect('/')->withMessage(__($message));
+        }
     }
 
     public function rateBook($userId){
@@ -98,5 +112,11 @@ class ProfileController extends Controller
 
     public function timeLine($userId){
         return view('users.profile.timeline');
+    }
+
+    public function listuser(){
+        $users = User::paginate(5);
+        $count = $users->count();
+        return view('users.profile.listuser',compact('users','count'));
     }
 }

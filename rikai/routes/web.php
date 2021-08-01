@@ -47,6 +47,8 @@ Route::middleware(['users'])->group(function () {
     Route::get('profile/timeline/{id}', [ProfileController1::class, 'timeLine']);
     Route::put('change_password', [ChangeController1::class, 'changePassword'])->name('change.password');
     Route::put('change_image', [ChangeController1::class, 'changeImage'])->name('change.image');
+    Route::get('listuser',[ProfileController1::class,'listuser']);
 });
 
 Route::resource('timeline', ActivityController::class);
+

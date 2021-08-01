@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
     use HasFactory;
-
     protected $table = "activity";
 
     public $timestamps = false;
@@ -24,5 +23,10 @@ class Activity extends Model
 
     public function type() {
         return $this->belongsTo(ActivityType::class,'type_id');
+    }
+
+    public function scopeActivityOfBooksUser($query){
+        return $query->join('users','activity.user_id','=','users.id')
+        ->join('book','activity.book_id','=','book.id');
     }
 }

@@ -32,4 +32,8 @@ class Book extends Model
         return $this->hasMany(Activity::class,'book_id')->latest('id');
     }
 
+    public function scopeBookActivityUser($query,$userid){
+        return $query->rightJoin('activity','book.id','=','activity.book_id')
+        ->where('user_id','=',$userid)->where('activity.type_id','=','5');
+    }
 }

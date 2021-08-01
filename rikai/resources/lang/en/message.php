@@ -172,6 +172,9 @@
         'add_review_fail'=>'Add review fail',
         'profileChangeSuccess' => 'Profile update success',
         'activity' => 'Activity',
-        'atBook' => 'At Book'
+        'atBook' => 'At Book',
+        'List_User'=>'List User',
+        'no_activity'=>'No activity',
+        'Users'=>'Users',
     ]
 ?>
