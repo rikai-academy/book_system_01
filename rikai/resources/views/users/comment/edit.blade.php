@@ -13,15 +13,14 @@
                <div class="blog-detail-ct">
                   <div class="comment-form">
                      <h4>{{__('message.Update_Comment')}}</h4>
-                     <form action="#">
-                        <div class="row">
-                           <div class="col-md-8">
-                              <input type="text" placeholder="{{__('message.Title')}}">
-                           </div>
-                        </div>
+                     <form action="{{url('comment/'.$comment->id)}}" method="post">
+                        @method('PUT')
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="reviewid" value="{{ $comment->review()->value('id') }}">
+                        <input type="hidden" name="userid" value="{{ $comment->user()->value('id') }}">
                         <div class="row">
                            <div class="col-md-12">
-                              <textarea name="message" id="" placeholder="{{__('message.Comments')}}"></textarea>
+                              <textarea name="body" id="" placeholder="{{__('message.Comments')}}">{{$comment->body}}</textarea>
                            </div>
                         </div>
                         <button class="submit" type="submit" placeholder="update">{{__('message.Update')}}</button>
