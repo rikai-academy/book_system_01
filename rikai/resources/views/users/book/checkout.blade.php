@@ -51,6 +51,7 @@
                   </div>
                   <div class="row">
                      <div class="col-md-2">
+                        <input type="hidden" name="status" value="pending">
                         <button class="submit" type="submit" placeholder="update">{{__('message.Checkout')}}</button>
                      </div>
                   </div>

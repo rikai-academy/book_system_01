@@ -19,3 +19,5 @@
 <script src="{{ asset('admin/js/typeahead.js') }}"></script>
 <script src="{{ asset('admin/js/select2.js') }}"></script>
 <script src="{{ asset('admin/js/custom.js') }}"></script>
+<script src="{{ asset('admin/js/cart.js') }}"></script>
+<script src="{{ asset('admin/js/cartItem.js') }}"></script>
