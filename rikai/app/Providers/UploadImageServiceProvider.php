@@ -3,10 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Library\Services\UploadImageService;
-use App\Library\Services\Contracts\UploadImageServiceInterface;
+use App\Library\Services\UploadimageService;
+use App\Library\Services\Contracts\UploadimageServiceInterface;
 
-class UploadImageServiceProvider extends ServiceProvider
+class UploadimageServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -26,6 +26,6 @@ class UploadImageServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        $this->app->bind(UploadImageServiceInterface::class,UploadImageService::class);
+        $this->app->bind(UploadimageServiceInterface::class,UploadimageService::class);
     }
 }

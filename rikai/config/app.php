@@ -179,7 +179,7 @@ return [
         App\Providers\UserServiceProvider::class,
         App\Providers\ActivityServiceProvider::class,
         App\Providers\CartServiceProvider::class,
-        App\Providers\UploadImageServiceProvider::class,
+        App\Providers\UploadimageServiceProvider::class,
     ],
 
     /*

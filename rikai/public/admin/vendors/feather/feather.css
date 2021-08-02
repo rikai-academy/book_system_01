@@ -569,4 +569,8 @@
 
 .icon-ellipsis:before {
   content: "\e129";
+
+}
+.imageprofile{
+  width: 400px;
 }

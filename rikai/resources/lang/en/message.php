@@ -251,6 +251,9 @@
         'quantity_is_not_null'=>'Quantity is not null',
         'all_book'=>'All book',
         'delete_category_book_fail'=>'Delete category book fail',
-
+        'price_is_not_null'=>'Price is not null',
+        'update_profile_success'=>'Update profile success',
+        'update_profile_fail'=>'Update profile fail',
+        'no_profile'=>'No Profile',
     ]
 ?>

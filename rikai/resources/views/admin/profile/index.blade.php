@@ -11,19 +11,19 @@
             <form class="forms-sample">
                <div class="form-group">
                   <label for="exampleInputName1">{{__('message.Username')}}</label>
-                  <input type="text" class="form-control" id="exampleInputName1" placeholder="{{__('message.Username')}}">
+                  <input type="text" class="form-control" id="exampleInputName1" placeholder="{{__('message.Username')}}" value="{{$user->name}}"  readonly>
                </div>
                <div class="form-group">
                   <label for="exampleInputEmail3">{{__('message.Email_Address')}}</label>
-                  <input type="email" class="form-control" id="exampleInputEmail3" placeholder="{{__('message.Email_Address')}}">
+                  <input type="email" class="form-control" id="exampleInputEmail3" placeholder="{{__('message.Email_Address')}}" value="{{$user->email}}"  readonly>
                </div>
                <div class="form-group">
                   <label for="exampleInputPassword4">{{__('message.Password')}}</label>
-                  <input type="password" class="form-control" id="exampleInputPassword4" placeholder="{{__('message.Password')}}">
+                  <input type="password" class="form-control" id="exampleInputPassword4" placeholder="{{__('message.Password')}}" value="{{$user->password}}"  readonly>
                </div>
                <div class="form-group">
                   <label>{{__('message.Image_Profile')}}</label>
-                  <img src="https://picsum.photos/200" alt="Italian Trulli">
+                  <img class="imageprofile" src="{{asset('/upload/profile/'.Auth::user()->image)}}" alt="Italian Trulli">
                </div>
             </form>
          </div>
