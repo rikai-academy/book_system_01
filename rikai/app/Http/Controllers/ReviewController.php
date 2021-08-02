@@ -169,6 +169,7 @@ class ReviewController extends Controller
     public function likereview(Request $request, $reviewId){
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
+
         $like_review = LikeReview::where(['user_id'=>$data['user_id'],'review_id'=>$reviewId])->first();
         $review = Review::find($reviewId);
         $book = Book::where('id','=',$review->book_id)->first(); 

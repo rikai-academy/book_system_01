@@ -8533,3 +8533,10 @@ input:checked ~ label{
   background-color: #071829;
   color: #fd4;
 };
+/*-----follow-----*/
+li p{
+  color: #fd4;
+}
+.followed{
+  margin: 10px;
+}

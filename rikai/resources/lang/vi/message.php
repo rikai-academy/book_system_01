@@ -192,5 +192,15 @@
         'no_like'=>"Bạn chưa từng thích trước đó",
         'is_like_review'=>'Đã thích bài viết',
         'is_like_comment'=>'Đã thích bình luận',
+        'Follow'=>'Theo dõi',
+        'Unfollow'=>'Bỏ theo dõi',
+        'Following'=>'Được theo dõi',
+        'follow_fail'=>'Theo dõi thất bại',
+        'follow_success'=>'Theo dõi thành công',
+        'unfollow_success'=>'Bỏ theo dõi thành công',
+        'unfollow_fail'=>'Bỏ theo dõi thất bại',
+        'now_follow'=>'Bạn đang theo dõi',
+        'Followed'=>'Đã theo dõi',
+
     ]
 ?>

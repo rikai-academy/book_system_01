@@ -94,6 +94,7 @@ class ProfileController extends Controller
     }
 
     public function favoriteBook($userId){
+
         $user = User::UserId($userId)->first();
         $activities = Activity::ActivityOfBooksUser()->get();
         if ($activities){
