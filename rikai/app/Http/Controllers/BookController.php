@@ -8,6 +8,11 @@ use App\Models\Review;
 use App\Models\Book_Category;
 use App\Models\Category;
 use App\Http\Requests\SearchFormRequest;
+use App\Models\Activity;
+use stdClass;
+use App\Enums\FavoriteStatus;
+use App\Enums\ReadStatus;
+use App\Enums\ActivityType;
 
 class BookController extends Controller
 {
@@ -52,8 +57,7 @@ class BookController extends Controller
      */
     public function show($bookId)
     {
-        //
-        $book = Book::find($bookId)->first();
+        $book = Book::find($bookId);
         if($book){
         $book_id = $book->id;
         $category_book = Book_Category::where('book_id','=',$book_id)->get();
@@ -62,7 +66,9 @@ class BookController extends Controller
             $categorys = Category::where('id','=',$category_id)->get();
         }
         $reviews = Review::where('book_id','=',$book_id)->get();
-        return view('users.book.detail',compact('book','reviews','categorys'));
+        $data["activity"] = new stdClass;
+        $this->activityController($data["activity"],$book_id);
+        return view('users.book.detail',compact('book','reviews','categorys'))->with('data', $data);
         }else{
             $errors = 'message.no_book';
             return view('/')->withErrors(__($errors));
@@ -103,11 +109,13 @@ class BookController extends Controller
         //
     }
 
-    public function cart($bookId){
+    public function cart($bookId)
+    {
         return view('users.book.cart');
     }
 
-    public function checkout(){
+    public function checkout()
+    {
         return view('users.book.checkout');
     }
 
@@ -117,5 +125,21 @@ class BookController extends Controller
         ->orWhere('author','like','%'.$name.'%')->paginate(10);
         $total = count($books);
         return view('users.book.search',compact('books','total'));
+    }
+
+    private function activityController($data_activity,$book_id){
+        if (auth()->user()) {
+            $activity = Activity::where('user_id', auth()->user()->id)->where('book_id', $book_id)->latest('id')->first();
+            if ($activity) {
+                $data_activity->read_status = $activity->read_status;
+                $data_activity->favorite_status = $activity->favorite_status;
+            } else {
+                $data_activity->read_status = ReadStatus::NONE;
+                $data_activity->favorite_status = FavoriteStatus::NONE;
+            }
+        } else {
+            $data_activity->read_status = ReadStatus::NONE;
+            $data_activity->favorite_status = FavoriteStatus::NONE;
+        }
     }
 }

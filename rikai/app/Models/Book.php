@@ -24,4 +24,12 @@ class Book extends Model
         return $this->hasMany(BookCategory::class,'book_id');
     }
 
+    public function activities() {
+        return $this->hasMany(Activity::class,'book_id');
+    }
+
+    public function activity() {
+        return $this->hasMany(Activity::class,'book_id')->latest('id');
+    }
+
 }

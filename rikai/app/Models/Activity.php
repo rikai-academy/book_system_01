@@ -10,6 +10,10 @@ class Activity extends Model
 {
     use HasFactory;
 
+    protected $table = "activity";
+
+    public $timestamps = false;
+
     public function user() {
         return $this->belongsTo(User::class,'user_id');
     }

@@ -161,5 +161,6 @@
         'price'=>'giá',
         'no_book'=>'Không có sách bạn tìm',
         
+        'needLogin' => 'Bạn cần đăng nhập để sử dụng chức năng này'
     ]
 ?>

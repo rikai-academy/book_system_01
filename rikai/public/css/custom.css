@@ -1,0 +1,5 @@
+.social-btn button.active {
+  background-color: blue;
+  border: none;
+  color: white;
+}

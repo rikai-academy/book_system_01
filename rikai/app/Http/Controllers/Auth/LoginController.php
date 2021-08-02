@@ -38,4 +38,14 @@ class LoginController extends Controller
         $this->redirectTo = url()->previous();
         $this->middleware('guest')->except('logout');
     }
+
+    public function showLoginForm()
+    {
+        $view = property_exists($this, 'loginView') ? $this->loginView : 'auth.authenticate';
+
+        if (view()->exists($view)) {
+            return view($view);
+        }
+        return back()->with('message', __('message.needLogin'));
+    }
 }
