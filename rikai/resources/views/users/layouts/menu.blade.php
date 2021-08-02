@@ -72,8 +72,23 @@
                   </ul>
                </li>
                <li><a href="#">{{__('message.Help')}}</a></li>
+               @guest
                <li class="loginLink"><a href="#">{{__('message.LOG_In')}}</a></li>
                <li class="btn signupLink"><a href="#">{{__('message.sign_up')}}</a></li>
+               @else 
+               <li class="dropdown first">
+                  <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+                     {{ Auth::user()->name }} <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </a>
+                  <ul class="dropdown-menu level1">
+                     <li><a href="{{route('logout')}}"onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">{{ __('message.Logout') }}</a></li>
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                  </ul>
+               </li>
+               @endguest
             </ul>
          </div>
          <!-- /.navbar-collapse -->

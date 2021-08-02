@@ -3,17 +3,18 @@
    <div class="login-content">
       <a href="#" class="close">x</a>
       <h3>{{__('message.LOG_In')}}</h3>
-      <form method="post" action="#">
+      <form method="post" action="{{ route("login") }}">
+         @csrf
          <div class="row">
-            <label for="username">
-            {{__('message.Username')}}:
-            <input type="text" name="username" id="username" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+            <label for="email">
+            {{__('message.Email')}}:
+            <input type="email" name="email" id="email" placeholder="user@gmail.com"  required="required" />
             </label>
          </div>
          <div class="row">
             <label for="password">
             {{__('message.Password')}}:
-            <input type="password" name="password" id="password" placeholder="******" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+            <input type="password" name="password" id="password" placeholder="******" required="required" />
             </label>
          </div>
          <div class="row">
