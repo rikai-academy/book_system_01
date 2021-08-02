@@ -17,20 +17,20 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([[
-            'name' => 'test1',
-            'email' => 'test1@gmail.com',
-            'image' => 'https://picsum.photos/200',
+            'name' => 'Pham Phan Bang',
+            'email' => 'Phamphanbang@gmail.com',
+            'image' => 'default.jpg',
             'password' => Hash::make('123456789'),
         ],[
-            'name' => 'test2',
-            'email' => 'test2@gmail.com',
-            'image' => 'https://picsum.photos/200',
+            'name' => 'Minh Tran',
+            'email' => 'Minh@gmail.com',
+            'image' => 'default.jpg',
             'password' => Hash::make('123456789'),
         ]]);
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
-            'image' => 'https://picsum.photos/200',
+            'image' => 'default.jpg',
             'password' => Hash::make('123456789'),
             'role' => 'admin'
         ]);

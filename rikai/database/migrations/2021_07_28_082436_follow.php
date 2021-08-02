@@ -15,8 +15,11 @@ class Follow extends Migration
     {
         Schema::create('follow', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('follow_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('follow_id');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('follow_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -27,6 +30,6 @@ class Follow extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('follow');
     }
 }

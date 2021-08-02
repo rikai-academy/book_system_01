@@ -101,7 +101,7 @@ class UserController extends Controller
             $data["user"]->password = Hash::make($request->password); 
         }
         $data["user"]->save();
-        $data["user"]->update($request->except(['password']));
+        $data["user"]->update($request->except(['password','image']));
         return back()->with('data',$data)->with('profileChangeSuccess',__('message.profileChangeSuccess'));
     }
 
