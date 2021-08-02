@@ -33,11 +33,20 @@
    }
  }
 
+
  function follow($user){
    if(Auth::user()->isFollowing($user)){
       return __('message.Followed');
    }else{
       return __('message.Follow');
+   }
+ }
+
+ function categorybook(){
+   $categorys = DB::table('category')->get();
+   foreach($categorys as $category){
+   echo '<li><a href="'.route('categoryuser.edit',[$category->id]).'">'.__('message.'.$category->title).'</a></li>';
+
    }
  }
 ?>

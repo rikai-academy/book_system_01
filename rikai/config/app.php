@@ -178,7 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\UserServiceProvider::class,
         App\Providers\ActivityServiceProvider::class,
-        App\Providers\CartServiceProvider::class
+        App\Providers\CartServiceProvider::class,
+        App\Providers\UploadImageServiceProvider::class,
     ],
 
     /*

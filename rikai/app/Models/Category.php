@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use BookCategory;
+use App\Models\Book_Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +17,10 @@ class Category extends Model
     ];
 
     public function bookCategory() {
-        return $this->belongsTo(BookCategory::class,'category_id');
+        return $this->hasMany(Book_Category::class,'category_id');
+    }
+
+    public function books(){
+        return $this->belongsToMany(Book::class);
     }
 }

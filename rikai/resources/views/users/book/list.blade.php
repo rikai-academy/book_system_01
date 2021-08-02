@@ -15,7 +15,7 @@
             <div class="flex-wrap-movielist mv-grid-fw">
                @foreach($books as $book)
                <div class="movie-item-style-2 movie-item-style-1">
-                  <img src="{{$book->image}}" alt="">
+                  <img src="{{asset('/upload/book/'.$book->image)}}" class="output_image" alt="">
                   <div class="hvr-inner">
                      <a  href="{{route('book.show',[$book->id])}}"> {{__('message.Read_more')}} <i class="ion-android-arrow-dropright"></i> </a>
                   </div>

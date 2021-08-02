@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Follow;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Session;
+use App\Models\Category;
 
-class UserController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -58,9 +55,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($categoryid)
     {
         //
+        $category = Category::find($categoryid);
+        $books = $category->books()->get();
+        return view('users.book.list',compact('books'));
     }
 
     /**
@@ -84,37 +84,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function follow($userId, $followId){
-
-        $follow = Follow::FollowUser($userId, $followId)->first();
-
-        if($follow){
-            $message = 'message.follow_fail';
-            return redirect('listuser')->withMessage(__($message));
-        }else{
-            $data["follow"] = new Follow;
-            $data["follow"]->user_id = $userId;
-            $data["follow"]->follow_id = $followId;
-            $data["follow"]->save();
-            $message = 'message.follow_success';
-
-            return redirect()->route('listuser')->withMessage(__($message));
-
-        } 
-    }
-
-    public function unfollow($userId, $followId){
-
-        $follow = Follow::FollowUser($userId, $followId)->first();
-        if($follow){
-            $follow->delete();
-            $message = 'message.unfollow_success';
-            return redirect()->route('listuser')->withMessage(__($message));
-        }else{
-            $message = 'message.unfollow_fail';
-            return redirect()->route('listuser')->withMessage(__($message));
-        } 
     }
 }

@@ -12,31 +12,39 @@
                   <thead>
                      <tr>
                         <th>{{__('message.Id')}}</th>
+                        <th>{{__('message.Name_Category')}}</th>
                         <th>{{__('message.Title')}}</th>
                         <th>{{__('message.Author')}}</th>
                         <th>{{__('message.Image')}}</th>
-                        <th>{{__('message.Quantity')}}</th>
                         <th>{{__('message.price')}}</th>
                         <th>{{__('message.Action')}}</th>
                      </tr>
                   </thead>
                   <tbody>
+                     @foreach($books as $book)
                      <tr>
-                        <td>Jacob</td>
-                        <td>53275531</td>
-                        <td>12 May 2017</td>
-                        <td>12 May 2017</td>
-                        <td>12 May 2017</td>
-                        <td>12 May 2017</td>
+                        <td>{{$book->id}}</td>
                         <td>
-                           <a href="{{route('bookadmin.edit',[1])}}">
+                           @foreach($book->categorys as $category)
+                           {{$category->title}}
+                           @endforeach
+                        </td>
+                        <td>{{$book->title}}</td>
+                        <td>{{$book->author}}</td>
+                        <td>
+                           <img src="upload/book/{{$book->image}}">
+                        </td>
+                        <td>{{$book->price}}</td>
+                        <td>
+                           <a href="{{route('bookadmin.edit',[$book->id])}}">
                            <label class="badge badge-info">{{__('message.Edit')}}</label>
                            </a>
-                           <a>
+                           <a href="{{route('deletebook',[$book->id])}}">
                            <label class="badge badge-danger">{{__('message.Delete')}}</label>
                            </a>
                         </td>
                      </tr>
+                     @endforeach
                   </tbody>
                </table>
             </div>

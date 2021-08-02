@@ -41,10 +41,10 @@
                <div class="user-fav">
                   <p>{{__('message.Account_Details')}}</p>
                   <ul>
-                     <li><a href="{{url('profile/'.$user->id)}}">{{__('message.Profile',['name' => $user->name])}}</a></li>
+                     <li><a href="{{route('profile.show',[$user->id])}}">{{__('message.Profile',['name' => $user->name])}}</a></li>
                      <li class="active"><a href="{{ route('profile.favorite',[$user->id]) }}">{{__('message.Favorite_Book')}}</a></li>
-                     <li><a href="profile/ratebook/1">{{__('message.Rated_books')}}</a></li>
-                     <li><a href="{{ url('timeline/'.auth()->user()->id) }}">{{__('message.TimeLine_History')}}</a></li>
+                     <li><a href="{{ route('profile.ratebook',[auth()->user()->id]) }}">{{__('message.Rated_books')}}</a></li>
+                     <li><a href="{{ route('profile.timeline',[auth()->user()->id]) }}">{{__('message.TimeLine_History')}}</a></li>
                   </ul>
                </div>
                <div class="user-fav">
@@ -64,7 +64,7 @@
             <div class="flex-wrap-movielist user-fav-list">
                @foreach($books as $book)
                <div class="movie-item-style-2">
-                  <img src="{{$book->image}}" alt="">
+               <img src="{{asset('/upload/book/'.$book->image)}}" class="output_image" alt="">
                   <div class="mv-item-infor">
                      <h6><a href="#"> <span>{{$book->title}}</span></a></h6>
                      <p class="run-time"><span>{{__('message.Release')}}:{{$book->publish_at}}</span></p>
