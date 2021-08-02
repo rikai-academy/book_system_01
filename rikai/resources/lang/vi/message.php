@@ -264,10 +264,10 @@
         'add_book_success'=>'Thêm sách thành công',
         'add_book_fail'=>'Thêm sách thất bại',
         'delete_category_book_fail'=>'Xóa danh mục sách thất bại',
-
         'update_profile_success'=>'Cập nhật hồ sơ thành công',
         'update_profile_fail'=>'Cập nhật hồ sơ thất bại',
         'no_profile'=>'Không có hồ sơ cần tìm',
-
+        'registerSuccess' => 'Đăng ký thành công',
+        'search' => 'Tìm kiếm',
     ]
 ?>

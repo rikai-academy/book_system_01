@@ -3,10 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Library\Services\Contracts\UserServiceInterface;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\RegistrationRequest;
 
 class UserController extends Controller
 {
+
+    protected $userService;
+
+    public function __construct(UserServiceInterface $userServiceInterface)
+    {
+        $this->userService = $userServiceInterface;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +26,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
-        return view('admin.user.list');
+        $data["users"] = User::paginate(5);
+        return view('admin.user.list')->with('data',$data);
     }
 
     /**
@@ -25,7 +37,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
         return view('admin.user.add');
     }
 
@@ -35,9 +46,19 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegistrationRequest $request)
     {
-        //
+        $data["user"] = new User;
+        $data["user"]->name = $request->name;
+        $data["user"]->email = $request->email;
+        $data["user"]->password = Hash::make($request->password);
+        $data["user"]->save();
+        if($request->hasFile('image')){
+            $fileName = $this->userService->changeImage($request,$data["user"]->id);
+            $data["user"]->image = $fileName;
+            $data["user"]->save();
+        }
+        return redirect('admin/user/'.$data["user"]->id.'/edit')->with('data',$data)->with('registerSuccess',__('message.registerSuccess'));
     }
 
     /**
@@ -59,8 +80,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
-        return view('admin.user.add');
+        $data["user"] = User::find($id);
+        return view('admin.user.edit')->with('data',$data);
     }
 
     /**
@@ -70,9 +91,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-        //
+        $data["user"] = User::find($id);
+        if($request->hasFile('image')){
+            $data["user"]->image = $this->userService->changeImage($request,$id);
+        }
+        if($request->password){
+            $data["user"]->password = Hash::make($request->password); 
+        }
+        $data["user"]->save();
+        $data["user"]->update($request->except(['password']));
+        return back()->with('data',$data)->with('profileChangeSuccess',__('message.profileChangeSuccess'));
     }
 
     /**
@@ -83,7 +113,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        $data["users"] = User::all();
+        return redirect('admin/user')->with('data',$data);
     }
 
+    public function login(){
+        return view('admin.layout.login');
+    }
+
+    public function search(Request $request) {
+        $data["users"] = $this->userService->searchBy($request->search,$request->by);
+        return view('admin.user.list')->with('data',$data);
+    }
 }

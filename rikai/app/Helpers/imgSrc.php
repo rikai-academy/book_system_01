@@ -1,6 +1,5 @@
 <?php
-function imgSrc($data)
+function imgSrc($image = null)
 {
-    $imgsrc = $data["user"]->image ? asset('storage/image/' . $data["user"]->image) : 'images/uploads/user-img.png';
-    return $imgsrc;
+    return $image ? 'upload/user/'.$image : 'upload/user/default.jpg';
 }

@@ -87,9 +87,7 @@ class UserController extends Controller
     }
 
     public function follow($userId, $followId){
-
         $follow = Follow::FollowUser($userId, $followId)->first();
-
         if($follow){
             $message = 'message.follow_fail';
             return redirect('listuser')->withMessage(__($message));
@@ -101,12 +99,10 @@ class UserController extends Controller
             $message = 'message.follow_success';
 
             return redirect()->route('listuser')->withMessage(__($message));
-
         } 
     }
 
     public function unfollow($userId, $followId){
-
         $follow = Follow::FollowUser($userId, $followId)->first();
         if($follow){
             $follow->delete();

@@ -86,7 +86,6 @@ class User extends Authenticatable
         return $query->where('id','=',$userid);
     }
     
-
     public function isLikeReviews(Review $review){
         return !! $this->likeReviews()->where('review_id', $review->id)->count();
     }

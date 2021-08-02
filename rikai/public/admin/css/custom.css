@@ -1,0 +1,33 @@
+.output_image {
+  width: 200px;
+  height: 200px;
+  object-fit: scale-down;
+}
+
+.success {
+  color: rgb(9, 255, 0);
+}
+
+.fail {
+  color: red;
+}
+
+.display-hidden {
+  display: none;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.float-right {
+  float: right;
+}
+
+.custom-input:focus {
+  outline: none;
+}

@@ -50,6 +50,7 @@ Auth::routes();
 Route::get('search', [BookController1::class, 'search'])->name('search');
 
 
+
 Route::middleware(['users'])->group(function () {
     Route::get('addreview/{id}', [BookController1::class, 'addreview'])->name('add.review');
     Route::resource('review', ReviewController1::class)->except('show');
@@ -87,6 +88,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::resource('category',CategoryController1::class);
     Route::resource('user',UserController2::class);
     Route::resource('profileadmin',ProfileController2::class);
+    Route::post('search/user', [UserController2::class, 'search'])->name('admin.user.search');
     Route::resource('cart',CartController2::class);
 
     Route::get('buybook',[UserController2::class,'buybook']);
