@@ -28,6 +28,21 @@
                         <a href="#"><i class="ion-social-pinterest"></i></a>
                         <a href="#"><i class="ion-social-linkedin"></i></a>
                      </div>
+                     @if(!Auth::guest())
+                     <ul class="nav nav-pills">
+                        <li role="presentation">
+                           <a href="{{route('like.review',[$review->id])}}" class="like">{{__('message.Like')}}:
+                           {{$review->likeReviews()->count()}}
+                           <span class="fa fa-thumbs-up"></span>
+                           </a>
+                        </li>
+                        <li role="presentation">
+                           <a href="{{route('unlike.review',[$review->id])}}" class="like">{{__('message.Unlike')}}:
+                           <span class="fa fa-thumbs-down"></span>
+                           </a>
+                        </li>
+                     </ul>
+                     @endif
                      <div class="right-it">
                         <h4>{{__('message.Tags')}}</h4>
                         <a href="#">{{__('message.'.$categorys->title)}},</a>
@@ -49,7 +64,7 @@
                            <p>{{$comment->body}}</p>
                            <div>
                               <p>
-                                 <a class="rep-btn" href="{{url('comment/'.$comment->id.'/edit')}}">{{__('message.Edit')}}</a>
+                                 <a class="rep-btn" href="{{route('comment.edit',[$comment->id])}}">{{__('message.Edit')}}</a>
                               </p>
                               <p>
                               <form action="{{url('comment/'.$comment->id)}}" class="user" method="post">
@@ -58,6 +73,22 @@
                                  <input type="submit" class="deletecomment" value="{{__('message.Delete')}}">
                               </form>
                               </p>
+                              @if(!Auth::guest())
+                              <ul class="nav nav-pills">
+                                 <li role="presentation">
+                                    <a href="{{route('like.comment',[$comment->id])}}" class="like">
+                                    {{ comment($comment) }}:
+                                          {{$comment->likeComments()->count()}}
+                                    <span class="fa fa-thumbs-up"></span>
+                                    </a>
+                                 </li>
+                                 <li role="presentation">
+                                    <a href="{{route('unlike.comment',[$comment->id])}}" class="like">{{__('message.Unlike')}}:
+                                    <span class="fa fa-thumbs-down"></span>
+                                    </a>
+                                 </li>
+                              </ul>
+                              @endif
                            </div>
                         </div>
                      </div>
@@ -65,7 +96,7 @@
                   </div>
                   <div class="comment-form">
                      <h4>{{__('message.Leave_a_comment')}}</h4>
-                     <form action="{{url('comment')}}" method="post">
+                     <form action="{{route('comment.store')}}" method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="reviewid" value="{{ $review->id }}">
                         <input type="hidden" name="bookid" value="{{ $book->id }}">

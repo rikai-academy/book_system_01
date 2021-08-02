@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use LikeComment;
+use App\Models\LikeComment;
 
 class Comment extends Model
 {
@@ -18,6 +18,7 @@ class Comment extends Model
         'created_at',
         'update_at',
     ];
+
 
     public function user() {
         return $this->belongsTo(User::class,'user_id');

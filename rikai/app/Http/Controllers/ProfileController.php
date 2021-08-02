@@ -102,7 +102,7 @@ class ProfileController extends Controller
             return view('users.profile.favorite',compact('user','books','count'));
         } else {
             $message = 'message.no_activity';
-            return redirect('/')->withMessage(__($message));
+            return redirect()->route('index')->withMessage(__($message));
         }
     }
 

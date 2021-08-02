@@ -21,7 +21,7 @@
             <div class="movie-item-style-2">
                <img src="images/uploads/mv1.jpg" alt="">
                <div class="mv-item-infor">
-                  <h6><a href="{{ url('book/'.$book->id) }}">{{$book->title}}</a></h6>
+                  <h6><a href="{{ route('book.show',[$book->id]) }}">{{$book->title}}</a></h6>
                   <p class="run-time"> {{__('message.number_of_page')}}: {{$book->num_of_page}}    .     <span>{{__('message.price')}}: {{$book->price}} </span>    .     <span>{{__('message.Release')}}: {{$book->publish_at}}</span></p>
                   <p class="author">{{__('message.Author')}}: <a href="#">{{$book->author}}</a></p>
                </div>

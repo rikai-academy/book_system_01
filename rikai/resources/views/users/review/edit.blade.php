@@ -28,7 +28,7 @@
                   </p>
                </div>
                @endif
-               <form action="{{url('review/'.$review->id)}}" class="user" method="post">
+               <form action="{{route('review.update',[$review->id])}}" class="user" method="post">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   @method('PUT')
                   <h4>{{__('message.Review_Book')}}</h4>
@@ -72,7 +72,7 @@
                </form>
                <div class="row">
                   <div class="col-md-2">
-                     <form action="{{url('review/'.$review->id)}}" class="user" method="post">
+                     <form action="{{route('review.destroy',[$review->id])}}" class="user" method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         @method('DELETE')
                         <input class="submit" type="submit" value="{{__('message.Delete')}}">

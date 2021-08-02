@@ -17,7 +17,7 @@
                <div class="movie-item-style-2 movie-item-style-1">
                   <img src="{{$book->image}}" alt="">
                   <div class="hvr-inner">
-                     <a  href="{{url('book/'.$book->id)}}"> {{__('message.Read_more')}} <i class="ion-android-arrow-dropright"></i> </a>
+                     <a  href="{{route('book.show',[$book->id])}}"> {{__('message.Read_more')}} <i class="ion-android-arrow-dropright"></i> </a>
                   </div>
                   <div class="mv-item-infor">
                      <h6><a href="#">{{$book->title}}</a></h6>

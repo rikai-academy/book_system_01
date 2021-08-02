@@ -22,7 +22,7 @@
                   {{__('message.Home')}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </a>
                   <ul class="dropdown-menu level1">
-                     <li><a href="{{url('home')}}">{{__('message.Home')}} </a></li>
+                     <li><a href="{{route('home.index')}}">{{__('message.Home')}} </a></li>
                   </ul>
                </li>
                <li class="dropdown first">
@@ -30,9 +30,9 @@
                   {{__('message.Category_Book')}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </a>
                   <ul class="dropdown-menu level1">
-                     <li><a href="{{url('book')}}">{{__('message.Novel')}}</a></li>
-                     <li><a href="{{url('book')}}">{{__('message.Science')}}</a></li>
-                     <li class="it-last"><a href="{{url('book')}}">{{__('message.Manga')}}</a></li>
+                     <li><a href="{{route('book.index')}}">{{__('message.Novel')}}</a></li>
+                     <li><a href="{{route('book.index')}}">{{__('message.Science')}}</a></li>
+                     <li class="it-last"><a href="{{route('book.index')}}">{{__('message.Manga')}}</a></li>
                   </ul>
                </li>
                @auth
@@ -41,7 +41,7 @@
                   {{__('message.Profile',['name'=>auth()->user()->name])}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </a>
                   <ul class="dropdown-menu level1">
-                     <li><a href="{{url('profile/'.auth()->user()->id )}}">{{__('message.User_Profile')}}</a></li>
+                     <li><a href="{{route('profile.favorite',[auth()->user()->id] )}}">{{__('message.User_Profile')}}</a></li>
                      <li><a href="{{url('cart/1')}}">{{__('message.Cart')}}</a></li>
                   </ul>
                </li>
@@ -51,7 +51,7 @@
                   {{__('message.Users')}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </a>
                   <ul class="dropdown-menu level1">
-                     <li><a href="{{url('listuser')}}">{{__('message.List_User')}}</a></li>
+                     <li><a href="{{route('listuser')}}">{{__('message.List_User')}}</a></li>
                   </ul>
                </li>
             </ul>

@@ -7,12 +7,15 @@ use App\Models\Book;
 use App\Models\Review;
 use App\Models\Book_Category;
 use App\Models\Category;
+use App\Models\LikeReview;
+use App\Models\User;
 use App\Http\Requests\SearchFormRequest;
 use App\Models\Activity;
 use stdClass;
 use App\Enums\FavoriteStatus;
 use App\Enums\ReadStatus;
 use App\Enums\ActivityType;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -57,18 +60,19 @@ class BookController extends Controller
      */
     public function show($bookId)
     {
+        //
         $book = Book::find($bookId);
         if($book){
-        $book_id = $book->id;
-        $category_book = Book_Category::where('book_id','=',$book_id)->get();
-        foreach($category_book as $value){
-            $category_id = $value->category_id;
-            $categorys = Category::where('id','=',$category_id)->get();
-        }
-        $data["activity"] = new stdClass;
-        $this->activityController($data["activity"],$book_id);
-        $reviews = Review::where('book_id','=',$book_id)->paginate(2);
-        return view('users.book.detail',compact('book','reviews','categorys'))->with('data', $data);
+            $book_id = $book->id;
+            $category_book = Book_Category::where('book_id','=',$book_id)->get();
+            foreach($category_book as $value){
+                $category_id = $value->category_id;
+                $categorys = Category::where('id','=',$category_id)->get();
+            }
+            $data["activity"] = new stdClass;
+            $this->activityController($data["activity"],$book_id);
+            $reviews = Review::where('book_id','=',$book_id)->paginate(2);
+            return view('users.book.detail',compact('book','reviews','categorys'))->with('data', $data);
 
         }else{
             $errors = 'message.no_book';

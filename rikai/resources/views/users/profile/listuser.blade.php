@@ -22,7 +22,7 @@
                         <br>
                         <span>Email: {{$user->email}}</span>
                         <br>
-                        <h3><a href="{{url('profile/favoritebook/'.$user->id)}}">{{__('message.Favorite_Book')}}</a></h3>
+                        <h3><a href="{{route('profile.favoritebook',[$user->id])}}">{{__('message.Favorite_Book')}}</a></h3>
                      </div>
                   </div>
                </div>

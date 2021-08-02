@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
-use LikeComment;
-use LikeReview;
+
+use App\Models\LikeComment;
+use App\Models\LikeReview;
+
 
 class User extends Authenticatable
 {
@@ -77,7 +79,17 @@ class User extends Authenticatable
         return $this->hasMany(Activity::class,'user_id');
     }
 
+
     public function scopeUserId($query,$userid){
         return $query->where('id','=',$userid);
+    }
+    
+    public function isLikeReviews(Review $review){
+        return !! $this->likeReviews()->where('review_id', $review->id)->count();
+    }
+
+    public function isLikeComments(Comment $comment){
+        return !! $this->likeComment()->where('comment_id', $comment->id)->count();
+
     }
 }

@@ -146,7 +146,7 @@
                                     <h2>Skyfall: Quantum of Spectre</h2>
                                  </div>
                                  @if(!Auth::guest())
-                                 <a href="{{url('addreview/'.$book->id)}}" class="redbtn">{{__('message.Write_Review')}}</a>
+                                 <a href="{{route('add.review',[$book->id])}}" class="redbtn">{{__('message.Write_Review')}}</a>
                                  @endif
                               </div>
                               <div class="topbar-filter">
@@ -154,11 +154,11 @@
                                     {{__('message.in_total')}}</p>
                               </div>
                               @foreach($reviews as $review)
-                              <div class="mv-user-review-item">
+                              <div class="mv-user-review-item" data-reviewId="{{$review->id}}">
                                  <div class="user-infor">
                                     <img src="images/uploads/userava1.jpg" alt="">
                                     <div>
-                                       <a href="{{url('review/'.$review->id)}}">
+                                       <a href="{{route('review.show',[$review->id])}}">
                                           <h3>{{$review->title}}</h3>
                                        </a>
                                        <div class="no-star">
@@ -173,19 +173,32 @@
                                        <p class="time">
                                           {{$review->created_at}}
                                           <a href="#">
-                                             <?php 
-                                             $user = DB::table('users')->where('id','=',$review->user_id)->value('name');
-                                             echo $user;
-                                             ?>
+                                          {{$review->user()->value('name')}}
                                           </a>
                                        </p>
                                     </div>
                                  </div>
                                  <p>{{$review->body}}</p>
                                  @if(!Auth::guest() && ($review->user_id == Auth::user()->id || Auth::user()->role=='admin'))
-                                 <a href="{{url('review/'.$review->id.'/edit')}}">
+                                 <a href="{{route('review.edit',[$review->id])}}">
                                     <h3>Edit</h3>
                                  </a>
+                                 @endif
+                                 @if(!Auth::guest())
+                                 <ul class="nav nav-pills">
+                                    <li role="presentation">
+                                       <a href="{{route('like.review',[$review->id])}}" class="like">
+                                       {{ like($review) }}
+                                       {{$review->likeReviews()->count()}}
+                                       <span class="fa fa-thumbs-up"></span>
+                                       </a>
+                                    </li>
+                                    <li role="presentation">
+                                       <a href="{{route('unlike.review',[$review->id])}}" class="like">{{__('message.Unlike')}}:
+                                       <span class="fa fa-thumbs-down"></span>
+                                       </a>
+                                    </li>
+                                 </ul>
                                  @endif
                               </div>
                               @endforeach
