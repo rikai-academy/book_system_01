@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Book;
+use App\Models\Review;
+use App\Models\Book_Category;
+use App\Models\Category;
+use App\Http\Requests\SearchFormRequest;
 
 class BookController extends Controller
 {
@@ -14,7 +19,8 @@ class BookController extends Controller
     public function index()
     {
         //
-        return view('users.book.list');
+        $books = Book::all();
+        return view('users.book.list',compact('books'));
     }
 
     /**
@@ -47,7 +53,20 @@ class BookController extends Controller
     public function show($bookId)
     {
         //
-        return view('users.book.detail');
+        $book = Book::find($bookId)->first();
+        if($book){
+        $book_id = $book->id;
+        $category_book = Book_Category::where('book_id','=',$book_id)->get();
+        foreach($category_book as $value){
+            $category_id = $value->category_id;
+            $categorys = Category::where('id','=',$category_id)->get();
+        }
+        $reviews = Review::where('book_id','=',$book_id)->get();
+        return view('users.book.detail',compact('book','reviews','categorys'));
+        }else{
+            $errors = 'message.no_book';
+            return view('/')->withErrors(__($errors));
+        }
     }
 
     /**
@@ -90,5 +109,13 @@ class BookController extends Controller
 
     public function checkout(){
         return view('users.book.checkout');
+    }
+
+    public function search(Request $request){
+        $name = $request->body;
+        $books = Book::where('title','like','%'.$name.'%')
+        ->orWhere('author','like','%'.$name.'%')->paginate(10);
+        $total = count($books);
+        return view('users.book.search',compact('books','total'));
     }
 }

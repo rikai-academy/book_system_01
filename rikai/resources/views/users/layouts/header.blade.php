@@ -6,13 +6,25 @@
    <div class="container">
       @include('users.layouts.menu')
       <!-- top search form -->
-      <div class="top-search">
-         <select>
-            <option value="united">{{__('message.Novel')}}</option>
-            <option value="saab">{{__('message.Others')}}</option>
-         </select>
-         <input type="text" placeholder="{{__('message.Search_for_a_book')}}">
+      @if ($errors->any())
+      <div class="alert alert-danger">
+         <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+         </ul>
       </div>
+      @endif
+      <form method="get" id="searchForm" action="{{url('search')}}">
+         <div class="top-search">
+            <select>
+               <option value="united">{{__('message.Novel')}}</option>
+               <option value="saab">{{__('message.Others')}}</option>
+            </select>
+            <input type="text" name="body" placeholder="{{__('message.Search_for_a_book')}}">
+            <button class="btn-search">Search</button>
+         </div>
+      </form>
    </div>
    <base href="{{asset('')}}">
    <link rel="stylesheet" href="css/plugins.css">

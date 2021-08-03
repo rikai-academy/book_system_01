@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
+    protected $table = "book";
 
     public function cartItem() {
         return $this->belongsTo(CartItem::class,'book_id');

@@ -155,5 +155,11 @@
         'min' => [
             'string' => ':attribute phải có ít nhất :min chữ cái',
         ],
+        'Search_book'=>'Tìm kiếm sách',
+        'is_not_null'=>'Trường này là bắt buộc',
+        'number_of_page'=>'Số trang',
+        'price'=>'giá',
+        'no_book'=>'Không có sách bạn tìm',
+        
     ]
 ?>
