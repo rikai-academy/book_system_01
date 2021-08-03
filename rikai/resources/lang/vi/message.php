@@ -5,7 +5,7 @@
         'Novel'=>'Tiểu thuyết',
         'Science'=>'Khoa Học',
         'Manga'=>'Truyện Tranh',
-        'Profile'=>'Hồ Sơ',
+        'Profile'=>'Hồ sơ của :name',
         'User_Profile'=>'Hồ Sơ Người Dùng',
         'List_Book'=>'Tất Cả Sách',
         'Books'=>'Sách',
@@ -171,5 +171,10 @@
         'overview_tony'=>' Tony Stark tạo ra Chương trình Ultron để bảo vệ thế giới, nhưng khi chương trình gìn giữ hòa bình trở nên thù địch, The Avengers bắt tay vào hành động để cùng nhau cố gắng đánh bại một kẻ thù gần như không thể. Những anh hùng mạnh nhất của Trái đất phải cùng nhau một lần nữa để bảo vệ thế giới khỏi sự tuyệt chủng toàn cầu.',
         'this_is'=>'Đây là một trong những bộ phim yêu thích của tôi từ MCU. Việc giới thiệu các Nhân vật mới cả tốt lẫn xấu cũng làm cho bộ phim trở nên hấp dẫn hơn. để các nhân vật có nhiều câu chuyện ngược hơn cũng có thể giúp khán giả liên hệ nhiều hơn với các nhân vật khác nhau tốt hơn và nó kết nối sự gắn kết giữa khán giả và diễn viên hoặc nhân vật. Tôi đã xem bộ phim ba lần không làm phiền tôi ở đây vì nó là ly kỳ và thú vị mỗi lần tôi xem nó. Nói cách khác, bộ phim hay hơn nhiều so với các bộ phim trước (và tôi thực sự yêu thích mọi thứ của Marvel), cốt truyện tuyệt vời (họ thực sự thể hiện mình trong mỗi bộ phim, không có vấn đề gì khi xem nó nhiều hơn một lần.',
         'Best_Marvel'=>'Phim Marvel hay nhất theo ý kiến của tôi',
+        'changePasswordFail' => 'Mật khẩu cũ không trùng khớp!',
+        'changePasswordSuccess' => 'Thay đổi mật khẩu thành công',
+        'imgChangeSuccess' => 'Thay đổi ảnh thành công',
+        'imgChangeFail' => 'Thay đổi ảnh thất bại',
+        'profileChangeSuccess' => 'Cập nhật thành công'
     ]
 ?>

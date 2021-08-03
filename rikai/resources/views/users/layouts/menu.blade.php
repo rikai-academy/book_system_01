@@ -35,15 +35,17 @@
                      <li class="it-last"><a href="{{url('book')}}">{{__('message.Manga')}}</a></li>
                   </ul>
                </li>
+               @auth
                <li class="dropdown first">
                   <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                  {{__('message.Profile')}} <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  {{__('message.Profile',['name'=>auth()->user()->name])}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </a>
                   <ul class="dropdown-menu level1">
-                     <li><a href="{{url('profile')}}">{{__('message.User_Profile')}}</a></li>
+                     <li><a href="{{url('profile/'.auth()->user()->id )}}">{{__('message.User_Profile')}}</a></li>
                      <li><a href="{{url('cart/1')}}">{{__('message.Cart')}}</a></li>
                   </ul>
                </li>
+               @endauth
                <li class="dropdown first">
                   <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
                   {{__('message.Books')}} <i class="fa fa-angle-down" aria-hidden="true"></i>
