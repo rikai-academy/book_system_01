@@ -29,4 +29,5 @@
    <base href="{{asset('')}}">
    <link rel="stylesheet" href="css/plugins.css">
    <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/custom.css">
 </header>

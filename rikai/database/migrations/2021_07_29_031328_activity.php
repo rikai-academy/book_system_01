@@ -1,8 +1,10 @@
 <?php
 
+use App\Enums\FavoriteStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\ReadStatus;
 
 class Activity extends Migration
 {
@@ -18,8 +20,8 @@ class Activity extends Migration
             $table->integer('book_id');
             $table->integer('user_id');
             $table->integer('type_id');
-            $table->integer('read_status');
-            $table->integer('favorite_status');
+            $table->integer('read_status')->default(ReadStatus::None);
+            $table->integer('favorite_status')->default(FavoriteStatus::None);
             $table->timestamp('time');
         });
     }

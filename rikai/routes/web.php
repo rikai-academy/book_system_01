@@ -6,6 +6,7 @@ use App\Http\Controllers\BookController as BookController1;
 use App\Http\Controllers\ReviewController as ReviewController1;
 use App\Http\Controllers\CommentController as CommentController1;
 use App\Http\Controllers\ProfileController as ProfileController1;
+use App\Http\Controllers\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ Route::get('/', function () {
     return view('users.home');
 });
 
+Route::middleware(['auth'])->group(function (){
+    Route::resource('activity', ActivityController::class);
+});
 
 Route::get('cart/{id}',[BookController1::class,'cart']);
 Route::get('checkout',[BookController1::class,'checkout']);
