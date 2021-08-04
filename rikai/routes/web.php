@@ -43,14 +43,12 @@ Route::middleware(['users'])->group(function () {
     Route::resource('review', ReviewController1::class)->except('show');
     Route::resource('profile', ProfileController1::class);
     Route::resource('comment', CommentController1::class)->except('show');
-    Route::get('cart/{id}', [BookController1::class, 'cart']);
     Route::get('profile/favoritebook/{id}', [ProfileController1::class, 'favoriteBook'])->name('profile.favorite');
     Route::get('checkout', [CartController::class, 'checkout']);
     Route::get('profile/ratebook/{id}', [ProfileController1::class, 'rateBook']);
     Route::get('profile/timeline/{id}', [ProfileController1::class, 'timeLine']);
     Route::put('change_password', [ChangeController1::class, 'changePassword'])->name('change.password');
     Route::put('change_image', [ChangeController1::class, 'changeImage'])->name('change.image');
-
     Route::get('listuser',[ProfileController1::class,'listuser'])->name('listuser');
     Route::get('like/review/{reviewid}',[ReviewController1::class,'likereview'])->name('like.review');
     Route::get('unlike/review/{reviewid}',[ReviewController1::class,'unlikereview'])->name('unlike.review');
@@ -62,5 +60,7 @@ Route::middleware(['users'])->group(function () {
     Route::resource('cart', CartController::class);
     Route::resource('cartItem', CartItemController::class);
     Route::get('current_cart', [CartController::class, 'currentCart']);
+    Route::get('cancel/{id}', [CartController::class, 'cancel']);
     Route::put('updateTotal/{id}', [CartController::class, 'updateTotal']);
 });
+    Route::resource('timeline', ActivityController::class);

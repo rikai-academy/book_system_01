@@ -205,5 +205,15 @@
         'checkoutSuccess' => 'Gửi yêu cầu thành công',
         'outOfStock' => 'Đã bán hết sách',
         'checkoutFail' => 'Gửi yêu cầu thất bại',
+        'addCartItemSuccess' => 'Thêm vào giỏ hàng thành công',
+        'checkoutSuccess' => 'Gửi yêu cầu thành công',
+        'outOfStock' => 'Đã bán hết sách',
+        'CartList' => 'Danh sách yêu cầu',
+        'total_price' => 'Tổng giá',
+        'update_at' => 'Cập nhật tại',
+        'status' => 'Trạng thái',
+        'CancelRequest' => 'Hủy yêu cầu',
+        'RequestIsCancel' => 'Yêu cầu đã được hủy',
+        'RequestIsDone' => 'Yêu cầu đã được xử lý',
     ]
 ?>

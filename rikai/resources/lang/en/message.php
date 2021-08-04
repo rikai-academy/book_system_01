@@ -194,5 +194,15 @@
         'checkoutSuccess' => 'Send request success',
         'outOfStock' => 'Book has already sold out',
         'checkoutFail' => 'Send request fail',
+        'addCartItemSuccess' => 'Add to cart success',
+        'checkoutSuccess' => 'Send request success',
+        'outOfStock' => 'Book has already sold out',
+        'CartList' => 'Request list',
+        'total_price' => 'Total Price',
+        'update_at' => 'Update at',
+        'status' => 'Status',
+        'CancelRequest' => 'Cancel request',
+        'RequestIsCancel' => 'Request is cancel',
+        'RequestIsDone' => 'Request is done',
     ]
 ?>
