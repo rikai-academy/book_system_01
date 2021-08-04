@@ -7,10 +7,20 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Enums\FavoriteStatus;
 use App\Enums\ReadStatus;
-use App\Enums\ActivityType;
+use App\Enums\ActivityTypeEnum;
+use App\Models\ActivityType;
+use App\Models\User;
+use App\Library\Services\Contracts\ActivityServiceInterface;
 
 class ActivityController extends Controller
 {
+
+    protected $activityService;
+
+    public function __construct(ActivityServiceInterface $activityServiceInterface)
+    {
+        $this->activityService = $activityServiceInterface;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +62,7 @@ class ActivityController extends Controller
             $data["activity"]->read_status = ReadStatus::NONE;
             $data["activity"]->favorite_status = FavoriteStatus::NONE;
         }
-        $this->statusController($data["activity"],$request->activity);
+        $this->activityService->statusController($data["activity"],$request->activity);
         $data["activity"]->time = Carbon::now();
         $data["activity"]->save();
         return back();
@@ -66,7 +76,9 @@ class ActivityController extends Controller
      */
     public function show($id)
     {
-        //
+        $data["user"] = User::find($id);
+        $data["activity"] = Activity::where('user_id',$id)->orderBy('time','desc')->paginate(10);
+        return view('users.profile.timeline')->with('data',$data);
     }
 
     /**
@@ -103,32 +115,4 @@ class ActivityController extends Controller
         //
     }
 
-    private function statusController($data_activity,$activity){
-        switch ($activity) {
-            case "reading" : 
-                $data_activity->read_status = ReadStatus::READING;
-                $data_activity->type_id = ActivityType::READING;
-                break;
-            case "unreading" : 
-                $data_activity->read_status = ReadStatus::NONE;
-                $data_activity->type_id = ActivityType::UNREADING;
-                break;
-            case "read" :
-                $data_activity->read_status = ReadStatus::READ;
-                $data_activity->type_id = ActivityType::READ;
-                break;
-            case "unread" : 
-                $data_activity->read_status = ReadStatus::NONE;
-                $data_activity->type_id = ActivityType::UNREADING;
-                break;
-            case "favorite" : 
-                $data_activity->favorite_status = FavoriteStatus::FAVORITE;
-                $data_activity->type_id = ActivityType::FAVORITE;
-                break;
-            case "unfavorite" : 
-                $data_activity->favorite_status = FavoriteStatus::NONE;
-                $data_activity->type_id = ActivityType::UNFAVORITE;  
-                break;  
-        }
-    }
 }

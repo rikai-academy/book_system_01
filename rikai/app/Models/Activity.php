@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use ActivityType;
+use App\Models\ActivityType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +23,6 @@ class Activity extends Model
     }
 
     public function type() {
-        return $this->hasOne(ActivityType::class,'type_id');
+        return $this->belongsTo(ActivityType::class,'type_id');
     }
 }

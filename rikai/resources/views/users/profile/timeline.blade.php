@@ -10,16 +10,42 @@
       <div class="row ipad-width2">
          <div class="col-md-3 col-sm-12 col-xs-12">
             <div class="user-information">
-               <div class="user-img">
-                  <a href="#"><img src="images/uploads/user-img.png" alt=""><br></a>
-                  <a href="#" class="redbtn">{{__('message.Change_avatar')}}</a>
-               </div>
+               <form method="POST" action="{{ route('change.image') }}" enctype="multipart/form-data" class="user-img">
+                  @csrf
+                  @method('PUT')
+                  <input type="file" id="image" name="image" class="display_none">
+                  <label for="image">
+                     <img id="output"
+                        src="{{ imgSrc($data) }}"
+                        alt="" class="output_image">
+                     <br>
+                  </label>
+                  @if(session()->has('imgChangeSuccess'))
+                  <span class="success" role="alert">
+                     <strong>{{ session()->get('imgChangeSuccess') }}</strong>
+                  </span>
+                  @endif
+                  @error('image')
+                  <span class="fail" role="alert">
+                     <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                  @if(session()->has('imageError'))
+                  <span class="fail" role="alert">
+                     <strong>{{ session()->get('imageError') }}</strong>
+                  </span>
+                  @endif
+                  <input type="submit" class="redbtn border_none"  value="{{__('message.Change_avatar')}}">
+               </form>
                <div class="user-fav">
                   <p>{{__('message.Account_Details')}}</p>
                   <ul>
-                     <li><a href="#">{{__('message.Profile')}}</a></li>
-                     <li><a href="#">{{__('message.Favorite_Book')}}</a></li>
-                     <li class="active"><a href="#">{{__('message.Rated_books')}}</a></li>
+                     <li>
+                        <a href="{{url('profile/'.$data["user"]->id)}}">{{__('message.Profile',['name' => $data['user']->name])}}</a>
+                     </li>
+                     <li><a href="profile/favoritebook/1">{{__('message.Favorite_Book')}}</a></li>
+                     <li><a href="profile/ratebook/1">{{__('message.Rated_books')}}</a></li>
+                     <li class="active"><a href="{{ url('timeline/'.auth()->user()->id) }}">{{__('message.TimeLine_History')}}</a></li>
                   </ul>
                </div>
                <div class="user-fav">
@@ -32,65 +58,24 @@
             </div>
          </div>
          <div class="col-md-9 col-sm-12 col-xs-12">
+            {{ $data["activity"]->links() }}
             <div class="timeline">
                <ul>
+                  @foreach ($data["activity"] as $activity)
                   <li>
                      <div class="timeline-content">
-                        <h3>{{__('message.Heading')}}1</h3>
-                        <p>{{__('message.This_is_history')}} 1</p>
+                        <h3>{{ __('message.atBook') }} : {{ $activity->book->title }}</h3>
+                        <p>{{ __('message.activity') }} : {{ $activity->type->type }}</p>
                         <div class="time">
-                           <h4>{{__('message.July')}} 2021</h4>
+                           <h4>{{ date('M d/Y ', strtotime($activity->time)) . __('at') . date(' H:i A ', strtotime($activity->time)) }} </h4>
                         </div>
                      </div>
                   </li>
-                  <li>
-                     <div class="timeline-content">
-                        <h3>{{__('message.Heading')}}2</h3>
-                        <p>{{__('message.This_is_history')}} 2</p>
-                        <div class="time">
-                           <h4>{{__('message.July')}} 2021</h4>
-                        </div>
-                     </div>
-                  </li>
-                  <li>
-                     <div class="timeline-content">
-                        <h3>{{__('message.Heading')}}3</h3>
-                        <p>{{__('message.This_is_history')}} 3</p>
-                        <div class="time">
-                           <h4>{{__('message.July')}} 2021</h4>
-                        </div>
-                     </div>
-                  </li>
-                  <li>
-                     <div class="timeline-content">
-                        <h3>{{__('message.Heading')}}4</h3>
-                        <p>{{__('message.This_is_history')}} 4</p>
-                        <div class="time">
-                           <h4>{{__('message.July')}} 2021</h4>
-                        </div>
-                     </div>
-                  </li>
-                  <li>
-                     <div class="timeline-content">
-                        <h3>{{__('message.Heading')}}5</h3>
-                        <p>{{__('message.This_is_history')}} 5</p>
-                        <div class="time">
-                           <h4>{{__('message.July')}} 2021</h4>
-                        </div>
-                     </div>
-                  </li>
-                  <li>
-                     <div class="timeline-content">
-                        <h3>{{__('message.Heading')}}6</h3>
-                        <p>{{__('message.This_is_history')}} 6</p>
-                        <div class="time">
-                           <h4>{{__('message.July')}} 2021</h4>
-                        </div>
-                     </div>
-                  </li>
+                  @endforeach
                   <div style="clear: both;"></div>
                </ul>
             </div>
+            {{ $data["activity"]->links() }}
          </div>
       </div>
    </div>

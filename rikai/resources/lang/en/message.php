@@ -164,12 +164,14 @@
         'changePasswordSuccess' => 'Password change successful',
         'imgChangeSuccess' => 'Image change successful',
         'imgChangeFail' => 'Image change fail',
-        'profileChangeSuccess' => 'Profile update success'
         'add_comment_success'=>'Add comment success',
         'body_is_min'=>'Body must be at least 10 characters',
         'update_comment_success'=>'Update comment success',
         'add_comment_fail'=>'Add comment fail',
         'update_comment_fail'=>'Update comment fail',
         'add_review_fail'=>'Add review fail',
+        'profileChangeSuccess' => 'Profile update success',
+        'activity' => 'Activity',
+        'atBook' => 'At Book'
     ]
 ?>
