@@ -15,6 +15,13 @@
          </ul>
       </div>
       @endif
+      @if (Session::has('message'))
+      <div class="flash alert-info">
+         <p class="panel-body">
+            {{ __(Session::get('message')) }}
+         </p>
+      </div>
+      @endif
       <form method="get" id="searchForm" action="{{url('search')}}">
          <div class="top-search">
             <select>

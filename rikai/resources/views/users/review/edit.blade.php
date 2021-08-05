@@ -11,38 +11,56 @@
          <div class="col-md-9 col-sm-12 col-xs-12">
             <div class="form-style-1 user-pro" action="#">
                <div>
-                  <h3>{{__('message.Related_Book')}}</h3>
-                  <h2>{{__('message.Name_Book')}}</h2>
+                  <h2>{{__('message.Name_Book')}}: {{$book->title}}</h2>
                </div>
                <br>
-               <form action="#" class="user">
+               @if(count($errors)>0)
+               <div class="alert alert-danger">
+                  @foreach($errors->all() as $err)
+                  {{$err}}<br>
+                  @endforeach
+               </div>
+               @endif
+               @if (Session::has('message'))
+               <div class="flash alert-info">
+                  <p class="panel-body">
+                     {{ __(Session::get('message')) }}
+                  </p>
+               </div>
+               @endif
+               <form action="{{url('review/'.$review->id)}}" class="user" method="post">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  @method('PUT')
                   <h4>{{__('message.Review_Book')}}</h4>
+                  <input type="hidden" name="bookId" value="{{$book->id}}">
                   <div class="row">
                      <div class="col-md-12 form-it">
                         <label>{{__('message.Title')}}</label>
-                        <input type="text" placeholder="">
+                        <input type="text" placeholder="" name="title" value="{{$review->title}}">
                      </div>
                   </div>
                   <div class="row">
                      <div class="col-md-12 form-it">
                         <label>{{__('message.Body')}}</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="body" value="{{$review->body}}" rows="3">{{$review->body}}</textarea>
                      </div>
                   </div>
                   <div class="row">
                      <div class="col-md-6 form-it">
                         <label>{{__('message.Rated_books')}} </label>
-                        <div class="no-star">
-                           <i class="ion-ios-star" data-index="0"></i>
-                           <i class="ion-ios-star" data-index="1"></i>
-                           <i class="ion-ios-star" data-index="2"></i>
-                           <i class="ion-ios-star" data-index="3"></i>
-                           <i class="ion-ios-star" data-index="4"></i>
-                           <i class="ion-ios-star" data-index="5"></i>
-                           <i class="ion-ios-star" data-index="6"></i>
-                           <i class="ion-ios-star" data-index="7"></i>
-                           <i class="ion-ios-star" data-index="8"></i>
-                           <i class="ion-ios-star" data-index="9"></i>
+                        <div class="container1">
+                           <h5 class="oldrate">Old rating</h5>
+                           <div class="star-widget">
+                              <?php
+                                 oldrate($review->rate);
+                              ?>
+                           </div>
+                           <h5 class="newrate">New rating</h5>
+                           <div class="star-widget">
+                              <?php
+                                 rateform();
+                              ?>
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -50,11 +68,17 @@
                      <div class="col-md-2">
                         <input class="submit" type="submit" value="{{__('message.Update')}}">
                      </div>
-                     <div class="col-md-2">
-                        <input class="submit" type="submit" value="{{__('message.Delete')}}">
-                     </div>
                   </div>
                </form>
+               <div class="row">
+                  <div class="col-md-2">
+                     <form action="{{url('review/'.$review->id)}}" class="user" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        @method('DELETE')
+                        <input class="submit" type="submit" value="{{__('message.Delete')}}">
+                     </form>
+                  </div>
+               </div>
             </div>
          </div>
       </div>

@@ -65,10 +65,11 @@ class BookController extends Controller
             $category_id = $value->category_id;
             $categorys = Category::where('id','=',$category_id)->get();
         }
-        $reviews = Review::where('book_id','=',$book_id)->get();
         $data["activity"] = new stdClass;
         $this->activityController($data["activity"],$book_id);
+        $reviews = Review::where('book_id','=',$book_id)->paginate(2);
         return view('users.book.detail',compact('book','reviews','categorys'))->with('data', $data);
+
         }else{
             $errors = 'message.no_book';
             return view('/')->withErrors(__($errors));
@@ -127,6 +128,7 @@ class BookController extends Controller
         return view('users.book.search',compact('books','total'));
     }
 
+
     private function activityController($data_activity,$book_id){
         if (auth()->user()) {
             $activity = Activity::where('user_id', auth()->user()->id)->where('book_id', $book_id)->latest('id')->first();
@@ -141,5 +143,9 @@ class BookController extends Controller
             $data_activity->read_status = ReadStatus::NONE;
             $data_activity->favorite_status = FavoriteStatus::NONE;
         }
+    }
+    public function addreview($bookId){
+        $book = Book::find($bookId);
+        return view('users.review.create',compact('book'));
     }
 }
