@@ -15,72 +15,40 @@
                   <th class="quantity">{{__('message.Quantity')}}</th>
                   <th class="subtotal">{{__('message.Subtotal')}}</th>
                </tr>
+               @foreach ($data["cart_item"] as $item)
                <tr>
                   <td class="col-md-8 col-sm-12 col-xs-12">
                      <div class="book-info">
                         <img src="images/uploads/mv1.jpg" alt="">
                         <div class="mv-item-infor">
-                           <h6><a href="moviesingle.html">oblivion <span>(2012)</span></a></h6>
+                           <h6><a href="{{ url('book/'.$item->book->id) }}">{{ $item->book->title }}</a></h6>
                            <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-                           <p class="describe">Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
-                           <p>{{__('message.Author')}}: <a href="#">Joss Whedon</a></p>
+                           <p class="describe">Earth's mightiest heroes must come together and learn to fight as a team
+                              if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
+                           <p>{{__('message.Author')}}: <a href="#">{{ $item->book->author }}</a></p>
                         </div>
                         <br>
-                        <a href="#" class="remove-cart">{{__('message.Remove')}}</a>
+                        <form action="{{ url('cartItem/'.$item->id) }}" method="post">
+                           @csrf
+                           @method('DELETE')
+                           <input type="submit" class="remove-cart" value="{{__('message.Remove')}}" />
+                        </form>
                      </div>
                   </td>
-                  <td><input type="number" value="1"></td>
-                  <td class="unit-total">$50</td>
-               </tr>
-               <tr>
-                  <td class="col-md-8 col-sm-12 col-xs-12">
-                     <div class="book-info">
-                        <img src="images/uploads/mv1.jpg" alt="">
-                        <div class="mv-item-infor">
-                           <h6><a href="moviesingle.html">oblivion <span>(2012)</span></a></h6>
-                           <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-                           <p class="describe">Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
-                           <p>{{__('message.Author')}}: <a href="#">Joss Whedon</a></p>
-                        </div>
-                        <br>
-                        <a href="#" class="remove-cart">{{__('message.Remove')}}</a>
-                     </div>
+                  <td>
+                     <input type="number" min="1" max="{{ $item->book->quantity }}" class="cart-item-input"
+                        cartItemId="{{ $item->id }}" cartPrice="{{ $item->book->price }}" value="{{ $item->quantity }}">
                   </td>
-                  <td><input type="number" value="1"></td>
-                  <td class="unit-total">$50</td>
+                  <td class="unit-total">{{ $item->total_price }}</td>
                </tr>
-               <tr>
-                  <td class="col-md-8 col-sm-12 col-xs-12">
-                     <div class="book-info">
-                        <img src="images/uploads/mv1.jpg" alt="">
-                        <div class="mv-item-infor">
-                           <h6><a href="moviesingle.html">oblivion <span>(2012)</span></a></h6>
-                           <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-                           <p class="describe">Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
-                           <p>{{__('message.Author')}}: <a href="#">Joss Whedon</a></p>
-                        </div>
-                        <br>
-                        <a href="#" class="remove-cart">{{__('message.Remove')}}</a>
-                     </div>
-                  </td>
-                  <td><input type="number" value="1"></td>
-                  <td class="unit-total">$50</td>
-               </tr>
+               @endforeach
             </table>
          </div>
-         <div class="total-price">
-            <table>
-               <tr>
-                  <td><b>{{__('message.Subtotal')}}</b></td>
-                  <td>$200</td>
-               </tr>
-               <tr>
-                  <td><b>{{__('message.Tax')}}</b></td>
-                  <td>$35</td>
-               </tr>
+         <div class="total-price total-price-disable">
+            <table class="custom_table">
                <tr>
                   <td><b>{{__('message.Total')}}</b></td>
-                  <td>$230</td>
+                  <td id="sum" cartid="{{ $data["current_cart"]->id }}"></td>
                </tr>
                <tr>
                   <td colspan="2" class="checkoutbtn" style="text-align:center">
@@ -92,4 +60,9 @@
       </div>
    </div>
 </div>
+@endsection
+
+@section('js')
+   <script src="js/cartItem.js"></script>
+   <script src="js/cart.js"></script>
 @endsection

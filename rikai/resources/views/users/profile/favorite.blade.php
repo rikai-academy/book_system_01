@@ -11,28 +11,47 @@
          @if(Auth::user()->id == $user->id)
          <div class="col-md-3 col-sm-12 col-xs-12">
             <div class="user-information">
-               <div class="user-img">
-                  <a href="#"><img src="images/uploads/user-img.png" alt=""><br></a>
-                  <a href="#" class="redbtn">{{__('message.Change_avatar')}}</a>
-               </div>
+               <form method="POST" action="{{ route('change.image') }}" enctype="multipart/form-data" class="user-img">
+                  @csrf
+                  @method('PUT')
+                  <input type="file" id="image" name="image" class="display_none">
+                  <label for="image">
+                     <img id="output"
+                        src="{{ $user->image?asset('storage/image/'.$user->image):'images/uploads/user-img.png' }}"
+                        alt="" class="output_image">
+                     <br>
+                  </label>
+                  @if(session()->has('imgChangeSuccess'))
+                  <span class="success" role="alert">
+                     <strong>{{ session()->get('imgChangeSuccess') }}</strong>
+                  </span>
+                  @endif
+                  @error('image')
+                  <span class="fail" role="alert">
+                     <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                  @if(session()->has('imageError'))
+                  <span class="fail" role="alert">
+                     <strong>{{ session()->get('imageError') }}</strong>
+                  </span>
+                  @endif
+                  <input type="submit" class="redbtn border_none"  value="{{__('message.Change_avatar')}}">
+               </form>
                <div class="user-fav">
                   <p>{{__('message.Account_Details')}}</p>
                   <ul>
-                     <li><a href="{{url('profile')}}">{{__('message.Profile')}}</a></li>
-                     <li class="active"><a href="{{url('profile/favoritebook/'.$user->id)}}">{{__('message.Favorite_Book')}}</a></li>
-                     <li><a href="{{url('profile/ratebook/'.$user->id)}}">{{__('message.Rated_books')}}</a></li>
-                     <li><a href="{{url('profile/timeline/'.$user->id)}}">{{__('message.TimeLine_History')}}</a></li>
+                     <li><a href="{{url('profile/'.$user->id)}}">{{__('message.Profile',['name' => $user->name])}}</a></li>
+                     <li class="active"><a href="{{ route('profile.favorite',[$user->id]) }}">{{__('message.Favorite_Book')}}</a></li>
+                     <li><a href="profile/ratebook/1">{{__('message.Rated_books')}}</a></li>
+                     <li><a href="{{ url('timeline/'.auth()->user()->id) }}">{{__('message.TimeLine_History')}}</a></li>
                   </ul>
                </div>
                <div class="user-fav">
                   <p>{{__('message.Others')}}</p>
                   <ul>
                      <li><a href="#">{{__('message.Change_password')}}</a></li>
-                     <li><a href="{{route('logout')}}"onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">{{ __('message.Logout') }}</a></li>
-                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                     </form>
+                     <li><a href="#">{{__('message.Log_out')}}</a></li>
                   </ul>
                </div>
             </div>

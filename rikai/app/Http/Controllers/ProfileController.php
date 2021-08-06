@@ -108,7 +108,8 @@ class ProfileController extends Controller
     }
 
     public function rateBook($userId){
-        return view('users.profile.rate');
+        $data["user"] = User::find($userId);
+        return view('users.profile.rate')->with('data',$data);
     }
 
     public function timeLine($userId){

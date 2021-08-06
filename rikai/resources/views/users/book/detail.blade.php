@@ -15,11 +15,25 @@
             <div class="movie-img sticky-sb">
                <img src="images/uploads/movie-single.jpg" alt="">
                <div class="movie-btn">
-                  <div class="btn-transform transform-vertical">
-                     <div><a href="{{url('cart/1')}}" class="item item-1 yellowbtn"> <i class="ion-card"></i>
-                           {{__('message.Buy_book')}}</a></div>
-                     <div><a href="{{url('cart/1')}}" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
-                  </div>
+                  @if(session()->has('addCartItemSuccess'))
+                  <span class="success" role="alert">
+                     <strong>{{ session()->get('addCartItemSuccess') }}</strong>
+                  </span>
+                  @endif
+                  @if(session()->has('outOfStock'))
+                  <span class="fail" role="alert">
+                     <strong>{{ session()->get('outOfStock') }}</strong>
+                  </span>
+                  @endif
+                  <form method="POST" action="{{ url('cartItem') }}" class="btn-transform transform-vertical">
+                     @csrf
+                     <input type="hidden" name="book_id" value="{{ $book->id }}">
+                     <input type="hidden" name="quantity" value="1">
+                     <input type="hidden" name="price" value="{{ $book->price }}">
+                     <div><button type="submit" class="item item-1 yellowbtn border_none width_100">
+                           {{__('message.Buy_book')}}</button></div>
+                     <div><button type="submit" class="item item-2 yellowbtn border_none width_100"><i class="ion-card"></i></button></div>
+                  </form>
                </div>
             </div>
          </div>
@@ -30,30 +44,28 @@
                   <form action="{{ url('activity') }}" method="POST">
                      @csrf
                      <input type="hidden" name="book_id" value="{{ $book->id }}">
-                     <button type="submit" name="activity" 
-                        class="@if($data["activity"]->read_status == 1)
-                        {{ 'active' }} @endif parent-btn" 
+                     <button type="submit" name="activity" class="@if($data["activity"]->read_status == 1)
+                        {{ 'active' }} @endif parent-btn"
                         value="@if($data["activity"]->read_status == 1)
-                        {{ 'unreading' }} 
-                        @else {{ 'reading' }} 
+                        {{ 'unreading' }}
+                        @else {{ 'reading' }}
                         @endif"> {{__('message.Add_to_Reading')}}</button>
-                     <button type="submit" name="activity" 
-                        class="parent-btn @if($data["activity"]->read_status == 2)
-                        {{ 'active' }} 
-                        @endif" 
-                        value="@if($data["activity"]->read_status == 2) {{ 'unread' }} 
-                        @else {{ 'read' }} 
+                     <button type="submit" name="activity" class="parent-btn @if($data["activity"]->read_status == 2)
+                        {{ 'active' }}
+                        @endif"
+                        value="@if($data["activity"]->read_status == 2) {{ 'unread' }}
+                        @else {{ 'read' }}
                         @endif"> {{__('message.Add_to_Read')}}</button>
-                     <button type="submit" name="activity" 
-                        class="parent-btn @if($data["activity"]->favorite_status == 1) 
-                        {{ 'active' }} 
-                        @endif" 
+                     <button type="submit" name="activity" class="parent-btn @if($data["activity"]->favorite_status ==
+                        1)
+                        {{ 'active' }}
+                        @endif"
                         value="@if($data["activity"]->favorite_status == 1) {{ 'unfavorite' }}
-                        @else {{ 'favorite' }} 
+                        @else {{ 'favorite' }}
                         @endif"> {{__('message.Add_to_Favorite')}}</button>
                   </form>
                   @if(session('message'))
-                  <span style="color: red" role="alert">
+                  <span class="fail" role="alert">
                      <strong>{{ session('message') }}</strong>
                   </span>
                   @endif
@@ -110,7 +122,8 @@
                                        <i class="ion-android-star last"></i>
                                     </div>
                                     <p class="time">
-                                       17 {{__('message.December')}} 2016 {{__('message.by')}} <a href="#"> {{$book->author}}</a>
+                                       17 {{__('message.December')}} 2016 {{__('message.by')}} <a href="#">
+                                          {{$book->author}}</a>
                                     </p>
                                     <p>{{__('message.this_is')}}</p>
                                  </div>
@@ -162,13 +175,12 @@
                                           <h3>{{$review->title}}</h3>
                                        </a>
                                        <div class="no-star">
-                                          @for($i=0; $i<= 10;$i++)
-                                          @if($i<=$review->rate)
-                                          <i class="ion-android-star"></i>
-                                          @else
-                                          <i class="ion-android-star last"></i>
-                                          @endif
-                                          @endfor
+                                          @for($i=0; $i<= 10;$i++) @if($i<=$review->rate)
+                                             <i class="ion-android-star"></i>
+                                             @else
+                                             <i class="ion-android-star last"></i>
+                                             @endif
+                                             @endfor
                                        </div>
                                        <p class="time">
                                           {{$review->created_at}}

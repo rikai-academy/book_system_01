@@ -16,7 +16,7 @@
                   <input type="file" id="image" name="image" class="display_none">
                   <label for="image">
                      <img id="output"
-                        src="{{ imgSrc($data) }}"
+                        src="{{ $data["user"]->image?asset('storage/image/'.$data["user"]->image):'images/uploads/user-img.png' }}"
                         alt="" class="output_image">
                      <br>
                   </label>
@@ -40,10 +40,8 @@
                <div class="user-fav">
                   <p>{{__('message.Account_Details')}}</p>
                   <ul>
-                     <li>
-                        <a href="{{url('profile/'.$data["user"]->id)}}">{{__('message.Profile',['name' => $data['user']->name])}}</a>
-                     </li>
-                     <li><a href="profile/favoritebook/1">{{__('message.Favorite_Book')}}</a></li>
+                     <li><a href="{{url('profile/'.$data["user"]->id)}}">{{__('message.Profile',['name' => $data['user']->name])}}</a></li>
+                     <li><a href="{{ route('profile.favorite',[$data["user"]->id]) }}">{{__('message.Favorite_Book')}}</a></li>
                      <li><a href="profile/ratebook/1">{{__('message.Rated_books')}}</a></li>
                      <li class="active"><a href="{{ url('timeline/'.auth()->user()->id) }}">{{__('message.TimeLine_History')}}</a></li>
                   </ul>
