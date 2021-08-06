@@ -3,3 +3,26 @@
   border: none;
   color: white;
 }
+
+.success {
+  color: rgb(9, 255, 0);
+}
+
+.fail {
+  color: red;
+}
+
+.output_image {
+  width: 200px;
+  height: 200px;
+  object-fit: scale-down;
+}
+
+form .display_none {
+  display: none;
+}
+
+
+.border_none {
+  border: none;
+}

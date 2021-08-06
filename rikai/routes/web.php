@@ -7,7 +7,7 @@ use App\Http\Controllers\ReviewController as ReviewController1;
 use App\Http\Controllers\CommentController as CommentController1;
 use App\Http\Controllers\ProfileController as ProfileController1;
 use App\Http\Controllers\ActivityController;
-
+use App\Http\Controllers\ChangeController as ChangeController1;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,3 +46,5 @@ Route::middleware(['users'])->group(function(){
     Route::get('profile/ratebook/{id}',[ProfileController1::class,'rateBook']);
     Route::get('profile/timeline/{id}',[ProfileController1::class,'timeLine']);
 });
+Route::put('change_password',[ChangeController1::class,'changePassword'])->name('change.password');
+Route::put('change_image',[ChangeController1::class,'changeImage'])->name('change.image');

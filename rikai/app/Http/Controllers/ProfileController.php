@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -46,7 +48,8 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        $data["user"] = User::find($id);
+        return view('users.profile.index')->with('data',$data);
     }
 
     /**
@@ -67,9 +70,11 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-        //
+        $data["user"] = User::find($id);
+        $data["user"]->update($request->all());
+        return back()->with('data',$data)->with('profileChangeSuccess',__('message.profileChangeSuccess'));
     }
 
     /**
