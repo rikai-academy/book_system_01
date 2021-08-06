@@ -144,6 +144,7 @@ class BookController extends Controller
             $data_activity->favorite_status = FavoriteStatus::NONE;
         }
     }
+
     public function addreview($bookId){
         $book = Book::find($bookId);
         return view('users.review.create',compact('book'));

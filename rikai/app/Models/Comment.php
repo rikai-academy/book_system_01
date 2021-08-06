@@ -9,6 +9,14 @@ use LikeComment;
 class Comment extends Model
 {
     use HasFactory;
+    protected $table = "comment";
+    protected $fillable = [
+        'body',
+        'review_id',
+        'user_id',
+        'created_at',
+        'update_at',
+    ];
 
     public function user() {
         return $this->belongsTo(User::class,'user_id');

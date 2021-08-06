@@ -8529,3 +8529,7 @@ input:checked ~ label{
   color: #fd4;
   background: rgba(0, 0, 0, 0.75);
 }
+.deletecomment{
+  background-color: #071829;
+  color: #fd4;
+};
