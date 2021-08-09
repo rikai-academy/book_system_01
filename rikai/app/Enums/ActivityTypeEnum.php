@@ -9,7 +9,7 @@ use BenSampo\Enum\Enum;
  * @method static static OptionTwo()
  * @method static static OptionThree()
  */
-final class ActivityType extends Enum
+final class ActivityTypeEnum extends Enum
 {
     const READ = 1;
     const UNREAD = 2;

@@ -175,12 +175,14 @@
         'changePasswordSuccess' => 'Thay đổi mật khẩu thành công',
         'imgChangeSuccess' => 'Thay đổi ảnh thành công',
         'imgChangeFail' => 'Thay đổi ảnh thất bại',
-        'profileChangeSuccess' => 'Cập nhật thành công'
         'add_comment_success'=>'Thêm bình luận thành công',
         'body_is_min'=>'Nội dung phải có ít nhất 10 ký tự',
         'update_comment_success'=>'Cập nhật bình luận thành công',
         'add_comment_fail'=>'Thêm bình luận không thành công',
         'update_comment_fail'=>'Cập nhật bình luận không thành công',
         'add_review_fail'=>'Thêm đánh giá thất bại',
+        'profileChangeSuccess' => 'Cập nhật hồ sơ thành công',
+        'activity' => 'Hoạt động',
+        'atBook' => 'Tại sách'
     ]
 ?>
