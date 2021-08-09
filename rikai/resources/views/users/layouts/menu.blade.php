@@ -48,10 +48,10 @@
                @endauth
                <li class="dropdown first">
                   <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                  {{__('message.Books')}} <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  {{__('message.Users')}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </a>
                   <ul class="dropdown-menu level1">
-                     <li><a href="{{url('book')}}">{{__('message.List_Book')}}</a></li>
+                     <li><a href="{{url('listuser')}}">{{__('message.List_User')}}</a></li>
                   </ul>
                </li>
             </ul>

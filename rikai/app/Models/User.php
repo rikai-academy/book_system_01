@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 use LikeComment;
 use LikeReview;
 
@@ -74,5 +75,9 @@ class User extends Authenticatable
 
     public function activities() {
         return $this->hasMany(Activity::class,'user_id');
+    }
+
+    public function scopeUserId($query,$userid){
+        return $query->where('id','=',$userid);
     }
 }
