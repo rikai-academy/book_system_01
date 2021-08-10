@@ -29,7 +29,7 @@
                   </p>
                </div>
                @endif
-               <form action="{{url('review')}}" class="user" method="post">
+               <form action="{{route('review.store')}}" class="user" method="post">
                   <h4>{{__('message.Review_Book')}}</h4>
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="bookid" value="{{ $book->id }}">

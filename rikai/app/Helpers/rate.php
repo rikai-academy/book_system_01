@@ -17,4 +17,19 @@
       }
    }
  }
+ function like($review){
+   if(Auth::user()->isLikeReviews($review)){
+      echo __('message.is_like_review');
+   }else{
+      echo __('message.Like');
+   }
+ }
+
+ function comment($comment){
+   if(Auth::user()->isLikeComments($comment)){
+      echo __('message.is_like_comment');
+   }else{
+      echo __('message.Comments');
+   }
+ }
 ?>

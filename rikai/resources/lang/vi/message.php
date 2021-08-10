@@ -187,5 +187,10 @@
         'List_User'=>'Tất Cả Người Dùng',
         'no_activity'=>'Không có hoạt động nào',
         'Users'=>'Người dùng',
+        'Like'=>'Thích',
+        'Unlike'=>'Bỏ thích',
+        'no_like'=>"Bạn chưa từng thích trước đó",
+        'is_like_review'=>'Đã thích bài viết',
+        'is_like_comment'=>'Đã thích bình luận',
     ]
 ?>

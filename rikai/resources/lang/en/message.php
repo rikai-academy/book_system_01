@@ -176,5 +176,10 @@
         'List_User'=>'List User',
         'no_activity'=>'No activity',
         'Users'=>'Users',
+        'Like'=>'Like',
+        'Unlike'=>'Unlike',
+        'no_like'=>"You have never liked before",
+        'is_like_review'=>'Is like review',
+        'is_like_comment'=>'Is like comment',
     ]
 ?>

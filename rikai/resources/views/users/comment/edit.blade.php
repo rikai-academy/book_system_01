@@ -13,7 +13,7 @@
                <div class="blog-detail-ct">
                   <div class="comment-form">
                      <h4>{{__('message.Update_Comment')}}</h4>
-                     <form action="{{url('comment/'.$comment->id)}}" method="post">
+                     <form action="{{route('comment.update',[$comment->id])}}" method="post">
                         @method('PUT')
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="reviewid" value="{{ $comment->review()->value('id') }}">

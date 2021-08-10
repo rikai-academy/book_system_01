@@ -22,7 +22,7 @@
          </p>
       </div>
       @endif
-      <form method="get" id="searchForm" action="{{url('search')}}">
+      <form method="get" id="searchForm" action="{{route('search')}}">
          <div class="top-search">
             <select>
                <option value="united">{{__('message.Novel')}}</option>
