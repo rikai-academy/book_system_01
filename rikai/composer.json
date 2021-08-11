@@ -31,7 +31,9 @@
         },
         "files": [
             "app/Helpers/rate.php",
-            "app/Helpers/imgSrc.php"
+            "app/Helpers/imgSrc.php",
+            "app/Helpers/customTime.php",
+            "app/Helpers/customCheckout.php"
         ]
     },
     "autoload-dev": {

@@ -23,24 +23,24 @@
                         <div class="mv-item-infor">
                            <h6><a href="{{ url('book/'.$item->book->id) }}">{{ $item->book->title }}</a></h6>
                            <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-                           <p class="describe">Earth's mightiest heroes must come together and learn to fight as a team
-                              if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
+                           <p class="describe">Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
                            <p>{{__('message.Author')}}: <a href="#">{{ $item->book->author }}</a></p>
                         </div>
                         <br>
-                        <form action="{{ url('cartItem/'.$item->id) }}" method="post">
+                        @if ($data["current_cart"]->status == "shopping")
+                        <form action="{{ url('cartItem/'.$item->id) }}" method="post" >
                            @csrf
                            @method('DELETE')
                            <input type="submit" class="remove-cart" value="{{__('message.Remove')}}" />
                         </form>
+                        @endif
                      </div>
                   </td>
                   <td>
-                     <input type="number" min="1" max="{{ $item->book->quantity }}" class="cart-item-input"
-                        cartItemId="{{ $item->id }}" cartPrice="{{ $item->book->price }}" value="{{ $item->quantity }}">
+                     <input type="number" {{ $data["current_cart"]->status=='shopping'?'':'readonly' }} min="1" max="{{ $item->book->quantity }}" class="cart-item-input" cartItemId="{{ $item->id }}" cartPrice="{{ $item->book->price }}" value="{{ $item->quantity }}">
                   </td>
                   <td class="unit-total">{{ $item->total_price }}</td>
-               </tr>
+               </tr>    
                @endforeach
             </table>
          </div>
@@ -52,7 +52,7 @@
                </tr>
                <tr>
                   <td colspan="2" class="checkoutbtn" style="text-align:center">
-                     <a href="{{url('checkout')}}"><b>{{__('message.Checkout')}}</b></a>
+                     {!! customCheckout($data["current_cart"]) !!}
                   </td>
                </tr>
             </table>

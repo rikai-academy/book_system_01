@@ -17,7 +17,38 @@ class CartController extends Controller
         $this->cartService = $cartServiceInterface;
     }
 
-    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $user_id = auth()->user()->id;
+        $data["carts"] = Cart::where('user_id',$user_id)->orderBy('created_at', 'desc')->paginate(4);
+        return view('users.book.cartList')->with('data',$data);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $data["current_cart"] = Cart::find($id);
+        $data["cart_item"] = $data["current_cart"]->cartItems()->get();
+        return view('users.book.cart')->with('data',$data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(CheckoutCartRequest $request, $cart_id)
     {
         $cart = Cart::find($cart_id);
@@ -27,6 +58,7 @@ class CartController extends Controller
         }
         return redirect('home')->with('message',__('message.checkoutSuccess'));
     }
+
 
     public function currentCart() {
         $data = $this->cartService->getCurrentCartData(auth()->user()->id);
@@ -43,5 +75,13 @@ class CartController extends Controller
         $cart = Cart::find($id);
         $data = $request->all();
         $cart->update($data);
+    }
+
+    public function cancel($id) {
+        $data["current_cart"] = Cart::find($id);
+        $data["current_cart"]->status = CartStatus::CANCEL;
+        $data["current_cart"]->update();
+        $data["cart_item"] = $data["current_cart"]->cartItems()->get();
+        return view('users.book.cart')->with('data',$data);
     }
 }

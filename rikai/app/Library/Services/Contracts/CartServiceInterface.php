@@ -1,8 +1,6 @@
 <?php
 namespace App\Library\Services\Contracts;
 
-use Illuminate\Http\Request;
-
 Interface CartServiceInterface
 {
     public function getCurrentCart($user_id);

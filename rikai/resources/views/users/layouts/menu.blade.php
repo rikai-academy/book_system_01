@@ -41,8 +41,9 @@
                   {{__('message.Profile',['name'=>auth()->user()->name])}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </a>
                   <ul class="dropdown-menu level1">
-                     <li><a href="{{url('profile/'.auth()->user()->id)}}">{{__('message.User_Profile')}}</a></li>
-                     <li><a href="{{url('cart/1')}}">{{__('message.Cart')}}</a></li>
+                     <li><a href="{{url('profile/'.auth()->user()->id )}}">{{__('message.User_Profile')}}</a></li>
+                     <li><a href="{{url('current_cart')}}">{{__('message.Cart')}}</a></li>
+                     <li><a href="{{url('cart')}}">{{__('message.CartList')}}</a></li>
                   </ul>
                </li>
                @endauth
