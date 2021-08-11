@@ -143,7 +143,9 @@ class CommentController extends Controller
     public function likecomment(Request $request, $commentId){
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
+
         $like_comment = LikeComment::where(['user_id'=>$data['user_id'],'comment_id'=>$commentId])->first();
+
         $comment= Comment::find($commentId);
         $review = Review::where('id','=',$comment->review_id)->first(); 
         if(empty($like_comment->user_id)){
@@ -152,9 +154,11 @@ class CommentController extends Controller
             $data['like'] = 1;
             $like_review = LikeComment::firstOrCreate($data);
             $like_review->save();
+
             return redirect()->route('review.show',[$review->id]);
         }else{
             return redirect->route('index');
+
         }
     }
     public function unlikecomment(Request $request, $commentId){
@@ -168,6 +172,7 @@ class CommentController extends Controller
         }else{
             $errors = 'message.no_like';
             return redirect()->route('index')->withErrors(__($errors));
+
         }
     }
 }

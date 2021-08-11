@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Follow;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Session;
 
-class UserController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,6 +15,7 @@ class UserController extends Controller
     public function index()
     {
         //
+        return view('admin.cart.list');
     }
 
     /**
@@ -61,6 +59,7 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        return view('admin.cart.detail');
     }
 
     /**
@@ -84,35 +83,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function follow($userId, $followId){
-
-        $follow = Follow::FollowUser($userId, $followId)->first();
-        if($follow){
-            $message = 'message.follow_fail';
-            return redirect('listuser')->withMessage(__($message));
-        }else{
-            $data["follow"] = new Follow;
-            $data["follow"]->user_id = $userId;
-            $data["follow"]->follow_id = $followId;
-            $data["follow"]->save();
-            $message = 'message.follow_success';
-            return redirect()->route('listuser')->withMessage(__($message));
-
-        } 
-    }
-
-    public function unfollow($userId, $followId){
-
-        $follow = Follow::FollowUser($userId, $followId)->first();
-        if($follow){
-            $follow->delete();
-            $message = 'message.unfollow_success';
-            return redirect()->route('listuser')->withMessage(__($message));
-        }else{
-            $message = 'message.unfollow_fail';
-            return redirect()->route('listuser')->withMessage(__($message));
-        } 
     }
 }

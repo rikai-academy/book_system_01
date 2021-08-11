@@ -92,7 +92,7 @@ class User extends Authenticatable
     public function isLikeComments(Comment $comment){
         return !! $this->likeComment()->where('comment_id', $comment->id)->count();
     }
-    
+
     public function isFollowing(User $user){
         return !! $this->beFollowed()->where('user_id', $user->id)->count();
 

@@ -7,6 +7,13 @@ use App\Http\Controllers\ReviewController as ReviewController1;
 use App\Http\Controllers\CommentController as CommentController1;
 use App\Http\Controllers\ProfileController as ProfileController1;
 use App\Http\Controllers\UserController as UserController1;
+
+use App\Http\Controllers\Admin\HomeController as HomeController1;
+use App\Http\Controllers\Admin\BookController as BookController2;
+use App\Http\Controllers\Admin\CategoryController as CategoryController1;
+use App\Http\Controllers\Admin\UserController as UserController2;
+use App\Http\Controllers\Admin\ProfileController as ProfileController2;
+use App\Http\Controllers\Admin\CartController as CartController2;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ChangeController as ChangeController1;
 use App\Http\Controllers\CartController;
@@ -38,6 +45,7 @@ Route::resource('comment', CommentController1::class)->only('show');
 Auth::routes();
 Route::get('search', [BookController1::class, 'search'])->name('search');
 
+
 Route::middleware(['users'])->group(function () {
     Route::get('addreview/{id}', [BookController1::class, 'addreview'])->name('add.review');
     Route::resource('review', ReviewController1::class)->except('show');
@@ -63,4 +71,20 @@ Route::middleware(['users'])->group(function () {
     Route::get('cancel/{id}', [CartController::class, 'cancel']);
     Route::put('updateTotal/{id}', [CartController::class, 'updateTotal']);
 });
-    Route::resource('timeline', ActivityController::class);
+
+Route::resource('timeline', ActivityController::class);
+
+
+Route::group(['prefix'=>'admin'], function(){
+    Route::resource('homeadmin',HomeController1::class);
+    Route::resource('book',BookController2::class);
+    Route::resource('category',CategoryController1::class);
+    Route::resource('user',UserController2::class);
+    Route::resource('profile',ProfileController2::class);
+    Route::resource('cart',CartController2::class);
+
+    Route::get('buybook',[UserController2::class,'buybook']);
+    Route::get('login',[UserController2::class,'login']);
+    Route::get('profile/{id}/edit',[ProfileController2::class,'edit']);
+});
+
