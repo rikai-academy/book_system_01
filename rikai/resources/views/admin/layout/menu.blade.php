@@ -27,8 +27,8 @@
          </a>
          <div class="collapse" id="form-elements">
             <ul class="nav flex-column sub-menu">
-               <li class="nav-item"><a class="nav-link" href="{{route('book.index')}}">{{__('message.List_Book')}}</a></li>
-               <li class="nav-item"><a class="nav-link" href="{{route('book.create')}}">{{__('message.Add_Book')}}</a></li>
+               <li class="nav-item"><a class="nav-link" href="{{route('bookadmin.index')}}">{{__('message.List_Book')}}</a></li>
+               <li class="nav-item"><a class="nav-link" href="{{route('bookadmin.create')}}">{{__('message.Add_Book')}}</a></li>
             </ul>
          </div>
       </li>

@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\CategoryController as CategoryController1;
 use App\Http\Controllers\Admin\UserController as UserController2;
 use App\Http\Controllers\Admin\ProfileController as ProfileController2;
 use App\Http\Controllers\Admin\CartController as CartController2;
+use App\Http\Controllers\Admin\LoginController as LoginController2;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ChangeController as ChangeController1;
 use App\Http\Controllers\CartController;
@@ -72,19 +73,23 @@ Route::middleware(['users'])->group(function () {
     Route::put('updateTotal/{id}', [CartController::class, 'updateTotal']);
 });
 
+
 Route::resource('timeline', ActivityController::class);
 
 
-Route::group(['prefix'=>'admin'], function(){
+Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::resource('homeadmin',HomeController1::class);
-    Route::resource('book',BookController2::class);
+    Route::resource('bookadmin',BookController2::class);
     Route::resource('category',CategoryController1::class);
     Route::resource('user',UserController2::class);
     Route::resource('profile',ProfileController2::class);
     Route::resource('cart',CartController2::class);
 
     Route::get('buybook',[UserController2::class,'buybook']);
-    Route::get('login',[UserController2::class,'login']);
     Route::get('profile/{id}/edit',[ProfileController2::class,'edit']);
+    Route::get('logout', [LoginController2::class, 'logout'])->name('admin.logout');
 });
+Route::get('admin/login',[LoginController2::class,'index'])->name('admin.index');
+Route::post('admin/login', [LoginController2::class, 'postLogin'])->name('admin.login');
+
 

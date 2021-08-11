@@ -14,16 +14,24 @@
                            <img src="{{ asset('admin/images/logo.svg') }}" alt="logo">
                         </div>
                         <h4>{{__('message.Hello')}}</h4>
+                        @if (Session::has('message'))
+                          <div class="alert alert-danger">
+                            <p class="panel-body">
+                                {{ __(Session::get('message')) }}
+                            </p>
+                          </div>
+                        @endif
                         <h6 class="font-weight-light">{{__('message.LOG_In')}} {{__('message.to_continue')}}.</h6>
-                        <form class="pt-3">
+                        <form class="pt-3"  method="POST" action="{{route('admin.login')}}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                            <div class="form-group">
-                              <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="{{__('message.Email_Address')}}">
+                              <input type="email" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="{{__('message.Email_Address')}}">
                            </div>
                            <div class="form-group">
-                              <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="{{__('message.Password')}}">
+                              <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="{{__('message.Password')}}">
                            </div>
                            <div class="mt-3">
-                              <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">{{__('message.LOG_In')}}</a>
+                              <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">{{__('message.LOG_In')}}</button>
                            </div>
                      </div>
                      </form>
