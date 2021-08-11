@@ -9,12 +9,22 @@ class CartItem extends Model
 {
     use HasFactory;
 
+    protected $table = "cart_item";
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'book_id',
+        'total_price',
+        'quantity',
+    ];
+
     public function cart() {
         return $this->belongsTo(Cart::class,'cart_id');
     }
 
     public function book() {
-        return $this->hasOne(Book::class,'book_id');
+        return $this->belongsTo(Book::class,'book_id');
     }
 
 }

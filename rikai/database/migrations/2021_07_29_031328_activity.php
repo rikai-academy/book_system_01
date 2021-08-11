@@ -20,8 +20,8 @@ class Activity extends Migration
             $table->integer('book_id');
             $table->integer('user_id');
             $table->integer('type_id');
-            $table->integer('read_status')->default(ReadStatus::None);
-            $table->integer('favorite_status')->default(FavoriteStatus::None);
+            $table->integer('read_status')->default(ReadStatus::NONE);
+            $table->integer('favorite_status')->default(FavoriteStatus::NONE);
             $table->timestamp('time');
         });
     }

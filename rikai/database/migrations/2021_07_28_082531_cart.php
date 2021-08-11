@@ -16,8 +16,12 @@ class Cart extends Migration
         Schema::create('cart', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('total_price');
-            $table->integer('status');
+            $table->integer('total_price')->nullable();
+            $table->enum('status',['shopping','pending','done','cancel'])->default('shopping');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('name_of_card')->nullable();
+            $table->string('credit_card_number')->nullable();
             $table->timestamps();
         });
     }

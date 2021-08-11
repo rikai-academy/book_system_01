@@ -201,6 +201,9 @@
         'unfollow_fail'=>'Bỏ theo dõi thất bại',
         'now_follow'=>'Bạn đang theo dõi',
         'Followed'=>'Đã theo dõi',
-
+        'addCartItemSuccess' => 'Thêm vào giỏ hàng thành công',
+        'checkoutSuccess' => 'Gửi yêu cầu thành công',
+        'outOfStock' => 'Đã bán hết sách',
+        'checkoutFail' => 'Gửi yêu cầu thất bại',
     ]
 ?>

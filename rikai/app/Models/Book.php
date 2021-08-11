@@ -12,8 +12,8 @@ class Book extends Model
     use HasFactory;
     protected $table = "book";
 
-    public function cartItem() {
-        return $this->belongsTo(CartItem::class,'book_id');
+    public function cartItems() {
+        return $this->hasMany(CartItem::class,'book_id');
     }
 
     public function reviews() {

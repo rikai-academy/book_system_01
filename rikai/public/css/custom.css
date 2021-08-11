@@ -22,7 +22,22 @@ form .display_none {
   display: none;
 }
 
+.width_100 {
+  width: 100%;
+}
 
 .border_none {
   border: none;
+}
+
+.total-price-disable {
+  position: unset;
+  width: auto;
+  left: auto;
+}
+
+.custom_table {
+  position: relative;
+  width: 500px;
+  margin-left: auto;
 }

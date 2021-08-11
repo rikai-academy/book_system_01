@@ -17,7 +17,7 @@ class CartItem extends Migration
             $table->id();
             $table->integer('cart_id');
             $table->integer('book_id');
-            $table->integer('quantity');
+            $table->integer('quantity')->default(1);
             $table->integer('total_price');
         });
     }

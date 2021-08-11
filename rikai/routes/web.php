@@ -9,6 +9,8 @@ use App\Http\Controllers\ProfileController as ProfileController1;
 use App\Http\Controllers\UserController as UserController1;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ChangeController as ChangeController1;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartItemController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,8 +44,8 @@ Route::middleware(['users'])->group(function () {
     Route::resource('profile', ProfileController1::class);
     Route::resource('comment', CommentController1::class)->except('show');
     Route::get('cart/{id}', [BookController1::class, 'cart']);
-    Route::get('checkout', [BookController1::class, 'checkout']);
     Route::get('profile/favoritebook/{id}', [ProfileController1::class, 'favoriteBook'])->name('profile.favorite');
+    Route::get('checkout', [CartController::class, 'checkout']);
     Route::get('profile/ratebook/{id}', [ProfileController1::class, 'rateBook']);
     Route::get('profile/timeline/{id}', [ProfileController1::class, 'timeLine']);
     Route::put('change_password', [ChangeController1::class, 'changePassword'])->name('change.password');
@@ -54,11 +56,11 @@ Route::middleware(['users'])->group(function () {
     Route::get('unlike/review/{reviewid}',[ReviewController1::class,'unlikereview'])->name('unlike.review');
     Route::get('like/comment/{commentid}',[CommentController1::class,'likecomment'])->name('like.comment');
     Route::get('unlike/comment/{commentid}',[CommentController1::class,'unlikecomment'])->name('unlike.comment');
-
     Route::get('follow/{userid}/{followid}',[UserController1::class,'follow'])->name('follow');
     Route::get('unfollow/{userid}/{followid}',[UserController1::class,'unfollow'])->name('unfollow');
-
+    Route::resource('timeline', ActivityController::class);
+    Route::resource('cart', CartController::class);
+    Route::resource('cartItem', CartItemController::class);
+    Route::get('current_cart', [CartController::class, 'currentCart']);
+    Route::put('updateTotal/{id}', [CartController::class, 'updateTotal']);
 });
-
-Route::resource('timeline', ActivityController::class);
-

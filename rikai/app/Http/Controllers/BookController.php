@@ -119,11 +119,6 @@ class BookController extends Controller
         return view('users.book.cart');
     }
 
-    public function checkout()
-    {
-        return view('users.book.checkout');
-    }
-
     public function search(Request $request){
         $name = $request->body;
         $books = Book::where('title','like','%'.$name.'%')

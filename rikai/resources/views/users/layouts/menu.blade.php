@@ -9,7 +9,7 @@
                   <span></span>
                </div>
             </div>
-            <a href="index-2.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+            <a href="{{url('home')}}"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
          </div>
          <!-- Collect the nav links, forms, and other content for toggling -->
          <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
@@ -41,7 +41,7 @@
                   {{__('message.Profile',['name'=>auth()->user()->name])}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </a>
                   <ul class="dropdown-menu level1">
-                     <li><a href="{{route('profile.favorite',[auth()->user()->id] )}}">{{__('message.User_Profile')}}</a></li>
+                     <li><a href="{{url('profile/'.auth()->user()->id)}}">{{__('message.User_Profile')}}</a></li>
                      <li><a href="{{url('cart/1')}}">{{__('message.Cart')}}</a></li>
                   </ul>
                </li>
@@ -58,14 +58,6 @@
             <ul class="nav navbar-nav flex-child-menu menu-right">
                <li class="dropdown first">
                   <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                  {{__('message.pages')}} <i class="fa fa-angle-down" aria-hidden="true"></i>
-                  </a>
-                  <ul class="dropdown-menu level1">
-                     <li><a href="404.html">{{__('message.404_Page')}}</a></li>
-                  </ul>
-               </li>
-               <li class="dropdown first">
-                  <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
                   {{__('message.Language')}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </a>
                   <ul class="dropdown-menu level1">
@@ -73,7 +65,6 @@
                      <li><a href="{{route('language.index',['vi'])}}">Viet Nam</a></li>
                   </ul>
                </li>
-               <li><a href="#">{{__('message.Help')}}</a></li>
                @guest
                <li class="loginLink" id="loginLink"><a href="#">{{__('message.LOG_In')}}</a></li>
                <li class="btn signupLink"><a href="#">{{__('message.sign_up')}}</a></li>

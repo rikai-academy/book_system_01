@@ -190,6 +190,9 @@
         'unfollow_fail'=>'Unfollow fail',
         'now_follow'=>'Now_follow',
         'Followed'=>'Followed',
-
+        'addCartItemSuccess' => 'Add to cart success',
+        'checkoutSuccess' => 'Send request success',
+        'outOfStock' => 'Book has already sold out',
+        'checkoutFail' => 'Send request fail',
     ]
 ?>
