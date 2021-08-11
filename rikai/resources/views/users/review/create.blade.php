@@ -50,9 +50,7 @@
                         <label>{{__('message.Rated_books')}} </label>
                         <div class="container1">
                            <div class="star-widget">
-                              <?php
-                                 rateform();
-                              ?>
+                              {{rateform()}}
                            </div> 
                         </div>
                      </div>

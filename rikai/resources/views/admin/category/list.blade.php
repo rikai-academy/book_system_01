@@ -15,18 +15,20 @@
                      </tr>
                   </thead>
                   <tbody>
+                     @foreach($categories as $category)
                      <tr>
-                        <td>Jacob</td>
-                        <td>53275531</td>
+                        <td>{{$category->id}}</td>
+                        <td>{{$category->title}}</td>
                         <td>
-                           <a href="{{route('category.edit',[1])}}">
+                           <a href="{{route('category.edit',[$category->id])}}">
                            <label class="badge badge-info">{{__('message.Edit')}}</label>
                            </a>
-                           <a>
+                           <a href="{{route('deletecategory',[$category->id])}}">
                            <label class="badge badge-danger">{{__('message.Delete')}}</label>
                            </a>
                         </td>
                      </tr>
+                     @endforeach
                   </tbody>
                </table>
             </div>
