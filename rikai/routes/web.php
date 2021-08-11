@@ -77,7 +77,7 @@ Route::resource('timeline', ActivityController::class);
 
 Route::group(['prefix'=>'admin'], function(){
     Route::resource('homeadmin',HomeController1::class);
-    Route::resource('book',BookController2::class);
+    Route::resource('bookadmin',BookController2::class);
     Route::resource('category',CategoryController1::class);
     Route::resource('user',UserController2::class);
     Route::resource('profile',ProfileController2::class);

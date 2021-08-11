@@ -29,7 +29,7 @@
                         <td>12 May 2017</td>
                         <td>12 May 2017</td>
                         <td>
-                           <a href="{{route('book.edit',[1])}}">
+                           <a href="{{route('bookadmin.edit',[1])}}">
                            <label class="badge badge-info">{{__('message.Edit')}}</label>
                            </a>
                            <a>
