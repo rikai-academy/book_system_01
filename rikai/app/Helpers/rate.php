@@ -32,4 +32,12 @@
       echo __('message.Comments');
    }
  }
+
+ function follow($user){
+   if(Auth::user()->isFollowing($user)){
+      return __('message.Followed');
+   }else{
+      return __('message.Follow');
+   }
+ }
 ?>

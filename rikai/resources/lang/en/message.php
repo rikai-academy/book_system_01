@@ -181,5 +181,15 @@
         'no_like'=>"You have never liked before",
         'is_like_review'=>'Is like review',
         'is_like_comment'=>'Is like comment',
+        'Follow'=>'Follow',
+        'Unfollow'=>'Unfollow',
+        'Following'=>'Following',
+        'follow_fail'=>'Follow fail',
+        'follow_success'=>'Follow success',
+        'unfollow_success'=>'Unfollow success',
+        'unfollow_fail'=>'Unfollow fail',
+        'now_follow'=>'Now_follow',
+        'Followed'=>'Followed',
+
     ]
 ?>

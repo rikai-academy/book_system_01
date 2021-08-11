@@ -10,7 +10,6 @@ class ActivityType extends Model
     use HasFactory;
     protected $table = "activity_type";
 
-    protected $table = "activity_type";
 
     public function activity() {
         return $this->hasMany(Activity::class,'type_id');

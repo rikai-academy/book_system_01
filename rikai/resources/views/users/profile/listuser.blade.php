@@ -22,7 +22,31 @@
                         <br>
                         <span>Email: {{$user->email}}</span>
                         <br>
-                        <h3><a href="{{route('profile.favoritebook',[$user->id])}}">{{__('message.Favorite_Book')}}</a></h3>
+                        <h3><a href="{{route('profile.favorite',[$user->id])}}">{{__('message.Favorite_Book')}}</a></h3>
+                        <br><br>
+                        @if(!Auth::guest() && (Auth::user()->id != $user->id ))
+                        <ul class="nav nav-pills">
+                           <li role="presentation">
+                              <a href="{{route('follow',[$user->id,Auth::user()->id])}}" class="follow">
+                                 {{follow($user)}}
+                              </a>
+                           </li>
+                           <li role="presentation">
+                              <a href="{{route('unfollow',[$user->id,Auth::user()->id])}}" class="follow">
+                              {{__('message.Unfollow')}}:
+                              </a>
+                           </li>
+                        </ul>
+                        @endif
+                        <ul class="nav nav-pills">
+                           <li class="followed">
+                           <p class="Following">{{__('message.Following')}}:{{$user->follow()->count()}}</p>
+                           </li>
+                           &nbsp;
+                           <li class="followed">
+                           <p class="Following">{{__('message.now_follow')}}:{{$user->beFollowed()->count()}}</p>
+                           </li>
+                        </ul>
                      </div>
                   </div>
                </div>
