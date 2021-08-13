@@ -182,6 +182,7 @@ class ReviewController extends Controller
             return redirect()->route('book.show',[$book->id]);
         } else {
             return redirect()->route('index');
+
         }
     }
 

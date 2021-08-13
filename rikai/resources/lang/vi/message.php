@@ -239,6 +239,7 @@
         'to_continue'=>'để tiếp tục',
         'Hello'=>'Xin chào! Bắt đầu nào',
         'Id'=>'Mã số nhận dạng',
+        'error_login'=>'Tài khoản không đúng vui lòng đăng nhập lại ',
 
     ]
 ?>

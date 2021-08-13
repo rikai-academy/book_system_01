@@ -89,6 +89,7 @@ class UserController extends Controller
     public function follow($userId, $followId){
 
         $follow = Follow::FollowUser($userId, $followId)->first();
+
         if($follow){
             $message = 'message.follow_fail';
             return redirect('listuser')->withMessage(__($message));

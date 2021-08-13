@@ -228,6 +228,7 @@
         'to_continue'=>'to continue',
         'Hello'=>'Hello! lets get started',
         'Id'=>'Id',
+        'error_login'=>'Email or password is not correct',
 
     ]
 ?>
