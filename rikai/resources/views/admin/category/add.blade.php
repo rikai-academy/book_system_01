@@ -8,14 +8,16 @@
             <p class="card-description">
                {{__('message.Add_Category')}}
             </p>
-            <form class="forms-sample">
+            <form class="forms-sample" method="POST" action="{{route('category.store')}}">
+               @method('POST')
+               <input type="hidden" name="_token" value="{{ csrf_token() }}">
                <div class="form-group">
                   <label for="exampleInputName1">{{__('message.Name_Category')}}</label>
-                  <input type="text" class="form-control" id="exampleInputName1" placeholder="{{__('message.Name_Category')}}">
+                  <input type="text" class="form-control" name="title" id="exampleInputName1" placeholder="{{__('message.Name_Category')}}">
                </div>
                <div class="form-group">
                   <label for="exampleTextarea1">{{__('message.Description')}}</label>
-                  <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                  <textarea class="form-control" name="description" id="exampleTextarea1" rows="4"></textarea>
                </div>
                <button type="submit" class="btn btn-primary mr-2">{{__('message.submit')}}</button>
             </form>

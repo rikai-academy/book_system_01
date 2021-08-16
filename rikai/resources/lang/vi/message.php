@@ -240,6 +240,13 @@
         'Hello'=>'Xin chào! Bắt đầu nào',
         'Id'=>'Mã số nhận dạng',
         'error_login'=>'Tài khoản không đúng vui lòng đăng nhập lại ',
-
+        'no_category'=>'Không tìm thấy danh mục sách',
+        'update_category_success'=>'Cập nhật danh mục thành công',
+        'update_category_fail'=>'Cập nhật danh mục thất bại',
+        'add_category_success'=>'Thêm danh mục thành công',
+        'add_category_fail'=>'Thêm danh mục thất bại',
+        'delete_category_success'=>'Xóa danh mục thành công',
+        'description_is_not_null'=>'Phần mô tả là không thể thiếu',
+        'delete_comment_success'=>'Xóa bình luận thành công ',
     ]
 ?>

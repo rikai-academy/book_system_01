@@ -76,6 +76,7 @@
                               @if(!Auth::guest())
                               <ul class="nav nav-pills">
                                  <li role="presentation">
+
                                     <a href="{{route('like.comment',[$comment->id])}}" class="like">
                                     {{ comment($comment) }}:
                                           {{$comment->likeComments()->count()}}

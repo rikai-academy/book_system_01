@@ -8,14 +8,17 @@
             <p class="card-description">
                {{__('message.Edit_Category')}}
             </p>
-            <form class="forms-sample">
+            <form class="forms-sample" method="post" action="{{route('category.update',[$category->id])}}">
+               @method('PUT')
                <div class="form-group">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  <input type="hidden" name="categoryid" value="{{$category->id}}">
                   <label for="exampleInputName1">{{__('message.Name_Category')}}</label>
-                  <input type="text" class="form-control" id="exampleInputName1" placeholder="{{__('message.Name_Category')}}">
+                  <input type="text" name="title" class="form-control" id="exampleInputName1" placeholder="{{$category->title}}" value="{{$category->title}}">
                </div>
                <div class="form-group">
                   <label for="exampleTextarea1">{{__('message.Description')}}</label>
-                  <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                  <textarea class="form-control" name="description" placeholder="{{$category->description}}" id="exampleTextarea1" rows="4">{{$category->description}}</textarea>
                </div>
                <button type="submit" class="btn btn-primary mr-2">{{__('message.submit')}}</button>
             </form>

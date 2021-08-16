@@ -88,6 +88,8 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::get('buybook',[UserController2::class,'buybook']);
     Route::get('profile/{id}/edit',[ProfileController2::class,'edit']);
     Route::get('logout', [LoginController2::class, 'logout'])->name('admin.logout');
+    Route::get('category/{categoryid}/delete', [CategoryController1::class, 'destroy'])->name('deletecategory');
+
 });
 Route::get('admin/login',[LoginController2::class,'index'])->name('admin.index');
 Route::post('admin/login', [LoginController2::class, 'postLogin'])->name('admin.login');

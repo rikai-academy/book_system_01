@@ -124,7 +124,7 @@ class CommentController extends Controller
         $comment = Comment::find($commentId);
         if ($comment && $this->hascomment($comment)==true ){
             $comment->delete();
-            $message = 'message.delete_review_success';
+            $message = 'message.delete_comment_success';
             return back()->withMessage(__($message));
         } else {
             $errors = 'message.sufficient_permissions';
@@ -149,7 +149,7 @@ class CommentController extends Controller
         $comment= Comment::find($commentId);
         $review = Review::where('id','=',$comment->review_id)->first(); 
         if(empty($like_comment->user_id)){
-            $user_id = Auth::user()->id;
+
             $data['comment_id'] = $commentId;
             $data['like'] = 1;
             $like_review = LikeComment::firstOrCreate($data);

@@ -229,6 +229,13 @@
         'Hello'=>'Hello! lets get started',
         'Id'=>'Id',
         'error_login'=>'Email or password is not correct',
-
+        'no_category'=>'No Category book',
+        'update_category_success'=>'Update category success',
+        'update_category_fail'=>'Update category fail',
+        'add_category_success'=>'Add category success',
+        'add_category_fail'=>'Add category fail',
+        'delete_category_success'=>'Delete category success',
+        'description_is_not_null'=>'Description is not null',
+        'delete_comment_success'=>'Delete comment success ',
     ]
 ?>

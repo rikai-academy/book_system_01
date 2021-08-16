@@ -51,15 +51,11 @@
                         <div class="container1">
                            <h5 class="oldrate">Old rating</h5>
                            <div class="star-widget">
-                              <?php
-                                 oldrate($review->rate);
-                              ?>
+                              {{oldrate($review->rate)}}
                            </div>
                            <h5 class="newrate">New rating</h5>
                            <div class="star-widget">
-                              <?php
-                                 rateform();
-                              ?>
+                              {{rateform()}}
                            </div>
                         </div>
                      </div>

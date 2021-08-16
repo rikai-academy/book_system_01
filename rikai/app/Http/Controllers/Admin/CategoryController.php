@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -15,7 +17,8 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        return view('admin.category.list');
+        $categories = Category::all();
+        return view('admin.category.list',compact('categories'));
     }
 
     /**
@@ -35,9 +38,18 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         //
+        $data = $request->all();
+        $category = Category::create($data);
+        if ($category){
+            $message = 'message.add_category_success';
+            return redirect()->route('category.index')->withMessage(__($message));
+        } else {
+            $message = 'message.add_category_fail';
+            return redirect()->route('category.index')->withMessage(__($message));
+        }
     }
 
     /**
@@ -57,10 +69,16 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($categoryid)
     {
         //
-        return view('admin.category.edit');
+        $category = $this->findCategory($categoryid);
+        if($category){
+            return view('admin.category.edit',compact('category'));
+        }else{
+            $errors = 'message.no_category';
+            return redirect()->route('homeadmin.index')->withErrors(__($errors));
+        }
     }
 
     /**
@@ -70,9 +88,20 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $categoryid)
     {
         //
+        $category = $this->findCategory($categoryid);
+        $data = $request->all();
+        $category->update($data);
+        if($category){
+            $message = 'message.update_category_success';
+            return redirect()->route('category.edit',$category->id)->withMessage(__($message));
+        } else {
+            $message = 'message.update_category_fail';
+            return redirect()->route('category.edit',$category->id)->withMessage(__($message));
+        }
+
     }
 
     /**
@@ -81,8 +110,22 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($categoryid)
     {
         //
+        $category = $this->findCategory($categoryid);
+        $category->delete();
+        $message = 'message.delete_category_success';
+        return redirect()->route('category.index')->withMessage(__($message));
+    }
+
+    public function findCategory($categoryid){
+        $category = Category::find($categoryid);
+        if($category){
+            return $category;
+        }else{
+            $errors = 'message.no_category';
+            return redirect()->route('homeadmin.index')->withErrors(__($errors));
+        }
     }
 }
