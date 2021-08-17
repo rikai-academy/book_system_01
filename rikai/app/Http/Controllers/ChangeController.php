@@ -36,8 +36,9 @@ class ChangeController extends Controller
 
     public function changeImage(ChangeImageRequest $request){
         if( $request->hasFile( 'image' ) ) {
-            $fileName = $this->userService->changeImage($request);
-            $user = User::find(auth()->user()->id);
+            $user_id = auth()->user()->id;
+            $fileName = $this->userService->changeImage($request,$user_id);
+            $user = User::find($user_id);
             $user->image = $fileName;
             $user->save();
             return back()->with('imgChangeSuccess',__('message.imgChangeSuccess'));

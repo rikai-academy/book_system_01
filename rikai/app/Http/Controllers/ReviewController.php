@@ -168,7 +168,6 @@ class ReviewController extends Controller
     public function likereview(Request $request, $reviewId){
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
-
         $like_review = LikeReview::where(['user_id'=>$data['user_id'],'review_id'=>$reviewId])->first();
         $review = Review::find($reviewId);
         $book = Book::where('id','=',$review->book_id)->first(); 
@@ -181,7 +180,6 @@ class ReviewController extends Controller
             return redirect()->route('book.show',[$book->id]);
         } else {
             return redirect()->route('index');
-
         }
     }
 
@@ -190,7 +188,6 @@ class ReviewController extends Controller
         $like_review = LikeReview::where(['user_id'=>$user_id,'review_id'=>$reviewId])->first();
         $review = Review::find($reviewId);
         $book = Book::where('id','=',$review->book_id)->first(); 
-
         if ($like_review){
             $like_review->delete();
             return redirect()->route('book.show',[$book->id]);

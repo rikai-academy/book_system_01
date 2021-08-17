@@ -255,5 +255,7 @@
         'update_profile_success'=>'Update profile success',
         'update_profile_fail'=>'Update profile fail',
         'no_profile'=>'No Profile',
+        'registerSuccess' => 'Register Success',
+        'search' => 'Search',
     ]
 ?>

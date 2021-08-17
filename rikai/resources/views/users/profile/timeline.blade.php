@@ -16,7 +16,7 @@
                   <input type="file" id="image" name="image" class="display_none">
                   <label for="image">
                      <img id="output"
-                        src="{{ $data["user"]->image?asset('storage/image/'.$data["user"]->image):'images/uploads/user-img.png' }}"
+                        src="{{ imgSrc($data["user"]->image) }}"
                         alt="" class="output_image">
                      <br>
                   </label>

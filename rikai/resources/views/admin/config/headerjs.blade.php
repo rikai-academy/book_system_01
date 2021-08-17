@@ -17,3 +17,4 @@
 <!-- endinject -->
 <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
 <!-- <base href="{{asset('')}}"> -->
+<link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
