@@ -9,7 +9,7 @@ use App\Models\Book_category;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Http\Requests\BookRequest;
-use App\Library\Services\Contracts\UploadImageServiceInterface; 
+use App\Library\Services\Contracts\UploadimageServiceInterface; 
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
@@ -56,7 +56,8 @@ class BookController extends Controller
     public function store(BookRequest $request)
     {
         $data = $request->all();
-        $data['image'] = $this->uploadImageService->uploadImageController($request,$data);
+        $type= 'book';
+        $data['image'] = $this->uploadImageService->uploadImage($request,$data,$type);
         $book = Book::create($data);
         $categorys = $request->input('category_id');
         foreach($categorys as $category){
@@ -154,7 +155,8 @@ class BookController extends Controller
                 }
             }
         }
-        $data['image'] = $this->uploadImageService->uploadImageController($request,$data);
+        $type = 'book';
+        $data['image'] = $this->uploadImageService->uploadImage($request,$data,$type);
         $book->update($data);
         if($book){
             $message = 'message.update_book_success';

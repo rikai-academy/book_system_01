@@ -1,7 +1,7 @@
 <?php
 namespace App\Library\Services\Contracts;
   
-Interface UploadImageServiceInterface
+Interface UploadimageServiceInterface
 {
-    public function uploadImageController($request,$data);
+    public function uploadImage($request,$data,$type);
 }

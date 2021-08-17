@@ -16,7 +16,7 @@
                @foreach($users as $user)
                <div class="col-md-12">
                   <div class="ceb-item-style-2">
-                     <img src="{{$user->image}}" alt="">
+                     <img src="{{asset('/upload/profile/'.$user->image)}}" class="output_imageprofile" alt="">
                      <div class="ceb-infor">
                         <h2>{{$user->name}}</h2>
                         <br>

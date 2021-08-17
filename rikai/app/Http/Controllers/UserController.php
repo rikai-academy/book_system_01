@@ -115,6 +115,7 @@ class UserController extends Controller
         }else{
             $message = 'message.unfollow_fail';
             return redirect()->route('listuser')->withMessage(__($message));
+
         } 
     }
 }

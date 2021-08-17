@@ -8545,6 +8545,10 @@ li p{
 .output_image{
   width: 200px;
   height: 300px;
+}
+.output_imageprofile{
+  width: 200px;
+  height: 204px;
   object-fit: scale-down;
 }
 
