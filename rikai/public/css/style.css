@@ -8540,3 +8540,11 @@ li p{
 .followed{
   margin: 10px;
 }
+
+/**---------------*/
+.output_image{
+  width: 200px;
+  height: 300px;
+  object-fit: scale-down;
+}
+

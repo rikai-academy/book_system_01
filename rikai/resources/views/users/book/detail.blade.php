@@ -13,7 +13,8 @@
       <div class="row ipad-width2">
          <div class="col-md-4 col-sm-12 col-xs-12">
             <div class="movie-img sticky-sb">
-               <img src="images/uploads/movie-single.jpg" alt="">
+               <!-- <img src="images/uploads/movie-single.jpg" alt=""> -->
+               <img src="{{asset('/upload/book/'.$book->image)}}" alt="">
                <div class="movie-btn">
                   @if(session()->has('addCartItemSuccess'))
                   <span class="success" role="alert">

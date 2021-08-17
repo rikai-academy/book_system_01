@@ -30,9 +30,8 @@
                   {{__('message.Category_Book')}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </a>
                   <ul class="dropdown-menu level1">
-                     <li><a href="{{route('book.index')}}">{{__('message.Novel')}}</a></li>
-                     <li><a href="{{route('book.index')}}">{{__('message.Science')}}</a></li>
-                     <li class="it-last"><a href="{{route('book.index')}}">{{__('message.Manga')}}</a></li>
+                     {{categorybook()}}
+                     <li><a href="{{route('book.index')}}">{{__('message.all_book')}}</a></li>
                   </ul>
                </li>
                @auth

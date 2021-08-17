@@ -21,7 +21,6 @@
       
       <div class="main-panel">
         <div class="content-wrapper">
-
         @if ($errors->any())
           <div class="alert alert-danger">
             <ul>

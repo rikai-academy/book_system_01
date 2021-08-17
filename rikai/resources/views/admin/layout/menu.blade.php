@@ -40,8 +40,8 @@
          </a>
          <div class="collapse" id="charts">
             <ul class="nav flex-column sub-menu">
-               <li class="nav-item"><a class="nav-link" href="{{route('profile.index')}}">{{__('message.User_Profile')}}</a></li>
-               <li class="nav-item"><a class="nav-link" href="{{route('profile.edit',[1])}}">{{__('message.Edit_Profile')}}</a></li>
+               <li class="nav-item"><a class="nav-link" href="{{route('profileadmin.index')}}">{{__('message.User_Profile')}}</a></li>
+               <li class="nav-item"><a class="nav-link" href="{{route('profileadmin.edit',[1])}}">{{__('message.Edit_Profile')}}</a></li>
             </ul>
          </div>
       </li>

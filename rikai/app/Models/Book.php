@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use BookCategory;
+use App\Models\Book_Category;
 use CartItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +11,16 @@ class Book extends Model
 {
     use HasFactory;
     protected $table = "book";
+    public $timestamps = false;
+    protected $fillable = [
+        'author',
+        'title',
+        'image',
+        'publish_at',
+        'num_of_page',
+        'quantity',
+        'price',
+    ];
 
     public function cartItems() {
         return $this->hasMany(CartItem::class,'book_id');
@@ -21,7 +31,7 @@ class Book extends Model
     }
 
     public function bookCategory() {
-        return $this->hasMany(BookCategory::class,'book_id');
+        return $this->hasMany(Book_Category::class,'book_id');
     }
 
     public function activities() {
@@ -32,8 +42,13 @@ class Book extends Model
         return $this->hasMany(Activity::class,'book_id')->latest('id');
     }
 
+
     public function scopeBookActivityUser($query,$userid){
         return $query->rightJoin('activity','book.id','=','activity.book_id')
         ->where('user_id','=',$userid)->where('activity.type_id','=','5');
+    }
+    
+    public function categorys(){
+        return $this->belongsToMany(Category::class);
     }
 }

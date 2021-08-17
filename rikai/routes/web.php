@@ -7,6 +7,8 @@ use App\Http\Controllers\ReviewController as ReviewController1;
 use App\Http\Controllers\CommentController as CommentController1;
 use App\Http\Controllers\ProfileController as ProfileController1;
 use App\Http\Controllers\UserController as UserController1;
+use App\Http\Controllers\CategoryController as CategoryController2;
+
 
 use App\Http\Controllers\Admin\HomeController as HomeController1;
 use App\Http\Controllers\Admin\BookController as BookController2;
@@ -30,9 +32,8 @@ use App\Http\Controllers\CartItemController;
 |
 */
 
-Route::get('/', function () {
-    return view('users.home');
-})->name('index');
+
+Route::get('/', [HomePageController1::class, 'index'])->name('index');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('activity', ActivityController::class);
@@ -42,6 +43,7 @@ Route::get('language/{language}', [App\Http\Controllers\LanguageController::clas
 Route::resource('review', ReviewController1::class)->only('show');
 Route::resource('book', BookController1::class);
 Route::resource('home', HomePageController1::class);
+Route::resource('categoryuser', CategoryController2::class);
 Route::resource('comment', CommentController1::class)->only('show');
 Auth::routes();
 Route::get('search', [BookController1::class, 'search'])->name('search');
@@ -54,8 +56,8 @@ Route::middleware(['users'])->group(function () {
     Route::resource('comment', CommentController1::class)->except('show');
     Route::get('profile/favoritebook/{id}', [ProfileController1::class, 'favoriteBook'])->name('profile.favorite');
     Route::get('checkout', [CartController::class, 'checkout']);
-    Route::get('profile/ratebook/{id}', [ProfileController1::class, 'rateBook']);
-    Route::get('profile/timeline/{id}', [ProfileController1::class, 'timeLine']);
+    Route::get('profile/ratebook/{id}', [ProfileController1::class, 'rateBook'])->name('profile.ratebook');
+    Route::get('profile/timeline/{id}', [ActivityController::class, 'show'])->name('profile.timeline');
     Route::put('change_password', [ChangeController1::class, 'changePassword'])->name('change.password');
     Route::put('change_image', [ChangeController1::class, 'changeImage'])->name('change.image');
     Route::get('listuser',[ProfileController1::class,'listuser'])->name('listuser');
@@ -63,6 +65,7 @@ Route::middleware(['users'])->group(function () {
     Route::get('unlike/review/{reviewid}',[ReviewController1::class,'unlikereview'])->name('unlike.review');
     Route::get('like/comment/{commentid}',[CommentController1::class,'likecomment'])->name('like.comment');
     Route::get('unlike/comment/{commentid}',[CommentController1::class,'unlikecomment'])->name('unlike.comment');
+
     Route::get('follow/{userid}/{followid}',[UserController1::class,'follow'])->name('follow');
     Route::get('unfollow/{userid}/{followid}',[UserController1::class,'unfollow'])->name('unfollow');
     Route::resource('timeline', ActivityController::class);
@@ -82,13 +85,14 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::resource('bookadmin',BookController2::class);
     Route::resource('category',CategoryController1::class);
     Route::resource('user',UserController2::class);
-    Route::resource('profile',ProfileController2::class);
+    Route::resource('profileadmin',ProfileController2::class);
     Route::resource('cart',CartController2::class);
 
     Route::get('buybook',[UserController2::class,'buybook']);
     Route::get('profile/{id}/edit',[ProfileController2::class,'edit']);
     Route::get('logout', [LoginController2::class, 'logout'])->name('admin.logout');
     Route::get('category/{categoryid}/delete', [CategoryController1::class, 'destroy'])->name('deletecategory');
+    Route::get('book/{bookid}/delete', [BookController2::class, 'destroy'])->name('deletebook');
 
 });
 Route::get('admin/login',[LoginController2::class,'index'])->name('admin.index');

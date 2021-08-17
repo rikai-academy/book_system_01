@@ -237,5 +237,20 @@
         'delete_category_success'=>'Delete category success',
         'description_is_not_null'=>'Description is not null',
         'delete_comment_success'=>'Delete comment success ',
+        'update_book_success'=>'Update book success',
+        'update_book_fail'=>'Update book fail',
+        'add_book_success'=>'Add book success',
+        'add_book_fail'=>'Add book fail',
+        'delete_category_success'=>'Delete book success',
+        'publish_at'=>'Publish at',
+        'title_is_not_null'=>'title_is_not_null',
+        'author_is_not_null'=>'author_is_not_null',
+        'publish_at_is_not_null'=>'Publish at is not null',
+        'category_is_not_null'=>'Category is not null',
+        'num_of_page_is_not_null'=>'Num of page is not null',
+        'quantity_is_not_null'=>'Quantity is not null',
+        'all_book'=>'All book',
+        'delete_category_book_fail'=>'Delete category book fail',
+
     ]
 ?>

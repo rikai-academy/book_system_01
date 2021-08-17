@@ -4,9 +4,25 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Book;
+use App\Models\Book_category;
+use App\Models\Category;
+use Illuminate\Support\Str;
+use App\Http\Requests\BookRequest;
+use App\Library\Services\Contracts\UploadImageServiceInterface; 
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
+
+    protected $uploadImageService;
+
+    public function __construct(UploadImageServiceInterface $uploadImageServiceInterface)
+    {
+        $this->uploadImageService = $uploadImageServiceInterface;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +31,8 @@ class BookController extends Controller
     public function index()
     {
         //
-        return view('admin.book.list');
+        $books = Book::all();
+        return view('admin.book.list',compact('books'));
     }
 
     /**
@@ -26,7 +43,8 @@ class BookController extends Controller
     public function create()
     {
         //
-        return view('admin.book.add');
+        $categorys = Category::all();
+        return view('admin.book.add',compact('categorys'));
     }
 
     /**
@@ -35,9 +53,32 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['image'] = $this->uploadImageService->uploadImageController($request,$data);
+        $book = Book::create($data);
+        $categorys = $request->input('category_id');
+        foreach($categorys as $category){
+            DB::beginTransaction();
+            try{
+                $bookcategory = DB::table('book_category')->insert([
+                    'book_id' => $book->id,
+                    'category_id' => $category,
+                ]);
+                DB::commit();
+            } catch(Exception $e) {
+                DB::rollBack();
+                throw new Exception($e->getMessage());
+            }
+        }
+        if ($book){
+            $message = 'message.add_book_success';
+            return redirect()->route('bookadmin.index')->withMessage(__($message));
+        } else {
+            $message = 'message.add_book_fail';
+            return redirect()->route('bookadmin.index')->withMessage(__($message));
+        }
     }
 
     /**
@@ -57,10 +98,12 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($bookid)
     {
         //
-        return view('admin.book.edit');
+        $book = $this->findBook($bookid);
+        $category = Category::all();
+        return view('admin.book.edit',compact('book','category'));
     }
 
     /**
@@ -70,9 +113,57 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BookRequest $request, $bookid)
     {
         //
+        $book = $this->findBook($bookid);
+        $data = $request->all();
+        $categorybooks = Book_Category::where('book_id','=',$bookid)->get();
+        $categorys = $request->input('category_id');
+        $categoryvalue=[];
+        foreach($categorybooks as $categorybook){
+            $categoryvalue[] = $categorybook['category_id'];
+        }
+        foreach($categorys as $category){
+            if(!in_array($category,$categoryvalue)){
+                DB::beginTransaction();
+                try{
+                    $bookcategory = DB::table('book_category')->insert([
+                        'book_id' => $book->id,
+                        'category_id' => $category,
+                    ]);
+                    DB::commit();
+                } catch(Exception $e){
+                    DB::rollBack();
+                    throw new Exception($e->getMessage());
+                }
+            }
+        }
+        foreach($categoryvalue as $value){
+            if(!in_array($value,$categorys)){
+                DB::beginTransaction();
+                try{
+                    $bookcategory = DB::table('book_category')->where([
+                        ['book_id' ,'=', $bookid],
+                        ['category_id', '=', $value]
+                    ])->delete();
+                    DB::commit();
+                } catch(Exception $e){
+                    DB::rollBack();
+                    throw new Exception($e->getMessage());
+                }
+            }
+        }
+        $data['image'] = $this->uploadImageService->uploadImageController($request,$data);
+        $book->update($data);
+        if($book){
+            $message = 'message.update_book_success';
+            return redirect()->route('bookadmin.edit',[$book->id])->withMessage(__($message));
+        } else {
+            $message = 'message.update_book_fail';
+            return redirect()->route('bookadmin.edit',[$book->id])->withMessage(__($message));
+        }
+
     }
 
     /**
@@ -81,8 +172,36 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($bookid)
     {
         //
+        $book = $this->findBook($bookid);
+        $categories = Book_Category::where('book_id','=',$bookid)->get();
+        $book->delete();
+        foreach($categories as $category){
+            DB::beginTransaction();
+            try{
+                $bookcategory = DB::table('book_category')->where([
+                    ['book_id' ,'=', $bookid],
+                    ['category_id', '=', $category->category_id]
+                ])->delete();
+                DB::commit();
+            } catch(Exception $e){
+                DB::rollBack();
+                throw new Exception($e->getMessage());
+            }
+        }
+        $message = 'message.delete_book_success';
+        return redirect()->route('bookadmin.index')->withMessage(__($message));
+    }
+
+    public function findBook($bookid){
+        $book = Book::find($bookid);
+        if($book){
+            return $book;
+        }else{
+            $errors = 'message.no_book';
+            return redirect()->route('homeadmin.index')->withErrors(__($errors));
+        }
     }
 }
