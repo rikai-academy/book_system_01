@@ -16,8 +16,11 @@ class LikeComment extends Migration
         Schema::create('like_comment', function (Blueprint $table) {
             $table->id();
             $table->integer('like');
-            $table->integer('user_id');
-            $table->integer('comment_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('comment_id');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('comment_id')->references('id')->on('comment')->onDelete('cascade');
         });
     }
 
@@ -28,6 +31,6 @@ class LikeComment extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('like_comment');
     }
 }

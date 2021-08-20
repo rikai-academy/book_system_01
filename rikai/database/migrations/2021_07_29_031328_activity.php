@@ -17,12 +17,16 @@ class Activity extends Migration
     {
         Schema::create('activity', function (Blueprint $table) {
             $table->id();
-            $table->integer('book_id');
-            $table->integer('user_id');
-            $table->integer('type_id');
+            $table->unsignedBigInteger('book_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('type_id');
             $table->integer('read_status')->default(ReadStatus::NONE);
             $table->integer('favorite_status')->default(FavoriteStatus::NONE);
             $table->timestamp('time');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('book_id')->references('id')->on('book')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('activity_type')->onDelete('cascade');
         });
     }
 
@@ -33,6 +37,6 @@ class Activity extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('activity');
     }
 }

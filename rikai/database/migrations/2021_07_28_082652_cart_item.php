@@ -15,10 +15,13 @@ class CartItem extends Migration
     {
         Schema::create('cart_item', function (Blueprint $table) {
             $table->id();
-            $table->integer('cart_id');
-            $table->integer('book_id');
+            $table->unsignedBigInteger('cart_id');
+            $table->unsignedBigInteger('book_id');
             $table->integer('quantity')->default(1);
             $table->integer('total_price');
+
+            $table->foreign('cart_id')->references('id')->on('cart')->onDelete('cascade');
+            $table->foreign('book_id')->references('id')->on('book')->onDelete('cascade');
         });
     }
 
@@ -29,6 +32,6 @@ class CartItem extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('cart_item');
     }
 }

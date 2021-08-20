@@ -15,10 +15,13 @@ class Comment extends Migration
     {
         Schema::create('comment', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('review_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('review_id');
             $table->longText('body');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('review_id')->references('id')->on('review')->onDelete('cascade');
         });
     }
 
@@ -29,6 +32,6 @@ class Comment extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('comment');
     }
 }

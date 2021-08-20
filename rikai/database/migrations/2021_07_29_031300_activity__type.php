@@ -26,6 +26,6 @@ class ActivityType extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('activity_type');
     }
 }

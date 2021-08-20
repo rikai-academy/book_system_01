@@ -16,8 +16,11 @@ class LikeReview extends Migration
         Schema::create('like_review', function (Blueprint $table) {
             $table->id();
             $table->integer('like');
-            $table->integer('user_id');
-            $table->integer('review_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('review_id');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('review_id')->references('id')->on('review')->onDelete('cascade');
         });
     }
 
@@ -28,6 +31,6 @@ class LikeReview extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('like_review');
     }
 }

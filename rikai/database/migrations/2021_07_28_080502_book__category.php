@@ -15,8 +15,11 @@ class BookCategory extends Migration
     {
         Schema::create('book_category', function (Blueprint $table) {
             $table->id();
-            $table->integer('book_id');
-            $table->integer('category_id');
+            $table->unsignedBigInteger('book_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
+
+            $table->foreign('book_id')->references('id')->on('book')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
         });
         
     }
@@ -28,6 +31,6 @@ class BookCategory extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('book_category');
     }
 }

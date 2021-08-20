@@ -17,16 +17,20 @@ class CategorySeeder extends Seeder
     {
         DB::table('category')->insert([
             [
-                'title' => 'novel',
-                'description' => 'an invented prose narrative of considerable length and a certain complexity that deals imaginatively with human experience'
+                'title' => 'Fantasy',
+                'description' => 'While usually set in a fictional imagined world fantasy books include prominent elements of magic , mythology , or the supernatural'
             ],
             [
-                'title' => 'science',
-                'description' => ' the pursuit and application of knowledge and understanding of the natural and social world following a systematic methodology based on evidence'
+                'title' => 'Literary Fiction',
+                'description' => 'literary fiction refers to the perceived artistic writing style of the author. Their prose is meant to evoke deep thought through stories that offer personal or social commentary on a particular theme.'
             ],
             [
-                'title' => 'book',
-                'description' => 'book'
+                'title' => 'Self-Help',
+                'description' => 'Whether the focus is on emotional well-being, finances, or spirituality, self-help books center on encouraging personal improvement and confidence in a variety of facets of your life.'
+            ],
+            [
+                'title' => 'Computer Science',
+                'description' => 'Computer science is the scientific and practical approach to computation and its applications.'
             ]
         ]);
     }
