@@ -292,5 +292,6 @@
         'nameOfCard' => 'Tên thẻ',
         'creditCardNumber' => 'Số thẻ',
         'no_cart' => 'Không tìm thấy yêu cầu',
+        'no_follow'=>'Bạn chưa theo dõi trước đó',
     ]
 ?>

@@ -45,7 +45,9 @@
                      @endif
                      <div class="right-it">
                         <h4>{{__('message.Tags')}}</h4>
-                        <a href="#">{{__('message.'.$categorys->title)}},</a>
+                        @foreach($categories as $category)
+                           <a href="#">{{__("message.$category->title")}} , </a>
+                        @endforeach
                      </div>
                   </div>
                   <!-- comment items -->

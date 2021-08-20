@@ -280,5 +280,6 @@
         'nameOfCard' => 'Name of Card',
         'creditCardNumber' => 'Credit card number',
         'no_cart' => 'No request found',
+        'no_follow'=>'You no follow before',
     ]
 ?>

@@ -76,10 +76,10 @@ class ReviewController extends Controller
             $book = Book::find($review->book_id);
             $book_id = $book->id;
             $category_book = Book_Category::where('book_id','=',$book_id)->first();
-            $categorys = Category::find($category_book->category_id);
+            $categories = $book->categorys()->get();
             $comments = Comment::where('review_id','=',$reviewId)->get();
             $totalcomment = Comment::where('review_id','=',$reviewId)->count();
-            return view('users.review.show',compact('review','book','comments','categorys','totalcomment','currentuser'));
+            return view('users.review.show',compact('review','book','comments','categories','totalcomment','currentuser'));
         } else {
             $errors = 'message.sufficient_permissions';
             return redirect()->route('index')->withErrors(__($errors));
@@ -178,7 +178,8 @@ class ReviewController extends Controller
             $like_review->save();
             return redirect()->route('book.show',[$book->id]);
         } else {
-            return redirect()->route('index');
+            $errors = 'message.is_like_review';
+            return redirect()->route('book.show',[$book->id])->withErrors(__($errors));
         }
     }
 
@@ -192,7 +193,7 @@ class ReviewController extends Controller
             return redirect()->route('book.show',[$book->id]);
         } else {
             $errors = 'message.no_like';
-            return redirect()->route('index')->withErrors(__($errors));
+            return redirect()->route('book.show',[$book->id])->withErrors(__($errors));
         }
     }
 }

@@ -134,7 +134,7 @@
                                  <div class="sb-it">
                                     <h6>{{__('message.Category_Book')}}:</h6>
                                     <p>
-                                       @foreach($categorys as $category)
+                                       @foreach($categories as $category)
                                        <a href="#">{{__("message.$category->title")}} </a>
                                        @endforeach
                                     </p>
