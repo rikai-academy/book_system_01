@@ -89,7 +89,7 @@ class UserController extends Controller
     public function follow($userId, $followId){
         $follow = Follow::FollowUser($userId, $followId)->first();
         if($follow){
-            $message = 'message.follow_fail';
+            $message = 'message.now_follow';
             return redirect('listuser')->withMessage(__($message));
         }else{
             $data["follow"] = new Follow;
@@ -109,7 +109,7 @@ class UserController extends Controller
             $message = 'message.unfollow_success';
             return redirect()->route('listuser')->withMessage(__($message));
         }else{
-            $message = 'message.unfollow_fail';
+            $message = 'message.no_follow';
             return redirect()->route('listuser')->withMessage(__($message));
 
         } 

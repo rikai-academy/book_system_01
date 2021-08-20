@@ -154,7 +154,8 @@ class CommentController extends Controller
             $like_review->save();
             return redirect()->route('review.show',[$review->id]);
         }else{
-            return redirect()->route('index');
+            $errors = 'message.is_like_comment';
+            return redirect()->route('review.show',[$review->id])->withErrors(__($errors));
 
         }
     }
@@ -168,7 +169,7 @@ class CommentController extends Controller
             return redirect()->back();
         }else{
             $errors = 'message.no_like';
-            return redirect()->route('index')->withErrors(__($errors));
+            return redirect()->route('review.show',[$review->id])->withErrors(__($errors));
         }
     }
 }

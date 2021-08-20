@@ -65,14 +65,11 @@ class BookController extends Controller
         if($book){
             $book_id = $book->id;
             $category_book = Book_Category::where('book_id','=',$book_id)->get();
-            foreach($category_book as $value){
-                $category_id = $value->category_id;
-                $categorys = Category::where('id','=',$category_id)->get();
-            }
+            $categories = $book->categorys()->get();
             $data["activity"] = new stdClass;
             $this->activityController($data["activity"],$book_id);
             $reviews = Review::where('book_id','=',$book_id)->paginate(2);
-            return view('users.book.detail',compact('book','reviews','categorys'))->with('data', $data);
+            return view('users.book.detail',compact('book','reviews','categories','data'));
 
         }else{
             $errors = 'message.no_book';
