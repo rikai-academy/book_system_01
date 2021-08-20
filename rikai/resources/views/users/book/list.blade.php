@@ -10,7 +10,7 @@
       <div class="row">
          <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="topbar-filter fw">
-               <p>{{__('message.Found')}} <span>1,608 {{__('message.Books')}}</span> {{__('message.in_total')}}</p>
+               <p>{{__('message.Found')}} <span>{{count($books)}} {{__('message.Books')}}</span> {{__('message.in_total')}}</p>
             </div>
             <div class="flex-wrap-movielist mv-grid-fw">
                @foreach($books as $book)
@@ -21,7 +21,7 @@
                   </div>
                   <div class="mv-item-infor">
                      <h6><a href="{{route('book.show',[$book->id])}}">{{$book->title}}</a></h6>
-                     <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
+                     <p class="rate"><i class="ion-android-star"></i><span>{{$book->rate}}</span> /10</p>
                   </div>
                </div>
                @endforeach

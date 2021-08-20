@@ -31,26 +31,6 @@ class BookController extends Controller
         return view('users.book.list',compact('books'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -66,10 +46,11 @@ class BookController extends Controller
             $book_id = $book->id;
             $category_book = Book_Category::where('book_id','=',$book_id)->get();
             $categories = $book->categorys()->get();
+            $bookrates = $book->rate;
             $data["activity"] = new stdClass;
             $this->activityController($data["activity"],$book_id);
             $reviews = Review::where('book_id','=',$book_id)->paginate(2);
-            return view('users.book.detail',compact('book','reviews','categories','data'));
+            return view('users.book.detail',compact('book','reviews','categories','data','bookrates'));
 
         }else{
             $errors = 'message.no_book';
@@ -77,44 +58,10 @@ class BookController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function search(Request $request){
         $name = $request->body;
         $books = Book::where('title','like','%'.$name.'%')
-        ->orWhere('author','like','%'.$name.'%')->paginate(10);
+        ->orWhere('author','like','%'.$name.'%')->orwhere('rate','=',$name)->paginate(10);
         $total = count($books);
         return view('users.book.search',compact('books','total'));
     }

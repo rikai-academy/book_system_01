@@ -71,21 +71,15 @@
                <div class="movie-rate">
                   <div class="rate">
                      <i class="ion-android-star"></i>
-                     <p><span>8.1</span> /10<br>
-                        <span class="rv">56 {{__('message.Reviews')}}</span>
+                     <p><span>{{$book->rate}}</span> /10<br>
+                        <span class="rv">{{$book->reviews()->count()}} {{__('message.Reviews')}}</span>
                      </p>
                   </div>
                   <div class="rate-star">
                      <p>{{__('message.Rate_This_Book')}}: </p>
+                     @for($i=0;$i<$bookrates;$i++)
                      <i class="ion-ios-star"></i>
-                     <i class="ion-ios-star"></i>
-                     <i class="ion-ios-star"></i>
-                     <i class="ion-ios-star"></i>
-                     <i class="ion-ios-star"></i>
-                     <i class="ion-ios-star"></i>
-                     <i class="ion-ios-star"></i>
-                     <i class="ion-ios-star"></i>
-                     <i class="ion-ios-star-outline"></i>
+                     @endfor
                   </div>
                </div>
                <div class="movie-tabs">
@@ -101,7 +95,7 @@
                                  <p>{{__('message.overview_tony')}}</p>
                                  <div class="title-hd-sm">
                                     <h4>{{__('message.User_reviews')}}</h4>
-                                    <a href="#" class="time">{{__('message.See_All')}} 56 {{__('message.Reviews')}} <i
+                                    <a href="#" class="time">{{__('message.See_All')}} {{$book->reviews()->count()}} {{__('message.Reviews')}} <i
                                           class="ion-ios-arrow-right"></i></a>
                                  </div>
                                  <!-- movie user review -->
@@ -161,7 +155,7 @@
                                  @endif
                               </div>
                               <div class="topbar-filter">
-                                 <p>{{__('message.Found')}} <span>56 {{__('message.Reviews')}}</span>
+                                 <p>{{__('message.Found')}} <span>{{$book->reviews()->count()}} {{__('message.Reviews')}}</span>
                                     {{__('message.in_total')}}</p>
                               </div>
                               @foreach($reviews as $review)

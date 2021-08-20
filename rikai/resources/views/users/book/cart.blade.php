@@ -23,7 +23,7 @@
                         <img src="images/uploads/mv1.jpg" alt="">
                         <div class="mv-item-infor">
                            <h6><a href="{{ url('book/'.$item->book->id) }}">{{ $item->book->title }}</a></h6>
-                           <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
+                           <p class="rate"><i class="ion-android-star"></i><span>{{ $item->book->rate }}</span> /10</p>
                            <p class="describe">Earth's mightiest heroes must come together and learn to fight as a team
                               if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
                            <p>{{__('message.Author')}}: <a href="#">{{ $item->book->author }}</a></p>
