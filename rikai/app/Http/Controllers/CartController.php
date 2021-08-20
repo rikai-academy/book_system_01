@@ -37,7 +37,7 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        $data["current_cart"] = Cart::find($id);
+        $data["current_cart"] = $this->findCart($id);
         $data["cart_item"] = $data["current_cart"]->cartItems()->get();
         return view('users.book.cart')->with('data',$data);
     }
@@ -51,7 +51,7 @@ class CartController extends Controller
      */
     public function update(CheckoutCartRequest $request, $cart_id)
     {
-        $cart = Cart::find($cart_id);
+        $cart = $this->findCart($cart_id);
         $checkIfSuccess = $this->cartService->updateCart($request,$cart_id);
         if(!$checkIfSuccess) {
             return back()->with('data',$cart)->with('checkoutFailMessage','message.checkoutFail');
@@ -59,9 +59,8 @@ class CartController extends Controller
         return redirect('home')->with('message',__('message.checkoutSuccess'));
     }
 
-
     public function currentCart() {
-        $data = $this->cartService->getCurrentCartData(auth()->user()->id);
+        $data = $this->cartService->getCurrentCartData();
         return view('users.book.cart')->with('data',$data);
     }
 
@@ -71,17 +70,26 @@ class CartController extends Controller
         return view('users.book.checkout')->with('data',$data);
     }
 
-    public function updateTotal(Request $request, $id){
-        $cart = Cart::find($id);
-        $data = $request->all();
-        $cart->update($data);
-    }
-
     public function cancel($id) {
-        $data["current_cart"] = Cart::find($id);
+        $data["current_cart"] = $this->findCart($id);
         $data["current_cart"]->status = CartStatus::CANCEL;
         $data["current_cart"]->update();
         $data["cart_item"] = $data["current_cart"]->cartItems()->get();
         return view('users.book.cart')->with('data',$data);
+    }
+
+    public function latestCart() {
+        $data = $this->cartService->getLatestCart(auth()->user()->id);
+        return view('users.book.checkout')->with('data',$data);
+    }
+
+    private function findCart($id){
+        $cart = Cart::find($id);
+        if($cart){
+            return $cart;
+        }else{
+            $errors = 'message.no_cart';
+            return back()->withErrors(__($errors));
+        }
     }
 }

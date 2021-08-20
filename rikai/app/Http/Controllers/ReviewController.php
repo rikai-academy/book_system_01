@@ -172,7 +172,6 @@ class ReviewController extends Controller
         $review = Review::find($reviewId);
         $book = Book::where('id','=',$review->book_id)->first(); 
         if (empty($like_review->user_id)){
-
             $data['review_id'] = $reviewId;
             $data['like'] = 1;
             $like_review = LikeReview::firstOrCreate($data);
@@ -194,7 +193,6 @@ class ReviewController extends Controller
         } else {
             $errors = 'message.no_like';
             return redirect()->route('index')->withErrors(__($errors));
-
         }
     }
 }

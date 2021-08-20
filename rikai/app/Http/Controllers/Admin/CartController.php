@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\CartStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use Illuminate\Http\Request;
+use App\Library\Services\Contracts\CartServiceInterface;
+
 
 class CartController extends Controller
 {
+    protected $cartService;
+
+    public function __construct(CartServiceInterface $cartServiceInterface)
+    {
+        $this->cartService = $cartServiceInterface;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,40 +25,9 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
-        return view('admin.cart.list');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $data["carts"] = $this->cartService->getCart(CartStatus::PENDING);
+        $data["type"] = CartStatus::PENDING;
+        return view('admin.cart.list')->with('data',$data);
     }
 
     /**
@@ -58,8 +38,11 @@ class CartController extends Controller
      */
     public function edit($id)
     {
-        //
-        return view('admin.cart.detail');
+        $data["cart"] = $this->findCart($id);
+        if(isset($data["cart"]["errors"])){
+            return redirect()->route('homeadmin.index')->withErrors(__($data["cart"]["errors"]));
+        }
+        return view('admin.cart.detail')->with('data',$data);
     }
 
     /**
@@ -69,9 +52,17 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $cart_id)
     {
-        //
+        $cart = $this->findCart($cart_id);
+        if(isset($cart["errors"])){
+            return redirect()->route('homeadmin.index')->withErrors(__($cart["errors"]));
+        }
+        $checkIfSuccess = $this->cartService->updateCart($request,$cart_id);
+        if(!$checkIfSuccess) {
+            return back()->with('data',$cart)->with('checkoutFailMessage','message.checkoutFail');
+        }
+        return back()->with('data',$cart)->with('requestResolve',__('message.requestResolve'));
     }
 
     /**
@@ -82,6 +73,30 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cart = $this->findCart($id);
+        if(isset($cart["errors"])){
+            $data["carts"] = $this->cartService->getCart(CartStatus::PENDING);
+            return back()->with('data',$data)->withErrors(__($cart["errors"]));
+        }
+        $cart_type = $cart->status;
+        $cart->delete();
+        $data["carts"] = $this->cartService->getCart($cart_type);
+        return back()->with('data',$data);
+    }
+
+    public function cartType($cart_type){
+        $data["carts"] = $this->cartService->getCart($cart_type);
+        $data["type"] = $cart_type;
+        return view('admin.cart.list')->with('data',$data);
+    }
+
+    private function findCart($id){
+        $cart = Cart::find($id);
+        if($cart){
+            return $cart;
+        }else{
+            $cart["errors"] = 'message.no_cart';
+            return $cart;
+        }
     }
 }

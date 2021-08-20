@@ -7,45 +7,106 @@ use App\Models\Cart;
 use App\Enums\CartStatus;
 use App\Models\User;
 use App\Models\CartItem;
+use App\Models\Book;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use stdClass;
 
 class CartService implements CartServiceInterface
 {
+    public function getCart($cart_type)
+    {
+        $data = Cart::where('status', $cart_type)->orderBy('created_at', 'desc')->paginate(10);
+        return $data;
+    }
+
     public function getCurrentCart($user_id)
     {
         $user = User::find($user_id);
-        $current_cart = $user->carts()->latest('created_at')->first();
-        if ($current_cart && $current_cart->status == CartStatus::SHOPPING) {
+        if (session()->has('cart')) {
+            $current_cart = $user->carts()->create();
+            $data = $this->getCurrentCartData();
+            $total_price = 0;
+            DB::beginTransaction();
+            try {
+                foreach ($data["cart_item"] as $item) {
+                    $total_price += $item->quantity * $item->book->price;
+                    $current_cart->cartItems()->create([
+                        'book_id' => $item->book->id,
+                        'quantity' => $item->quantity,
+                        'total_price' => $item->quantity * $item->book->price,
+                    ]);
+                }
+                DB::commit();
+            } catch (Exception $e) {
+                DB::rollBack();
+                throw new Exception($e->getMessage());
+            }
+            $current_cart->update(['total_price' => $total_price]);
+            session()->forget('cart');
             return $current_cart;
         }
-        return $user->carts()->create();
+        $current_cart = Cart::where('status', CartStatus::SHOPPING)
+            ->where('user_id', $user_id)
+            ->orderBy('created_at', 'desc')->first();
+        return $current_cart;
     }
 
-    public function storeCartItem($current_cart, $request)
+    public function storeCartItem($request)
     {
-        $check = $current_cart->cartItems()->where('book_id', $request->book_id)->first();
-        if ($check) {
-            $check->quantity += 1;
-            $check->total_price = $check->quantity * $request->price;
-            $check->update();
-        } else {
-            $data = $request->all();
-            $data["total_price"] = $data["price"] * $data["quantity"];
-            $current_cart->cartItems()->create($data);
+        $book = Book::find($request->book_id);
+        if ($book->quantity == 0) {
+            return __('message.outOfStock');
         }
+        $cartItem = new stdClass();
+        $cartItem->book = $book;
+        $cartItem->quantity = 1;
+        $cart = session('cart') ? session('cart') : [];
+        if (!$cart) {
+            $cart[] = $cartItem;
+            session(['cart' => $cart]);
+            return __('message.addCartItemSuccess');
+        }
+        foreach ($cart as $item) {
+            if ($item->book->id == $book->id) {
+                if ($item->quantity == $book->quantity) {
+                    return __('message.outOfStock');
+                }
+                $item->quantity++;
+                session(['cart' => $cart]);
+                return __('message.addCartItemSuccess');
+            }
+        }
+        $cart[] = $cartItem;
+        session(['cart' => $cart]);
+        return __('message.addCartItemSuccess');
     }
 
-    public function getCurrentCartData($user_id)
+    public function getCurrentCartData()
     {
-        $data["current_cart"] = $this->getCurrentCart($user_id);
-        $data["cart_item"] = $data["current_cart"]->cartItems()->get();
+        $data["current_cart"] = null;
+        $data["cart_item"] = session('cart') ? session('cart') : [];
         return $data;
     }
 
     public function updateCart($request, $cart_id)
     {
         $cart = Cart::find($cart_id);
+        $cart_items = $cart->cartItems()->get();
+        if ($request->user()->role == 'admin') {
+            DB::beginTransaction();
+            try {
+                foreach ($cart_items as $item) {
+                    $book = Book::find($item->book_id);
+                    $book->update(['quantity' => $book->quantity - $item->quantity]);
+                }
+                DB::commit();
+            } catch (Exception $e) {
+                DB::rollBack();
+                throw new Exception($e->getMessage());
+            }
+        }
         $data = $request->all();
-        $data["status"] = CartStatus::PENDING;
         $checkIfSuccess = $cart->update($data);
         return $checkIfSuccess;
     }
@@ -53,7 +114,20 @@ class CartService implements CartServiceInterface
     public function updateCartItem($request, $cart_item_id)
     {
         $data = $request->all();
-        $cart_item = CartItem::find($cart_item_id);
-        $cart_item->update($data);
+        $cart = session('cart');
+        foreach ($cart as $item) {
+            if ($item->book->id == $cart_item_id) {
+                $item->quantity = $data["quantity"];
+            }
+        }
+        session(['cart' => $cart]);
+        return __('message.addCartItemSuccess');
+    }
+
+    public function getLatestCart($user_id)
+    {
+        $user = User::find($user_id);
+        $current_cart = $user->carts()->latest('created_at')->first();
+        return $current_cart;
     }
 }

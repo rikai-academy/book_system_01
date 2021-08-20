@@ -16,6 +16,10 @@
   display: none;
 }
 
+.border_none {
+  border: none;
+}
+
 .display-flex {
   display: flex;
 }

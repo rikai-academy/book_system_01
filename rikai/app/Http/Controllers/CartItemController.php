@@ -7,6 +7,7 @@ use App\Library\Services\Contracts\CartServiceInterface;
 use App\Models\CartItem;
 use App\Models\Cart;
 use App\Models\Book;
+use stdClass;
 
 class CartItemController extends Controller
 {
@@ -44,13 +45,8 @@ class CartItemController extends Controller
      */
     public function store(Request $request)
     {
-        $book = Book::find($request->book_id);
-        if($book->quantity == 0) {
-            return back()->with('outOfStock', __('message.outOfStock'));
-        }
-        $current_cart = $this->cartService->getCurrentCart(auth()->user()->id);
-        $this->cartService->storeCartItem($current_cart,$request);
-        return back()->with('addCartItemSuccess', __('message.addCartItemSuccess'));
+        $message = $this->cartService->storeCartItem($request);
+        return response()->json(['message' => $message]);
     }
 
     /**
@@ -84,7 +80,8 @@ class CartItemController extends Controller
      */
     public function update(Request $request, $cart_item_id)
     {
-        $this->cartService->updateCartItem($request,$cart_item_id);
+        $message = $this->cartService->updateCartItem($request,$cart_item_id);
+        return response()->json(['message' => $message]);
     }
 
     /**
@@ -95,9 +92,18 @@ class CartItemController extends Controller
      */
     public function destroy($id)
     {
-        $item = CartItem::find($id);
-        $item->delete();
-        $data = $this->cartService->getCurrentCartData(auth()->user()->id);
+        $old_cart = $this->cartService->getCurrentCartData();
+        $cart = [];
+        $index = 0;
+        foreach ($old_cart["cart_item"] as $key => $item) {
+            if($key != $id ) {
+                $cart[$index] = $item;
+                $index ++;
+            }
+        }
+        session(['cart' => $cart]);
+        $data["current_cart"] = null;
+        $data["cart_item"] = $cart;
         return back()->with('data',$data);
     }
 }

@@ -26,14 +26,11 @@
                      <strong>{{ session()->get('outOfStock') }}</strong>
                   </span>
                   @endif
-                  <form method="POST" action="{{ url('cartItem') }}" class="btn-transform transform-vertical">
-                     @csrf
-                     <input type="hidden" name="book_id" value="{{ $book->id }}">
-                     <input type="hidden" name="quantity" value="1">
-                     <input type="hidden" name="price" value="{{ $book->price }}">
-                     <div><button type="submit" class="item item-1 yellowbtn border_none width_100">
+                  <form class="btn-transform transform-vertical">
+                     <input type="hidden" id="book_id" value="{{ $book->id }}">
+                     <div><button type="button" class="add-to-cart item item-1 yellowbtn border_none width_100"  >
                            {{__('message.Buy_book')}}</button></div>
-                     <div><button type="submit" class="item item-2 yellowbtn border_none width_100"><i class="ion-card"></i></button></div>
+                     <div><button type="button" class="add-to-cart item item-2 yellowbtn border_none width_100"><i class="ion-card"></i></button></div>
                   </form>
                </div>
             </div>

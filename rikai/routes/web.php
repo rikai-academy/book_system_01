@@ -9,7 +9,6 @@ use App\Http\Controllers\ProfileController as ProfileController1;
 use App\Http\Controllers\UserController as UserController1;
 use App\Http\Controllers\CategoryController as CategoryController2;
 
-
 use App\Http\Controllers\Admin\HomeController as HomeController1;
 use App\Http\Controllers\Admin\BookController as BookController2;
 use App\Http\Controllers\Admin\CategoryController as CategoryController1;
@@ -67,7 +66,7 @@ Route::middleware(['users'])->group(function () {
     Route::get('unlike/review/{reviewid}',[ReviewController1::class,'unlikereview'])->name('unlike.review');
     Route::get('like/comment/{commentid}',[CommentController1::class,'likecomment'])->name('like.comment');
     Route::get('unlike/comment/{commentid}',[CommentController1::class,'unlikecomment'])->name('unlike.comment');
-
+    Route::get('latestCart', [CartController::class, 'latestCart']);
     Route::get('follow/{userid}/{followid}',[UserController1::class,'follow'])->name('follow');
     Route::get('unfollow/{userid}/{followid}',[UserController1::class,'unfollow'])->name('unfollow');
     Route::resource('timeline', ActivityController::class);
@@ -75,7 +74,6 @@ Route::middleware(['users'])->group(function () {
     Route::resource('cartItem', CartItemController::class);
     Route::get('current_cart', [CartController::class, 'currentCart']);
     Route::get('cancel/{id}', [CartController::class, 'cancel']);
-    Route::put('updateTotal/{id}', [CartController::class, 'updateTotal']);
 });
 
 
@@ -90,7 +88,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::resource('profileadmin',ProfileController2::class);
     Route::post('search/user', [UserController2::class, 'search'])->name('admin.user.search');
     Route::resource('cart',CartController2::class);
-
+    Route::get('cart/type/{type}',[CartController2::class,'cartType'])->name('admin.cart.type');
     Route::get('buybook',[UserController2::class,'buybook']);
     Route::get('logout', [LoginController2::class, 'logout'])->name('admin.logout');
     Route::get('category/{categoryid}/delete', [CategoryController1::class, 'destroy'])->name('deletecategory');
@@ -101,3 +99,4 @@ Route::get('admin/login',[LoginController2::class,'index'])->name('admin.index')
 Route::post('admin/login', [LoginController2::class, 'postLogin'])->name('admin.login');
 
 
+    
