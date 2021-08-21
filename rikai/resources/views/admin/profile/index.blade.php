@@ -23,7 +23,7 @@
                </div>
                <div class="form-group">
                   <label>{{__('message.Image_Profile')}}</label>
-                  <img class="imageprofile" src="{{asset('/upload/profile/'.Auth::user()->image)}}" alt="Italian Trulli">
+                  <img class="imageprofile" src="{{asset('/upload/user/'.Auth::user()->image)}}" alt="Italian Trulli">
                </div>
             </form>
          </div>

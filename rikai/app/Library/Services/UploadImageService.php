@@ -16,19 +16,18 @@ class UploadimageService implements UploadimageServiceInterface {
             $image = Str::random(4)."_".$name;
             switch($type){
                 case 'book':
-                    while(file_exists("upload/book".$image))
+                    $destinationPath = storage_path('public/upload/book');
+                    while(file_exists($destinationPath.$image))
                     {
                         $image = Str::random(4)."_".$name;
                     }
-                    $file->move("upload/book",$image);
+                    $file->move($destinationPath,$image);
                     return $data['image'] = $image;
                     break;
                 case 'profile':
-                    while(file_exists("upload/profile".$image))
-                    {
-                        $image = Str::random(4)."_".$name;
-                    }
-                    $file->move("upload/profile",$image);
+                    $destinationPath = storage_path('public/upload/user');
+                    $image = $request->user()->id . '.' . $file->clientExtension();
+                    $file->move($destinationPath,$image);
                     return $data['image'] = $image;
                     break;
                 default:

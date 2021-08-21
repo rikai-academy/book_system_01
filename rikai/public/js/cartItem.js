@@ -17,7 +17,9 @@ $(function () {
 			url: "cartItem",
 			data: { book_id },
 			success (res) {
-				alert(res.message);
+				var message='<div class="flash alert-info"><p class="panel-body display-message">'
+				+ res.message +'</p></div>';
+				$(".navbar.navbar-default.navbar-custom").after(message);
 			},
 		});
 	});

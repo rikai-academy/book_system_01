@@ -59,7 +59,7 @@ class CategoryController extends Controller
     {
         //
         $category = Category::find($categoryid);
-        $books = $category->books()->get();
+        $books = $category->books()->paginate(10);
         return view('users.book.list',compact('books'));
     }
 

@@ -9,114 +9,20 @@
             <a href="#"><i class="ion-social-youtube"></i></a>
          </div>
          <div  class="slick-multiItemSlider">
+            @foreach ($slides as $item)
             <div class="movie-item">
                <div class="mv-img">
-                  <a href="#"><img src="images/uploads/slider1.jpg" alt="" width="285" height="437"></a>
+                  <a href="#"><img src="{{ asset('/upload/book/'.$item->image) }}" alt="" class="custom-slides-image" width="285" height="437"></a>
                </div>
                <div class="title-in">
                   <div class="cate">
-                     <span class="blue"><a href="#">{{__('message.Sci-fi')}}</a></span>
+                     <span class="blue"><a href="#">{{__('message.'.$item->categorys[0]->title)}}</a></span>
                   </div>
-                  <h6><a href="#">Interstellar</a></h6>
-                  <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                  <h6><a href="{{url('book/'.$item->id)}}">{{ $item->title }}</a></h6>
+                  <p><i class="ion-android-star"></i><span>{{$item->rate}}</span> /10</p>
                </div>
             </div>
-            <div class="movie-item">
-               <div class="mv-img">
-                  <a href="#"><img src="images/uploads/slider2.jpg" alt="" width="285" height="437"></a>
-               </div>
-               <div class="title-in">
-                  <div class="cate">
-                     <span class="yell"><a href="#">{{__('message.Action')}}</a></span>
-                  </div>
-                  <h6><a href="#">The revenant</a></h6>
-                  <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-               </div>
-            </div>
-            <div class="movie-item">
-               <div class="mv-img">
-                  <a href="#"><img src="images/uploads/slider3.jpg" alt="" width="285" height="437"></a>
-               </div>
-               <div class="title-in">
-                  <div class="cate">
-                     <span class="green"><a href="#">{{__('message.comedy')}}</a></span>
-                  </div>
-                  <h6><a href="#">Die hard</a></h6>
-                  <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-               </div>
-            </div>
-            <div class="movie-item">
-               <div class="mv-img">
-                  <a href="#"><img src="images/uploads/slider4.jpg" alt="" width="285" height="437"></a>
-               </div>
-               <div class="title-in">
-                  <div class="cate">
-                     <span class="blue"><a href="#">{{__('message.Sci-fi')}}</a></span> <span class="orange"><a href="#">{{__('message.advanture')}}</a></span>
-                  </div>
-                  <h6><a href="#">The walk</a></h6>
-                  <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-               </div>
-            </div>
-            <div class="movie-item">
-               <div class="mv-img">
-                  <a href="#"><img src="images/uploads/slider1.jpg" alt="" width="285" height="437"></a>
-               </div>
-               <div class="title-in">
-                  <div class="cate">
-                     <span class="blue"><a href="#">{{__('message.Sci-fi')}}</a></span>
-                  </div>
-                  <h6><a href="#">Interstellar</a></h6>
-                  <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-               </div>
-            </div>
-            <div class="movie-item">
-               <div class="mv-img">
-                  <a href="#"><img src="images/uploads/slider2.jpg" alt="" width="285" height="437"></a>
-               </div>
-               <div class="title-in">
-                  <div class="cate">
-                     <span class="yell"><a href="#">{{__('message.Action')}}</a></span>
-                  </div>
-                  <h6><a href="#">The revenant</a></h6>
-                  <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-               </div>
-            </div>
-            <div class="movie-item">
-               <div class="mv-img">
-                  <img src="images/uploads/slider3.jpg" alt="" width="285" height="437">
-               </div>
-               <div class="title-in">
-                  <div class="cate">
-                     <span class="green"><a href="#">{{__('message.comedy')}}</a></span>
-                  </div>
-                  <h6><a href="#">Die hard</a></h6>
-                  <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-               </div>
-            </div>
-            <div class="movie-item">
-               <div class="mv-img">
-                  <img src="images/uploads/slider4.jpg" alt="" width="285" height="437">
-               </div>
-               <div class="title-in">
-                  <div class="cate">
-                     <span class="blue"><a href="#">{{__('message.Sci-fi')}}</a></span> <span class="orange"><a href="#">{{__('message.advanture')}}</a></span>
-                  </div>
-                  <h6><a href="#">The walk</a></h6>
-                  <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-               </div>
-            </div>
-            <div class="movie-item">
-               <div class="mv-img">
-                  <img src="images/uploads/slider3.jpg" alt="" width="285" height="437">
-               </div>
-               <div class="title-in">
-                  <div class="cate">
-                     <span class="green"><a href="#">{{__('message.comedy')}}</a></span>
-                  </div>
-                  <h6><a href="#">Die hard</a></h6>
-                  <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-               </div>
-            </div>
+            @endforeach            
          </div>
       </div>
    </div>

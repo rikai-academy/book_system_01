@@ -13,7 +13,6 @@
                <form method="POST" action="{{ route('change.image') }}" enctype="multipart/form-data" class="user-img">
                   @csrf
                   @method('PUT')
-                  <input type="file" id="image" name="image" class="display_none">
                   <label for="image">
                      <img id="output"
                         src="{{ imgSrc($data["user"]->image) }}"
@@ -35,7 +34,10 @@
                      <strong>{{ session()->get('imageError') }}</strong>
                   </span>
                   @endif
+                  @if (auth()->user()->id == $data["user"]->id)
+                  <input type="file" id="image" name="image" class="display_none">    
                   <input type="submit" class="redbtn border_none"  value="{{__('message.Change_avatar')}}">
+                  @endif
                </form>
                <div class="user-fav">
                   <p>{{__('message.Account_Details')}}</p>
@@ -43,10 +45,10 @@
                      <li class="active"><a
                            href="{{route('profile.show',[$data["user"]->id])}}">{{__('message.Profile',['name' => $data['user']->name])}}</a></li>
                      <li><a href="{{ route('profile.favorite',[$data["user"]->id]) }}">{{__('message.Favorite_Book')}}</a></li>
-                     <li><a href="{{ route('profile.ratebook',[auth()->user()->id]) }}">{{__('message.Rated_books')}}</a></li>
-                     <li><a href="{{ route('profile.timeline',[auth()->user()->id]) }}">{{__('message.TimeLine_History')}}</a></li>
+                     <li><a href="{{ route('profile.timeline',[$data["user"]->id]) }}">{{__('message.TimeLine_History')}}</a></li>
                   </ul>
                </div>
+               @if (auth()->user()->id == $data["user"]->id)
                <div class="user-fav">
                   <p>{{__('message.Others')}}</p>
                   <ul>
@@ -54,6 +56,7 @@
                      <li><a href="#">{{__('message.Log_out')}}</a></li>
                   </ul>
                </div>
+               @endif
             </div>
          </div>
          <div class="col-md-9 col-sm-12 col-xs-12">
@@ -71,7 +74,7 @@
                      <div class="col-md-6 form-it">
                         <label>{{__('message.Username')}}</label>
                         <input type="hidden" name="old_name" value="{{ $data["user"]->name }}">
-                        <input type="text" name="name" placeholder="edwardkennedy" value="{{ $data["user"]->name }}">
+                        <input type="text" name="name" placeholder="edwardkennedy" value="{{ $data["user"]->name }}" {{ auth()->user()->id != $data["user"]->id ? 'readonly':'' }}>
                         @error('name')
                         <span class="fail" role="alert">
                            <strong>{{ $message }}</strong>
@@ -80,9 +83,9 @@
                      </div>
                      <div class="col-md-6 form-it">
                         <label>{{__('message.Email_Address')}}</label>
-                        <input type="hidden" name="old_email" value="{{ $data["user"]->email }}">
+                        <input type="hidden" name="old_email" value="{{ $data["user"]->email }}" >
                         <input type="email" name="email" placeholder="edward@kennedy.com"
-                           value="{{ $data["user"]->email }}">
+                           value="{{ $data["user"]->email }}" {{ auth()->user()->id != $data["user"]->id ? 'readonly':'' }}>
                         @error('email')
                         <span class="fail" role="alert">
                            <strong>{{ $message }}</strong>
@@ -92,10 +95,11 @@
                   </div>
                   <div class="row">
                      <div class="col-md-2">
-                        <input class="submit" type="submit" value="{{__('message.save')}}">
+                        <input class="submit {{ auth()->user()->id != $data["user"]->id ? 'display_none':'' }}" type="submit" value="{{__('message.save')}}">
                      </div>
                   </div>
                </form>
+               @if (auth()->user()->id == $data["user"]->id)
                <form action="{{ route('change.password') }}" method="POST" class="password">
                   @csrf
                   @method('PUT')
@@ -148,7 +152,8 @@
                         <input class="submit" type="submit" value="{{__('message.change')}}">
                      </div>
                   </div>
-               </form>
+               </form>                   
+               @endif
             </div>
          </div>
       </div>

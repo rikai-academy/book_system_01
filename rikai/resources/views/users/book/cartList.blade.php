@@ -23,15 +23,8 @@
                </div>
             </div>
             @endforeach
-            <div class="topbar-filter">
-               <label>{{__('message.Book_per_page')}}:</label>
-               <select>
-                  <option value="range">5 {{__('message.Books')}}</option>
-                  <option value="saab">10 {{__('message.Books')}}</option>
-               </select>
-               <div style="text-align:center">
-                  {{$data["carts"]->links()}}
-               </div>
+            <div style="text-align:center">
+               {{$data["carts"]->links("pagination::bootstrap-4")}}
             </div>
          </div>
       </div>

@@ -15,15 +15,15 @@
             <div class="row">
                @foreach($users as $user)
                <div class="col-md-12">
-                  <div class="ceb-item-style-2">
-                     <img src="{{asset('/upload/profile/'.$user->image)}}" class="output_imageprofile" alt="">
-                     <div class="ceb-infor">
-                        <h2>{{$user->name}}</h2>
-                        <br>
+                  <div class="user-item-container">
+                     <img src="{{asset('/upload/user/'.$user->image)}}" class="output_imageprofile" alt="">
+                     <div class="right-half">
+                        <h2><a href="{{ url('profile/'.$user->id) }}">{{ $user->name }}</a></h2>
                         <span>Email: {{$user->email}}</span>
-                        <br>
-                        <h3><a href="{{route('profile.favorite',[$user->id])}}">{{__('message.Favorite_Book')}}</a></h3>
-                        <br><br>
+                        <h3><a href="{{route('profile.favorite',[$user->id])}}">{{__('message.Favorite_Book')}}</a>
+                        </h3>
+                     </div>
+                     <div class="left-half">
                         @if(!Auth::guest() && (Auth::user()->id != $user->id ))
                         <ul class="nav nav-pills">
                            <li role="presentation">
@@ -33,18 +33,18 @@
                            </li>
                            <li role="presentation">
                               <a href="{{route('unfollow',[$user->id,Auth::user()->id])}}" class="follow">
-                              {{__('message.Unfollow')}}:
+                                 {{__('message.Unfollow')}}
                               </a>
                            </li>
                         </ul>
                         @endif
                         <ul class="nav nav-pills">
                            <li class="followed">
-                           <p class="Following">{{__('message.Following')}}:{{$user->follow()->count()}}</p>
+                              <p class="Following">{{__('message.Following')}}:{{$user->follow()->count()}}</p>
                            </li>
                            &nbsp;
                            <li class="followed">
-                           <p class="Following">{{__('message.now_follow')}}:{{$user->beFollowed()->count()}}</p>
+                              <p class="Following">{{__('message.now_follow')}}:{{$user->beFollowed()->count()}}</p>
                            </li>
                         </ul>
                      </div>
