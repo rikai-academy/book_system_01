@@ -13,7 +13,6 @@
                <form method="POST" action="{{ route('change.image') }}" enctype="multipart/form-data" class="user-img">
                   @csrf
                   @method('PUT')
-                  <input type="file" id="image" name="image" class="display_none">
                   <label for="image">
                      <img id="output"
                         src="{{ imgSrc($data["user"]->image) }}"
@@ -25,34 +24,38 @@
                      <strong>{{ session()->get('imgChangeSuccess') }}</strong>
                   </span>
                   @endif
-                  @error('image')
-                  <span class="fail" role="alert">
-                     <strong>{{ $message }}</strong>
-                  </span>
-                  @enderror
                   @if(session()->has('imageError'))
                   <span class="fail" role="alert">
                      <strong>{{ session()->get('imageError') }}</strong>
                   </span>
                   @endif
+                  @if (auth()->user()->id == $data["user"]->id)
+                  <input type="file" id="image" name="image" class="display_none">    
                   <input type="submit" class="redbtn border_none"  value="{{__('message.Change_avatar')}}">
+                  @endif
                </form>
                <div class="user-fav">
                   <p>{{__('message.Account_Details')}}</p>
                   <ul>
-                     <li><a href="{{route('profile.show',[$data["user"]->id])}}">{{__('message.Profile',['name' => $data['user']->name])}}</a></li>
+                     <li><a
+                           href="{{route('profile.show',[$data["user"]->id])}}">{{__('message.Profile',['name' => $data['user']->name])}}</a></li>
                      <li><a href="{{ route('profile.favorite',[$data["user"]->id]) }}">{{__('message.Favorite_Book')}}</a></li>
-                     <li><a href="{{ route('profile.ratebook',[auth()->user()->id]) }}">{{__('message.Rated_books')}}</a></li>
-                     <li><a href="{{ route('profile.timeline',[auth()->user()->id]) }}">{{__('message.TimeLine_History')}}</a></li>
+                     <li class="active"><a href="{{ route('profile.timeline',[$data["user"]->id]) }}">{{__('message.TimeLine_History')}}</a></li>
                   </ul>
                </div>
+               @if (auth()->user()->id == $data["user"]->id)
                <div class="user-fav">
                   <p>{{__('message.Others')}}</p>
                   <ul>
                      <li><a href="#">{{__('message.Change_password')}}</a></li>
-                     <li><a href="#">{{__('message.Log_out')}}</a></li>
+                     <li><a href="{{route('logout')}}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">{{__('message.Log_out')}}</a></li>
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                     </form>
                   </ul>
                </div>
+               @endif
             </div>
          </div>
          <div class="col-md-9 col-sm-12 col-xs-12">
@@ -63,9 +66,9 @@
                   <li>
                      <div class="timeline-content">
                         <h3>{{ __('message.atBook') }} : {{ $activity->book->title }}</h3>
-                        <p>{{ __('message.activity') }} : {{ $activity->type->type }}</p>
+                        <p>{{ __('message.'.$activity->type->type) }}</p>
                         <div class="time">
-                           <h4>{{ date('M d/Y ', strtotime($activity->time)) . __('at') . date(' H:i A ', strtotime($activity->time)) }} </h4>
+                           <h4>{{ date('M d/Y ', strtotime($activity->time)) . __('message.at') . date(' H:i A ', strtotime($activity->time)) }} </h4>
                         </div>
                      </div>
                   </li>
@@ -73,7 +76,7 @@
                   <div style="clear: both;"></div>
                </ul>
             </div>
-            {{ $data["activity"]->links() }}
+            {{ $data["activity"]->links("pagination::bootstrap-4") }}
          </div>
       </div>
    </div>

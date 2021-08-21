@@ -281,5 +281,16 @@
         'creditCardNumber' => 'Credit card number',
         'no_cart' => 'No request found',
         'no_follow'=>'You no follow before',
+        'Fantasy' => 'Fantasy',
+        'Literary Fiction' => 'Literary Fiction',
+        'Self-Help' => 'Self-Help',
+        'Computer Science' => 'Computer Science',
+        'read' => 'Mark book as read',
+        'unread' => 'Unmark book as read',
+        'reading' => 'Mark book as reading',
+        'unreading' => 'Unmark book as reading',
+        'favorite' => 'Mark book as favorite',
+        'unfavorite' => 'Unmark book as favorite',
+        'at' => 'at',
     ]
 ?>

@@ -21,7 +21,7 @@
                </div>
                <div class="form-group">
                   <label for="exampleInputCity1">{{__('message.Image')}}</label>
-                  <img class="imageprofile" src="upload/profile/{{$user->image}}" >
+                  <img class="imageprofile" src="upload/user/{{$user->image}}" >
                </div>
                <div class="form-group">
                   <label>{{__('message.Image')}}</label>
