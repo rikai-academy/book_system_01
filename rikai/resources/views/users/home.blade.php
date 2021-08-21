@@ -31,7 +31,7 @@
                                  </div>
                                  <div class="title-in">
                                     <h6><a href="#">{{$book->title}}</a></h6>
-                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                    <p><i class="ion-android-star"></i><span>{{$book->rate}}</span> /10</p>
                                  </div>
                               </div>
                            </div>
@@ -53,7 +53,7 @@
                                  </div>
                                  <div class="title-in">
                                     <h6><a href="#">{{$book->title}}</a></h6>
-                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                    <p><i class="ion-android-star"></i><span>{{$book->rate}}</span> /10</p>
                                  </div>
                               </div>
                            </div>
@@ -75,7 +75,7 @@
                                  </div>
                                  <div class="title-in">
                                     <h6><a href="#">{{$book->title}}</a></h6>
-                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                    <p><i class="ion-android-star"></i><span>{{$book->rate}}</span> /10</p>
                                  </div>
                               </div>
                            </div>
@@ -97,7 +97,7 @@
                                  </div>
                                  <div class="title-in">
                                     <h6><a href="#">{{$book->title}}</a></h6>
-                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                    <p><i class="ion-android-star"></i><span>{{$book->rate}}</span> /10</p>
                                  </div>
                               </div>
                            </div>
@@ -133,7 +133,7 @@
                                  </div>
                                  <div class="title-in">
                                     <h6><a href="#">{{$book->title}}</a></h6>
-                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                    <p><i class="ion-android-star"></i><span>{{$book->rate}}</span> /10</p>
                                  </div>
                               </div>
                            </div>
@@ -155,7 +155,7 @@
                                  </div>
                                  <div class="title-in">
                                     <h6><a href="#">{{$book->title}}</a></h6>
-                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                    <p><i class="ion-android-star"></i><span>{{$book->rate}}</span> /10</p>
                                  </div>
                               </div>
                            </div>
@@ -177,7 +177,7 @@
                                  </div>
                                  <div class="title-in">
                                     <h6><a href="#">{{$book->title}}</a></h6>
-                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                    <p><i class="ion-android-star"></i><span>{{$book->rate}}</span> /10</p>
                                  </div>
                               </div>
                            </div>
@@ -199,7 +199,7 @@
                                  </div>
                                  <div class="title-in">
                                     <h6><a href="#">{{$book->title}}</a></h6>
-                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                    <p><i class="ion-android-star"></i><span>{{$book->rate}}</span> /10</p>
                                  </div>
                               </div>
                            </div>

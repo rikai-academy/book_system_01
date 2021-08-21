@@ -51,6 +51,7 @@ class ReviewController extends Controller
         $data['book_id'] = $request->bookid;
         $data['user_id'] = $request->user()->id;
         $review = Review::create($data);
+        $this->updateRate($data['book_id']);
         if ($review){
             $message = 'message.add_review_success';
             return redirect()->route('book.show',[$review->book_id])->withMessage(__($message));
@@ -128,6 +129,7 @@ class ReviewController extends Controller
         }
             $message = 'message.update_review_success';
             $review->update($data);
+            $this->updateRate($review->book_id);
             return redirect()->route('book.show',[$review->book_id])->withMessage(__($message));
         } else {
             $errors = 'message.sufficient_permissions';
@@ -148,6 +150,7 @@ class ReviewController extends Controller
         $review = Review::find($reviewId);
         if ($review && $this->hasreview($review)==true){
             $review->delete();
+            $this->updateRate($review->book_id);
             $message = 'message.delete_review_success';
             return redirect()->route('book.show',[$review->book_id])->withMessage(__($message));
         } else {
@@ -195,5 +198,12 @@ class ReviewController extends Controller
             $errors = 'message.no_like';
             return redirect()->route('book.show',[$book->id])->withErrors(__($errors));
         }
+    }
+
+    private function updateRate($bookid){
+        $book = Book::find($bookid);
+        $bookreviews = $book->reviews()->avg('rate');
+        $book->rate = $bookreviews;
+        $book->update();
     }
 }

@@ -20,6 +20,7 @@ class Book extends Migration
             $table->string('image');
             $table->date('publish_at')->nullable();
             $table->integer('num_of_page');
+            $table->integer('rate');
             $table->integer('quantity');
             $table->integer('status');
             $table->integer('price');
