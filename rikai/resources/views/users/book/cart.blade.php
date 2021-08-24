@@ -13,7 +13,7 @@
                <tr>
                   <th class="book">{{__('message.Books')}}</th>
                   <th class="quantity">{{__('message.Quantity')}}</th>
-                  <th class="subtotal">{{__('message.Subtotal')}}</th>
+                  <th class="subtotal">{{__('message.Subtotal')}} / {{ langTypeOfCurency() }}</th>
                </tr>
                @if (!empty($data["cart_item"]))
                @foreach ($data["cart_item"] as $key=>$item)
@@ -41,13 +41,13 @@
                      </div>
                   </td>
                   <td>
-                     <input type="number" min="1" max="{{ $item->book->quantity }}" class="cart-item-input"
+                     <input type="number" min="1" max="{{ $item->book->quantity }}" class="cart-item-input" lang="{{ session('language') }}"
                         cartItemId="{{ $item->book->id }}" cartPrice="{{ $item->book->price }}" value="{{ $item->quantity }}"
                         @if ($data["current_cart"])
                         {{ $data["current_cart"]->status != "shopping" ? "readonly" : "" }}
                         @endif>
                   </td>
-                  <td class="unit-total">{{ $item->quantity * $item->book->price }}</td>
+                  <td class="unit-total">{{ langCurency($item->quantity,$item->book->price) }}</td>
                </tr>
                @endforeach
                @endif
@@ -57,7 +57,7 @@
             <table class="custom_table">
                <tr>
                   <td><b>{{__('message.Total')}}</b></td>
-                  <td id="sum"></td>
+                  <td id="sum" lang="{{ session('language') ?? 'vi' }}"></td>
                </tr>
                <tr>
                   <td colspan="2" class="checkoutbtn" style="text-align:center">

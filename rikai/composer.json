@@ -33,7 +33,8 @@
             "app/Helpers/rate.php",
             "app/Helpers/imgSrc.php",
             "app/Helpers/customTime.php",
-            "app/Helpers/customCheckout.php"
+            "app/Helpers/customCheckout.php",
+            "app/Helpers/multiLangHelper.php"
         ]
     },
     "autoload-dev": {

@@ -17,4 +17,6 @@
 <!-- endinject -->
 <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
 <!-- <base href="{{asset('')}}"> -->
+<link rel="stylesheet" href="{{ asset('admin/css/select2.min.css') }}"/>
+<link rel="stylesheet" href="{{ asset('admin/css/jquery-confirm.min.css') }}">
 <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">

@@ -36,10 +36,10 @@
                         </td>
                         <td>{{$book->price}}</td>
                         <td>
-                           <a href="{{route('bookadmin.edit',[$book->id])}}">
+                           <a href="{{route('bookadmin.edit',[$book->id])}}" ">
                            <label class="badge badge-info">{{__('message.Edit')}}</label>
                            </a>
-                           <a href="{{route('deletebook',[$book->id])}}">
+                           <a class="confirm" item-id="{{ $book->id }}" item-type="book" lang="{{ session('language') }}">
                            <label class="badge badge-danger">{{__('message.Delete')}}</label>
                            </a>
                         </td>

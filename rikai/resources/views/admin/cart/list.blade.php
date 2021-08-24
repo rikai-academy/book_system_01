@@ -28,7 +28,7 @@
             <tbody>
               @foreach ($data["carts"] as $cart)
               <tr>
-                <td>{{ $cart->id }}</td>
+                <td>{{ $cart->getCartID() }}</td>
                 <td>{{ $cart->user->name }}</td>
                 <td>{{ __('message.'.$cart->status) }}</td>
                 <td>{{ $cart->total_price?$cart->total_price:0 }}</td>
@@ -37,12 +37,9 @@
                   <a href="{{url('admin/cart/'.$cart->id.'/edit')}}">
                     <label class="badge badge-info">{{__('message.Detail')}}</label>
                   </a>
-                  <form action="{{ url('admin/cart/'.$cart->id) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" id="{{ $cart->id }}" class="badge badge-danger" />
-                  </form>
-                  <label for="{{ $cart->id }}" class="badge badge-danger">{{__('message.Delete')}}</label>
+                  <a class="confirm" item-id="{{ $cart->id }}" item-type="cart" lang="{{ session('language') }}">
+                    <label class="badge badge-danger">{{__('message.Delete')}}</label>
+                  </a>
                 </td>
               </tr>
               @endforeach

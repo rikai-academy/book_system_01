@@ -23,8 +23,8 @@
                            <a href="{{route('category.edit',[$category->id])}}">
                            <label class="badge badge-info">{{__('message.Edit')}}</label>
                            </a>
-                           <a href="{{route('deletecategory',[$category->id])}}">
-                           <label class="badge badge-danger">{{__('message.Delete')}}</label>
+                           <a class="confirm" item-id="{{ $category->id }}" item-type="category" lang="{{ session('language') }}">
+                              <label class="badge badge-danger">{{__('message.Delete')}}</label>
                            </a>
                         </td>
                      </tr>

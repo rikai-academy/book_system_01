@@ -2,7 +2,9 @@ $(function () {
 	$("#sum").html(() => {
 		var sum = 0;
 		$(".unit-total").each((x,y) => sum+=parseInt($(y).html(),10));
-		return sum;
+		var lang = $("#sum").attr("lang");
+		var typeOfCurency = lang==="vi"?" vnd":" $"
+		return sum + typeOfCurency;
 	});
 
 	$(".add-to-cart").click(function () { 
@@ -24,16 +26,18 @@ $(function () {
 		});
 	});
 
-
 	$(".cart-item-input").change(function () { 
 		var id = $(this).attr("cartitemid");
 		var price = $(this).attr("cartprice");
+		var lang = $(this).attr("lang")??"vi";
+		var curency = lang==="vi"?22000:1;
+		var typeOfCurency = lang==="vi"?" vnd":" $"
 		var quantity = $(this).val();
-		var totalPrice = price * quantity;
+		var totalPrice = price * quantity * curency;
 		$(this).parent().next(".unit-total").html(totalPrice);
 		var sum =0;
 		$(".unit-total").each((x,y) => sum+=parseInt($(y).html(),10));
-		$("#sum").html(sum);
+		$("#sum").html(sum + typeOfCurency);
 		var data = {quantity};
 		$.ajaxSetup({
 			headers: {

@@ -93,7 +93,8 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::get('logout', [LoginController2::class, 'logout'])->name('admin.logout');
     Route::get('category/{categoryid}/delete', [CategoryController1::class, 'destroy'])->name('deletecategory');
     Route::get('book/{bookid}/delete', [BookController2::class, 'destroy'])->name('deletebook');
-
+    Route::get('cart/{id}/delete', [CartController2::class, 'destroy'])->name('deletecart');
+    Route::get('user/{id}/delete', [UserController2::class, 'destroy'])->name('deleteuser');
 });
 Route::get('admin/login',[LoginController2::class,'index'])->name('admin.index');
 Route::post('admin/login', [LoginController2::class, 'postLogin'])->name('admin.login');
