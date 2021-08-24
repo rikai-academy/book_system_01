@@ -293,5 +293,16 @@
         'creditCardNumber' => 'Số thẻ',
         'no_cart' => 'Không tìm thấy yêu cầu',
         'no_follow'=>'Bạn chưa theo dõi trước đó',
+        'Fantasy' => 'Giả tưởng',
+        'Literary Fiction' => 'Văn học',
+        'Self-Help' => 'Tự lực',
+        'Computer Science' => 'Khoa học máy tính',
+        'read' => 'Đánh dấu sách đã đọc xong',
+        'unread' => 'Bỏ đánh dấu sách đã đọc xong',
+        'reading' => 'Đánh dấu sách đang đọc',
+        'unreading' => 'Bỏ đánh dấu sách đang đọc',
+        'favorite' => 'Đánh dấu sách yêu thích',
+        'unfavorite' => 'Bỏ đánh dấu sách yêu thích',
+        'at' => 'tại',
     ]
 ?>

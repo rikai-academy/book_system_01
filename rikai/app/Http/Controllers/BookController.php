@@ -27,7 +27,7 @@ class BookController extends Controller
     public function index()
     {
         //
-        $books = Book::all();
+        $books = Book::paginate(12);
         return view('users.book.list',compact('books'));
     }
 

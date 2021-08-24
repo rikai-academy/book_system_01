@@ -29,16 +29,23 @@
                            <p>{{__('message.Author')}}: <a href="#">{{ $item->book->author }}</a></p>
                         </div>
                         <br>
+                        @if ($data["current_cart"])
+                        @if ($data["current_cart"]->status == "shopping")
                         <form action="{{ url('cartItem/'.$key) }}" method="post">
                            @csrf
                            @method('DELETE')
                            <input type="submit" class="remove-cart" value="{{__('message.Remove')}}" />
                         </form>
+                        @endif
+                        @endif
                      </div>
                   </td>
                   <td>
                      <input type="number" min="1" max="{{ $item->book->quantity }}" class="cart-item-input"
-                        cartItemId="{{ $item->book->id }}" cartPrice="{{ $item->book->price }}" value="{{ $item->quantity }}">
+                        cartItemId="{{ $item->book->id }}" cartPrice="{{ $item->book->price }}" value="{{ $item->quantity }}"
+                        @if ($data["current_cart"])
+                        {{ $data["current_cart"]->status != "shopping" ? "readonly" : "" }}
+                        @endif>
                   </td>
                   <td class="unit-total">{{ $item->quantity * $item->book->price }}</td>
                </tr>

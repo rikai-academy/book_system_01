@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Category;
+use App\Models\User;
 
 class HomePageController extends Controller
 {
@@ -16,7 +18,10 @@ class HomePageController extends Controller
     {
         //
         $books = Book::all();
-        return view('users.home',compact('books'));
+        $slides = Book::take(6)->get();
+        $users = User::where('role','!=','admin')->take(6)->get();
+        $categorys = Category::take(3)->get();
+        return view('users.home',compact('books','slides','users','categorys'));
     }
 
     /**

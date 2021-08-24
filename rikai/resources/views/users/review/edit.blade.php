@@ -11,7 +11,7 @@
          <div class="col-md-9 col-sm-12 col-xs-12">
             <div class="form-style-1 user-pro" action="#">
                <div>
-                  <h2>{{__('message.Name_Book')}}: {{$book->title}}</h2>
+                  <h2 class="color-gray">{{__('message.Name_Book')}}: {{$book->title}}</h2>
                </div>
                <br>
                @if(count($errors)>0)
@@ -28,7 +28,7 @@
                   </p>
                </div>
                @endif
-               <form action="{{route('review.update',[$review->id])}}" class="user" method="post">
+               <form action="{{route('review.update',[$review->id])}}" class="user border-bottom-none" method="post">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   @method('PUT')
                   <h4>{{__('message.Review_Book')}}</h4>
@@ -64,17 +64,15 @@
                      <div class="col-md-2">
                         <input class="submit" type="submit" value="{{__('message.Update')}}">
                      </div>
+                     <div class="col-md-2">
+                        <input class="submit" type="submit" value="{{__('message.Delete')}}" form="delete-review">
+                     </div>
                   </div>
                </form>
-               <div class="row">
-                  <div class="col-md-2">
-                     <form action="{{route('review.destroy',[$review->id])}}" class="user" method="post">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        @method('DELETE')
-                        <input class="submit" type="submit" value="{{__('message.Delete')}}">
-                     </form>
-                  </div>
-               </div>
+               <form action="{{route('review.destroy',[$review->id])}}" class="user display_none" id="delete-review" method="post">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  @method('DELETE')
+               </form>      
             </div>
          </div>
       </div>
