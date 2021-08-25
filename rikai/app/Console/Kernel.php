@@ -2,8 +2,12 @@
 
 namespace App\Console;
 
+use App\Enums\CartStatus;
+use App\Exports\CartsExport;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,7 +28,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            DB::table('cart')->where('status',CartStatus::DONE)->delete();
+        })->lastDayOfMonth('23:59')
+        ->before(function () {
+            return (new CartsExport)->download('accepted request-'.Carbon::now().'.xlsx');
+        })
+        ->name("Monthly Request Delete")
+        ->emailOutputTo(env('MAIL_TO'));
     }
 
     /**
