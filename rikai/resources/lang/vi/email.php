@@ -9,4 +9,14 @@ return [
     'Quantity' => 'Số lượng',
     'Price' => 'Đơn giá',
     'Total Price' => 'Tổng giá',
+    'receive a new review' => 'nhận được đánh giá mới',
+    'Book' => 'Sách',
+    'Title' => 'Tiêu đề',
+    'View Review' => 'Xem review',
+    'receive a new comment' => 'nhận được bình luận mới',
+    'Review' => 'Bình luận',
+    'Comment by' => 'Bình luận bởi',
+    'New review on' => 'Đánh giá mới ở ',
+    'New comment on review' => 'Bình luận mới ở đánh giá ',
+    
 ];

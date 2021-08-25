@@ -4,6 +4,7 @@ namespace App\Library\Services;
 
 use App\Library\Services\Contracts\UserServiceInterface;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserService implements UserServiceInterface
 {
@@ -19,6 +20,14 @@ class UserService implements UserServiceInterface
     public function searchBy($search, $search_by)
     {
         $users = User::where($search_by,'like','%'.$search.'%')->paginate(5);
+        return $users;
+    }
+
+    public function reviewOnBook($book_id)
+    {
+        $users = DB::table('users')->join('review','users.id','=','review.user_id')
+            ->join('book','book.id','=','review.book_id')
+            ->groupBy('users.id')->get();
         return $users;
     }
 }

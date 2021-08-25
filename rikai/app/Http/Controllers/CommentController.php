@@ -9,30 +9,11 @@ use App\Models\User;
 use App\Models\Comment;
 use App\Models\LikeComment;
 use App\Http\Requests\CommentFormRequest;
+use App\Jobs\NewCommentJob;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -47,23 +28,13 @@ class CommentController extends Controller
         $data['review_id'] = $request->reviewid;
         $comment = Comment::create($data);
         if ($comment){
+            dispatch(new NewCommentJob($comment));
             $message = 'message.add_comment_success';
             return redirect()->route('review.show',[$request->reviewid])->withMessage(__($message));
         } else {
             $message = 'message.add_comment_fail';
             return redirect()->route('review.show'.[$request->reviewid])->withMessage(__($message));  
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
