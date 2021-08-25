@@ -292,5 +292,7 @@
         'favorite' => 'Mark book as favorite',
         'unfavorite' => 'Unmark book as favorite',
         'at' => 'at',
+        'buybook_successful'=>'You Buy book successfully',
+        'no_user'=>'No User need find',
     ]
 ?>
