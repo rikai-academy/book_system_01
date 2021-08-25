@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\CartStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Library\Services\Contracts\CartServiceInterface;
+use Illuminate\Support\Facades\Auth;
+use App\Mail\buybooksuccess;
+use App\Jobs\BuyBookJob;
 
 
 class CartController extends Controller
@@ -55,14 +59,17 @@ class CartController extends Controller
     public function update(Request $request, $cart_id)
     {
         $cart = $this->findCart($cart_id);
-        if (isset($cart["errors"])) {
+        if(isset($cart["errors"])){
             return redirect()->route('homeadmin.index')->withErrors(__($cart["errors"]));
         }
         $checkIfSuccess = $this->cartService->updateCart($request, $cart_id);
         if (!$checkIfSuccess) {
             return back()->with('data', $cart)->with('checkoutFailMessage', 'message.checkoutFail');
         }
-        return back()->with('data', $cart)->with('requestResolve', __('message.requestResolve'));
+
+        dispatch(new BuyBookJob($cart));
+        return back()->with('data',$cart)->with('requestResolve',__('message.requestResolve'));
+
     }
 
     /**
@@ -101,4 +108,5 @@ class CartController extends Controller
             return $cart;
         }
     }
+
 }
