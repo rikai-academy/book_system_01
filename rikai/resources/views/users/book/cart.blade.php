@@ -13,7 +13,7 @@
                <tr>
                   <th class="book">{{__('message.Books')}}</th>
                   <th class="quantity">{{__('message.Quantity')}}</th>
-                  <th class="subtotal">{{__('message.Subtotal')}} / {{ langTypeOfCurency() }}</th>
+                  <th class="subtotal">{{__('message.Subtotal')}} / {{ langTypeOfCurency(session('language')) }}</th>
                </tr>
                @if (!empty($data["cart_item"]))
                @foreach ($data["cart_item"] as $key=>$item)
@@ -47,7 +47,7 @@
                         {{ $data["current_cart"]->status != "shopping" ? "readonly" : "" }}
                         @endif>
                   </td>
-                  <td class="unit-total">{{ langCurency($item->quantity,$item->book->price) }}</td>
+                  <td class="unit-total">{{ langCurency($item->quantity,$item->book->price,session('language')) }}</td>
                </tr>
                @endforeach
                @endif

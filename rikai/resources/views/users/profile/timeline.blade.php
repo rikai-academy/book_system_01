@@ -68,7 +68,7 @@
                         <h3>{{ __('message.atBook') }} : {{ $activity->book->title }}</h3>
                         <p>{{ __('message.'.$activity->type->type) }}</p>
                         <div class="time">
-                           <h4>{{ langTime($activity->time) }} </h4>
+                           <h4>{{ langTime($activity->time,session('language')) }} </h4>
                         </div>
                      </div>
                   </li>

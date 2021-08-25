@@ -1,23 +1,23 @@
 <?php
 
-function langCurency($quantity , $price)
+function langCurency($quantity , $price , $lang)
 {
-    if(session('language')=='vi') {
+    if($lang=='vi') {
         return $quantity*$price*22000;
     }
     return $quantity*$price;
 }
 
-function langTypeOfCurency() {
-    if(session('language')=='vi') {
+function langTypeOfCurency($lang) {
+    if($lang=='vi') {
         return ' vnd';
     }
     return ' $';
 }
 
-function langTime($data)
+function langTime($data,$lang)
 {
-    if (session('language')=='vi') {
+    if ($lang=='vi') {
         $time = date('d/m/Y ', strtotime($data)) . __('message.at') . date(' H:i A ', strtotime($data));
         return $time;
     }

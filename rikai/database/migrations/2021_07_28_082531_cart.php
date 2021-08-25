@@ -22,6 +22,7 @@ class Cart extends Migration
             $table->string('last_name')->nullable();
             $table->string('name_of_card')->nullable();
             $table->string('credit_card_number')->nullable();
+            $table->enum('lang',['vi','en'])->default('vi');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

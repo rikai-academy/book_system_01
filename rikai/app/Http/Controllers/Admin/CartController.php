@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Library\Services\Contracts\CartServiceInterface;
+use App\Mail\RequestAccepted;
+use App\Jobs\SendEmailJob;
 
 
 class CartController extends Controller
@@ -62,6 +64,7 @@ class CartController extends Controller
         if (!$checkIfSuccess) {
             return back()->with('data', $cart)->with('checkoutFailMessage', 'message.checkoutFail');
         }
+        dispatch(new SendEmailJob($cart));
         return back()->with('data', $cart)->with('requestResolve', __('message.requestResolve'));
     }
 

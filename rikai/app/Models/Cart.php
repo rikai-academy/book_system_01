@@ -19,6 +19,7 @@ class Cart extends Model
         'last_name',
         'name_of_card',
         'credit_card_number',
+        'lang',
         'status'
     ];
 
