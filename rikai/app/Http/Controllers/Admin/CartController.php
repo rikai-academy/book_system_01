@@ -27,7 +27,7 @@ class CartController extends Controller
     {
         $data["carts"] = $this->cartService->getCart(CartStatus::PENDING);
         $data["type"] = CartStatus::PENDING;
-        return view('admin.cart.list')->with('data',$data);
+        return view('admin.cart.list')->with('data', $data);
     }
 
     /**
@@ -39,10 +39,10 @@ class CartController extends Controller
     public function edit($id)
     {
         $data["cart"] = $this->findCart($id);
-        if(isset($data["cart"]["errors"])){
+        if (isset($data["cart"]["errors"])) {
             return redirect()->route('homeadmin.index')->withErrors(__($data["cart"]["errors"]));
         }
-        return view('admin.cart.detail')->with('data',$data);
+        return view('admin.cart.detail')->with('data', $data);
     }
 
     /**
@@ -55,14 +55,14 @@ class CartController extends Controller
     public function update(Request $request, $cart_id)
     {
         $cart = $this->findCart($cart_id);
-        if(isset($cart["errors"])){
+        if (isset($cart["errors"])) {
             return redirect()->route('homeadmin.index')->withErrors(__($cart["errors"]));
         }
-        $checkIfSuccess = $this->cartService->updateCart($request,$cart_id);
-        if(!$checkIfSuccess) {
-            return back()->with('data',$cart)->with('checkoutFailMessage','message.checkoutFail');
+        $checkIfSuccess = $this->cartService->updateCart($request, $cart_id);
+        if (!$checkIfSuccess) {
+            return back()->with('data', $cart)->with('checkoutFailMessage', 'message.checkoutFail');
         }
-        return back()->with('data',$cart)->with('requestResolve',__('message.requestResolve'));
+        return back()->with('data', $cart)->with('requestResolve', __('message.requestResolve'));
     }
 
     /**
@@ -74,27 +74,29 @@ class CartController extends Controller
     public function destroy($id)
     {
         $cart = $this->findCart($id);
-        if(isset($cart["errors"])){
+        if (isset($cart["errors"])) {
             $data["carts"] = $this->cartService->getCart(CartStatus::PENDING);
-            return back()->with('data',$data)->withErrors(__($cart["errors"]));
+            return back()->with('data', $data)->withErrors(__($cart["errors"]));
         }
         $cart_type = $cart->status;
         $cart->delete();
         $data["carts"] = $this->cartService->getCart($cart_type);
-        return back()->with('data',$data);
+        return back()->with('data', $data);
     }
 
-    public function cartType($cart_type){
+    public function cartType($cart_type)
+    {
         $data["carts"] = $this->cartService->getCart($cart_type);
         $data["type"] = $cart_type;
-        return view('admin.cart.list')->with('data',$data);
+        return view('admin.cart.list')->with('data', $data);
     }
 
-    private function findCart($id){
+    private function findCart($id)
+    {
         $cart = Cart::find($id);
-        if($cart){
+        if ($cart) {
             return $cart;
-        }else{
+        } else {
             $cart["errors"] = 'message.no_cart';
             return $cart;
         }

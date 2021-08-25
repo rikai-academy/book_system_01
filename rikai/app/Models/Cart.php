@@ -22,11 +22,18 @@ class Cart extends Model
         'status'
     ];
 
-    public function user() {
-        return $this->belongsTo(User::class,'user_id');
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function cartItems() {
-        return $this->hasMany(CartItem::class,'cart_id');
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class, 'cart_id');
+    }
+
+    public function getCartID()
+    {
+        return sprintf('Cart-%03d', $this->id);
     }
 }

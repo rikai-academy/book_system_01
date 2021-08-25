@@ -97,4 +97,8 @@ class User extends Authenticatable
     public function isFollowing(User $user){
         return !! $this->beFollowed()->where('user_id', $user->id)->count();
     }
+
+    public function scopeGetAllUsers($query){
+        return $query->where('role','!=','admin')->paginate(5);
+    }
 }

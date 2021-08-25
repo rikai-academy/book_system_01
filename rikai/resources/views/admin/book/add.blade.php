@@ -24,7 +24,7 @@
                </div>
                <div class="form-group">
                   <label for="exampleSelectGender">{{__('message.Name_Category')}}</label>
-                  <select class="form-control" name="category_id[]" id="exampleSelectGender" multiple>
+                  <select class="form-control" name="category_id[]" id="categorySelect2">
                      @foreach($categorys as $category)
                      <option value="{{$category->id}}">{{$category->title}}</option>
                      @endforeach

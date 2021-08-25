@@ -14,6 +14,8 @@
 <script src="{{ asset('admin/js/todolist.js') }}"></script>
 <!-- endinject -->
 <!-- Custom js for this page-->
+<script src="{{ asset('admin/js/select2.min.js') }}"></script>
+<script src="{{ asset('admin/js/jquery-confirm.min.js') }}"></script>
 <script src="{{ asset('admin/js/dashboard.js') }}"></script>
 <script src="{{ asset('admin/js/file-upload.js') }}"></script>
 <script src="{{ asset('admin/js/typeahead.js') }}"></script>

@@ -18,7 +18,7 @@
             <div class="movie-item-style-2 custom-border">
                <div class="mv-item-infor">
                   <h6><a href="{{ url('cart/'.$cart->id) }}">{{customTime($cart->created_at)}}</a></h6>
-                  <p class="run-time"> {{ __('message.total_price') }}: {{ $cart->total_price }}  .  {{ __('message.update_at') }}: {{ customTime($cart->updated_at) }}</p>
+                  <p class="run-time" lang="{{ session('language') }}"> {{ __('message.total_price') }}: {{ langCurency(1,$cart->total_price) }} {{ langTypeOfCurency() }} .  {{ __('message.update_at') }}: {{ langTime($cart->updated_at) }}</p>
                   <p class="author"> {{ __('message.status') }} : {{$cart->status}}</p>
                </div>
             </div>

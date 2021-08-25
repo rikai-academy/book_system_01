@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data["users"] = User::paginate(5);
+        $data["users"] = User::getAllUsers();
         return view('admin.user.list')->with('data',$data);
     }
 
@@ -115,7 +115,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        $data["users"] = User::all();
+        $data["users"] = User::getAllUsers();
         return redirect('admin/user')->with('data',$data);
     }
 

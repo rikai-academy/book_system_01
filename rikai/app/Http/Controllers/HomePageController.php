@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class HomePageController extends Controller
 {
@@ -16,7 +17,7 @@ class HomePageController extends Controller
      */
     public function index()
     {
-        //
+        Session::put('language','vi');
         $books = Book::all();
         $slides = Book::take(6)->get();
         $users = User::where('role','!=','admin')->take(6)->get();

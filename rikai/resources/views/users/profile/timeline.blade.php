@@ -1,7 +1,7 @@
 @extends('users.layouts.index')
 @section('content')
 @include('users.title.header')
-<h1>Edward kennedy’s {{__('message.Profile')}}</h1>
+<h1>{{__('message.Profile',['name' => $data['user']->name])}}</h1>
 @include('users.title.body')
 <li> <span class="ion-ios-arrow-right"></span>{{__('message.Time_Line_History')}}</li>
 @include('users.title.footer')
@@ -68,7 +68,7 @@
                         <h3>{{ __('message.atBook') }} : {{ $activity->book->title }}</h3>
                         <p>{{ __('message.'.$activity->type->type) }}</p>
                         <div class="time">
-                           <h4>{{ date('M d/Y ', strtotime($activity->time)) . __('message.at') . date(' H:i A ', strtotime($activity->time)) }} </h4>
+                           <h4>{{ langTime($activity->time) }} </h4>
                         </div>
                      </div>
                   </li>

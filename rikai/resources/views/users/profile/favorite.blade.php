@@ -1,7 +1,7 @@
 @extends('users.layouts.index')
 @section('content')
 @include('users.title.header')
-<h1>{{$user->name}}: {{__('message.Profile')}}</h1>
+<h1>{{__('message.Profile',['name' => $user->name])}}</h1>
 @include('users.title.body')
 <li> <span class="ion-ios-arrow-right"></span>{{__('message.Favorite_Book')}}</li>
 @include('users.title.footer')
