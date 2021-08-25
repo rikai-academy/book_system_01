@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Charts\CartStatusChart;
+use App\Charts as Charts;
+use App\Enums\CartStatus;
+use Carbon\Carbon;
+use App\Models\Cart;
 
 class HomeController extends Controller
 {
@@ -15,8 +20,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data["users"] = User::paginate(5);
-        return view('admin.layout.home')->with('data',$data);
+        // dd(Cart::whereDate('created_at', '2021-08-27')->where('status','pending')->count());
+        $chart["cart"]= new Charts\CartAllChart();
+        $chart["revenue"]= new Charts\RevenueChart();
+        return view('admin.layout.home')->with('chart', $chart);
     }
 
     /**
