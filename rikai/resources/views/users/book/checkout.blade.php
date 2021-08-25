@@ -18,6 +18,7 @@
                <form action="{{ url('cart/'.$data->id) }}" method="POST">
                   @csrf
                   @method('PUT')
+                  <input type="hidden" name="lang" value="{{ session('language') ?? 'vi' }}">
                   <h4>{{__('message.Checkout')}}</h4>
                   <div class="row">
                      <div class="col-md-6 form-it">
