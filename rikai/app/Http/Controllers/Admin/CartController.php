@@ -13,6 +13,9 @@ use App\Mail\buybooksuccess;
 use App\Jobs\BuyBookJob;
 use App\Enums\PermissionType;
 use App\Models\Role;
+use App\Notifications\OrderNotification;
+use Illuminate\Support\Facades\Notification;
+use App\Enums\NotificationEnum;
 
 
 
@@ -61,10 +64,12 @@ class CartController extends Controller
      */
     public function update(Request $request, $cart_id)
     {
+
         $role = Role::where('id','=',Auth::user()->roles()->value('role_id'))->first();
         $permissions = $role->permissions()->where('name','=',PermissionType::AcceptOrder)->first();
 
         if($permissions){
+            $users = User::all();
             $cart = $this->findCart($cart_id);
             if(isset($cart["errors"])){
                 return redirect()->route('homeadmin.index')->withErrors(__($cart["errors"]));
@@ -75,6 +80,8 @@ class CartController extends Controller
             }
     
             dispatch(new BuyBookJob($cart));
+            $action = NotificationEnum::AcceptOrder;
+            Notification::send($users , new OrderNotification($book->title,$action));
             return back()->with('data',$cart)->with('requestResolve',__('message.requestResolve'));
         }else{
             $error = 'message.sufficient_permissions';
@@ -91,10 +98,12 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
+
         $role = Role::where('id','=',Auth::user()->roles()->value('role_id'))->first();
         $permissions = $role->permissions()->where('name','=',PermissionType::DeleteOrder)->first();
 
         if($permissions){
+            $users = User::all();
             $cart = $this->findCart($id);
             if (isset($cart["errors"])) {
                 $data["carts"] = $this->cartService->getCart(CartStatus::PENDING);
@@ -103,6 +112,8 @@ class CartController extends Controller
             $cart_type = $cart->status;
             $cart->delete();
             $data["carts"] = $this->cartService->getCart($cart_type);
+            $action = NotificationEnum::DeleteOrder;
+            Notification::send($users , new OrderNotification($book->title,$action));
             return back()->with('data', $data);
         }else{
             $error = 'message.sufficient_permissions';

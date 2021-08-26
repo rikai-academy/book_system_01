@@ -6,16 +6,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Role;
+use App\Models\User;
 use App\Models\Book_category;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Tag;
+use App\Notifications\BookNotification;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\BookRequest;
 use App\Library\Services\Contracts\UploadimageServiceInterface; 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Permission;
 use App\Enums\PermissionType;
+use App\Enums\NotificationEnum;
 
 class BookController extends Controller
 {
@@ -64,6 +68,7 @@ class BookController extends Controller
         $permissions = $role->permissions()->where('name','=',PermissionType::AddBook)->first();
 
         if($permissions){
+            $users = User::all();
             $data = $request->all();
             $type= 'book';
             $data['image'] = $this->uploadImageService->uploadImage($request,$data,$type);
@@ -85,6 +90,8 @@ class BookController extends Controller
                 }
 
             }
+            $action = NotificationEnum::AddBook;
+            Notification::send($users , new BookNotification($book->title,$action));
             if ($book){
                 $message = 'message.add_book_success';
                 return redirect()->route('bookadmin.index')->withMessage(__($message));
@@ -96,8 +103,6 @@ class BookController extends Controller
             $error = 'message.sufficient_permissions';
             return redirect()->route('bookadmin.index')->withErrors(__($error));
         }
-            
-        
     }
 
     /**
@@ -134,10 +139,12 @@ class BookController extends Controller
      */
     public function update(BookRequest $request, $bookid)
     {
+
         $role = Role::where('id','=',Auth::user()->roles()->value('role_id'))->first();
         $permissions = $role->permissions()->where('name','=',PermissionType::UpdateBook)->first();
 
         if($permissions){
+            $users = User::all();
             $book = $this->findBook($bookid);
             $data = $request->all();
             $categorybooks = Book_Category::where('book_id','=',$bookid)->get();
@@ -176,11 +183,14 @@ class BookController extends Controller
                     }
                 }
             }
+
             $type = 'book';
             $data['image'] = $this->uploadImageService->uploadImage($request,$data,$type);
             $tags = explode(',',$request->tag);
             $book->update($data);
             $book->retag($tags);
+            $action = NotificationEnum::EditBook;
+            Notification::send($users , new BookNotification($book->title,$action));
             if($book){
                 $message = 'message.update_book_success';
                 return redirect()->route('bookadmin.edit',[$book->id])->withMessage(__($message));
@@ -191,6 +201,7 @@ class BookController extends Controller
         }else{
             $error = 'message.sufficient_permissions';
             return redirect()->route('bookadmin.index')->withErrors(__($error));
+
         }
 
     }
@@ -203,12 +214,16 @@ class BookController extends Controller
      */
     public function destroy($bookid)
     {
+
         $role = Role::where('id','=',Auth::user()->roles()->value('role_id'))->first();
         $permissions = $role->permissions()->where('name','=',PermissionType::DeleteBook)->first();
 
         if($permissions){
+            $users = User::all();
             $book = $this->findBook($bookid);
             $categories = Book_Category::where('book_id','=',$bookid)->get();
+            $action = NotificationEnum::DeleteBook;
+            Notification::send($users , new BookNotification($book->title,$action));
             $book->delete();
             foreach($categories as $category){
                 DB::beginTransaction();

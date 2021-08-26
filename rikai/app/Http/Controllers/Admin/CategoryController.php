@@ -5,11 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\User;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Support\Facades\DB;
 use App\Enums\PermissionType;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\CategoryNotification;
+use Illuminate\Support\Facades\Notification;
+use App\Enums\NotificationEnum;
+
 
 class CategoryController extends Controller
 {
@@ -45,12 +50,15 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
+
         $role = Role::where('id','=',Auth::user()->roles()->value('role_id'))->first();
         $permissions = $role->permissions()->where('name','=',PermissionType::AddCategory)->first();
-
+        $users = User::all();
         if($permissions){
             $data = $request->all();
             $category = Category::create($data);
+            $action = NotificationEnum::AddCategory;
+            Notification::send($users , new CategoryNotification($category->title,$action));
             if ($category){
                 $message = 'message.add_category_success';
                 return redirect()->route('category.index')->withMessage(__($message));
@@ -107,9 +115,12 @@ class CategoryController extends Controller
         $permissions = $role->permissions()->where('name','=',PermissionType::UpdateCategory)->first();
 
         if($permissions){
+            $users = User::all();
             $category = $this->findCategory($categoryid);
             $data = $request->all();
             $category->update($data);
+            $action = NotificationEnum::EditCategory;
+            Notification::send($users , new CategoryNotification($category->title,$action));
             if($category){
                 $message = 'message.update_category_success';
                 return redirect()->route('category.edit',$category->id)->withMessage(__($message));
@@ -132,10 +143,12 @@ class CategoryController extends Controller
      */
     public function destroy($categoryid)
     {
+
         $role = Role::where('id','=',Auth::user()->roles()->value('role_id'))->first();
         $permissions = $role->permissions()->where('name','=',PermissionType::DeleteCategory)->first();
 
         if($permissions){
+            $users = User::all();
             $category = $this->findCategory($categoryid);
             if(count($category->subcategory)){
                 $subcategories = $category->subcategory;
@@ -151,6 +164,8 @@ class CategoryController extends Controller
                     }
                 }
             }
+            $action = NotificationEnum::DeleteCategory;
+            Notification::send($users , new CategoryNotification($category->title,$action));
             $category->delete();
             $message = 'message.delete_category_success';
             return redirect()->route('category.index')->withMessage(__($message));
