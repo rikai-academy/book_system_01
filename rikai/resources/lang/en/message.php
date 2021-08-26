@@ -301,5 +301,7 @@
         'total-revenue'=>'Total revenue',
         'number-of-orders'=>'Number of orders',
         'order-done'=>'Order done',
+        'export'=>'Export',
+        'exportorder'=>'Export buy book',
     ]
 ?>

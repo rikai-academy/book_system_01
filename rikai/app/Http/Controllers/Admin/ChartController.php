@@ -7,8 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Statistic;
 use App\Enums\CartStatus;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StatisticExport;
+use App\Exports\OrderStatistic;
+use App\Exports\ReportMonth;
+use App\Jobs\ExportExcel;
 
-class ChartController extends Controller
+
+class ChartController extends Controller 
 {
     /**
      * Display a listing of the resource.
@@ -24,4 +30,14 @@ class ChartController extends Controller
         return view('admin.chart.index',compact(['orders', 'data','ordersdone']));
     }
 
+    public function export() 
+    {
+        return Excel::download(new StatisticExport, 'statistic-'.date('d-m-Y').'.xlsx');
+
+    }
+
+    public function exportorder() 
+    {
+        return Excel::download(new OrderStatistic, 'order-statistic-'.date('d-m-Y').'.xlsx');
+    }
 }
