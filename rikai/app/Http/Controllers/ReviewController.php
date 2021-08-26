@@ -14,6 +14,7 @@ use App\Http\Requests\ReviewFormRequest;
 use App\Jobs\NewReviewJob;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use App\Enums\Approveval;
 
 class ReviewController extends Controller
 {
@@ -73,8 +74,8 @@ class ReviewController extends Controller
     {
         //
         $review = Review::where('id','=',$reviewId)->first();
-        $id = Auth::user()->id;
-        $currentuser = User::find($id);
+        // $id = Auth::user()->id;
+        // $currentuser = User::find($id);
         if ($review){
             $book = Book::find($review->book_id);
             $book_id = $book->id;
@@ -82,7 +83,7 @@ class ReviewController extends Controller
             $categories = $book->categorys()->get();
             $comments = Comment::where('review_id','=',$reviewId)->get();
             $totalcomment = Comment::where('review_id','=',$reviewId)->count();
-            return view('users.review.show',compact('review','book','comments','categories','totalcomment','currentuser'));
+            return view('users.review.show',compact('review','book','comments','categories','totalcomment'));
         } else {
             $errors = 'message.sufficient_permissions';
             return redirect()->route('index')->withErrors(__($errors));
@@ -207,5 +208,26 @@ class ReviewController extends Controller
         $bookreviews = $book->reviews()->avg('rate');
         $book->rate = $bookreviews;
         $book->update();
+    }
+
+    public function hidereview(Request $request,$reviewId){
+        $review = Review::find($reviewId);
+        if($review){
+            $approveval = $request->approveval;
+            if($approveval == Approveval::Status){
+                $approveval = Approveval::OnValue;
+                $message = 'message.hide_review_success';
+
+            }else{
+                $approveval = Approveval::OffValue;
+                $message = 'message.show_review_success';
+            }
+            $review->approve = $approveval;
+            $review->update();
+            return redirect()->route('book.show',[$review->book_id])->withMessage(__($message));
+        }else{
+            $errors = 'message.sufficient_permissions';
+            return redirect()->route('book.show',[$review->book_id])->withErrors(__($errors));
+        }
     }
 }

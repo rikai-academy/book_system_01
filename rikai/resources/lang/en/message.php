@@ -319,6 +319,14 @@
         'reportEmail'=>'Report Email',
         'dear'=>'Dear',
         'send-email-body'=>'Send email body',
+        'hidereview'=>'Hide review',
+        'hidecomment'=>'Hide comment',
+        'ManagerReviews'=>'Manager Reviews',
+        'managercomment'=>'Manager comment',
+        'hide_review_success'=>'hide review success',
+        'show_review_success'=>'show review success',
+        'hide_comment_success'=>'hide comment success',
+        'show_comment_success'=>'show comment success',
 
     ]
 ?>

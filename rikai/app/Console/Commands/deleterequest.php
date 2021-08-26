@@ -40,7 +40,7 @@ class deleterequest extends Command
      */
     public function handle()
     {
-        $carts = Cart::where([['status','=','done'],['updated_at','<',Carbon::now()->lastOfMonth()->endOfDay()]])->get();
+        $carts = Cart::where('status','=','done')->get();
         foreach($carts as $cart){
             DB::beginTransaction();
             try{

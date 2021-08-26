@@ -89,7 +89,7 @@ class BookController extends Controller
     }
 
     public function fulltextsearch(Request $request){
-        $books = Book::search($request->get('search'))->paginate(18);
+        $books = Book::search($request->get('body'))->paginate(18);
         $total = count($books);
         return view('users.book.search',compact('books','total'));
     }

@@ -61,12 +61,15 @@ class CategoryController extends Controller
     {
         //
         $category = Category::find($categoryid);
-        $bookcategory = $category->allChilds()->value('book_id');
+        $bookcategorys = $category->allChilds()->get();
         $books = $category->books()->paginate(10);
-        if($bookcategory){
-            $subbook = Book::find($bookcategory);
-            $books->push($subbook);
+        foreach($bookcategorys as $bookcategory){
+            if($bookcategory){
+                $subbook = Book::find($bookcategory->book_id);        
+                $books->push($subbook);
+            }
         }
+
         return view('users.book.list',compact('books'));
     }
 

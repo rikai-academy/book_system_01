@@ -51,4 +51,71 @@ use App\Models\Category;
    }
  }
 
+ function checkreviewhide($review){
+   if($review->approve == 1){
+      echo "checked";
+   }
+ }
+
+ function checkcommenthide($comment){
+   if($comment->approve == 1){
+      echo "checked";
+   }
+ }
+
+ function statusreading($data){
+
+   if($data["activity"]->read_status == 1){
+      return '{{ '.'active'.' }}'; 
+   }
+   
+ }
+ function statusread($data){
+   if($data["activity"]->read_status == 2){
+      return '{{ '.'active'.' }}'; 
+   }
+ }
+
+ function statusfavorite($data){
+   if($data["activity"]->favorite_status == 1){
+      return '{{ '.'active'.' }}'; 
+   }
+ }
+
+function reading($data){
+   if($data["activity"]->read_status == 1){
+      return ''.'unreading'.'';
+   }else{
+      return ''.'reading'.'';
+   } 
+
+}
+function read($data){
+   if($data["activity"]->read_status == 2){
+      return ''.'unread'.'';
+   }else{
+      return ''.'read'.'';
+   } 
+
+}
+function favorite($data){
+   if($data["activity"]->favorite_status == 1){
+      return ''.'unfavorite'.'';
+   }else{
+      return ''.'favorite'.'';
+   } 
+
+}
+function buttonfavorite($data){
+   echo '<button type="submit" 
+   name="activity" class="parent-btn '.statusfavorite($data).'" value="'.favorite($data).'">'.__('message.Add_to_Favorite').'</button>';
+}
+function buttonreading($data){
+   echo '<button type="submit" 
+   name="activity" class="parent-btn '.statusreading($data).'" value="'.reading($data).'">'.__('message.Add_to_Reading').'</button>';
+}
+function buttonread($data){
+   echo '<button type="submit" 
+   name="activity" class="parent-btn '.statusread($data).'" value="'.read($data).'">'.__('message.Add_to_Read').'</button>';
+}
 ?>

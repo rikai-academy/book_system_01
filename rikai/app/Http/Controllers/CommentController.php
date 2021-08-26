@@ -11,6 +11,8 @@ use App\Models\LikeComment;
 use App\Http\Requests\CommentFormRequest;
 use App\Jobs\NewCommentJob;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Book_Category;
+use App\Enums\Approveval;
 
 class CommentController extends Controller
 {
@@ -172,6 +174,45 @@ class CommentController extends Controller
         }else{
             $errors = 'message.no_like';
             return redirect()->route('review.show',[$review->id])->withErrors(__($errors));
+        }
+    }
+
+    public function managercomment($reviewId){
+        $review = Review::where('id','=',$reviewId)->first();
+        $id = Auth::user()->id;
+        $currentuser = User::find($id);
+        if ($review){
+            $book = Book::find($review->book_id);
+            $book_id = $book->id;
+            $category_book = Book_Category::where('book_id','=',$book_id)->first();
+            $categories = $book->categorys()->get();
+            $comments = Comment::where('review_id','=',$reviewId)->get();
+            $totalcomment = $comments->count();
+            return view('users.comment.manager',compact('review','book','comments','categories','totalcomment','currentuser'));
+        } else {
+            $errors = 'message.sufficient_permissions';
+            return redirect()->route('index')->withErrors(__($errors));
+        }
+    }
+
+    public function hidecomment(Request $request,$commentId){
+        $comment = Comment::find($commentId);
+        if($comment){
+            $approveval = $request->approveval;
+            if($approveval == Approveval::Status){
+                $approveval = Approveval::OnValue;
+                $message = 'message.hide_comment_success';
+
+            }else{
+                $approveval = Approveval::OffValue;
+                $message = 'message.show_comment_success';
+            }
+            $comment->approve = $approveval;
+            $comment->update();
+            return redirect()->route('review.show',[$comment->review_id])->withMessage(__($message));
+        }else{
+            $errors = 'message.sufficient_permissions';
+            return redirect()->route('index')->withErrors(__($errors));
         }
     }
 }

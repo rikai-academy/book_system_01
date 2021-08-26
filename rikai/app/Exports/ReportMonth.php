@@ -27,6 +27,7 @@ class ReportMonth implements FromCollection,WithHeadings
         $orders = Cart::where('status',CartStatus::DONE)->whereYear('updated_at',date('Y'))
         ->whereMonth('updated_at',date('m'))->get();
         $i = 0;
+        $data = Statistic::statisticRevenue();
         foreach($orders as $order){
             $data[$i] = array([
                 $order->user()->value('name'),
