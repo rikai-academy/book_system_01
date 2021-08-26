@@ -304,5 +304,7 @@
         'favorite' => 'Đánh dấu sách yêu thích',
         'unfavorite' => 'Bỏ đánh dấu sách yêu thích',
         'at' => 'tại',
+        'buybook_successful'=>'Bạn đã đặt hàng mua sách thành công',
+        'no_user'=>'Không có người dùng cần tìm',
     ]
 ?>
