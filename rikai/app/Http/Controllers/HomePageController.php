@@ -22,7 +22,8 @@ class HomePageController extends Controller
         $slides = Book::take(6)->get();
         $users = User::where('role','!=','admin')->take(6)->get();
         $categorys = Category::take(3)->get();
-        return view('users.home',compact('books','slides','users','categorys'));
+        $categoryparent = Category::where('parent_id','=','0')->get();
+        return view('users.home',compact('books','slides','users','categorys','categoryparent'));
     }
 
     /**
