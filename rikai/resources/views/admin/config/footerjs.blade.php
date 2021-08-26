@@ -23,3 +23,4 @@
 <script src="{{ asset('admin/js/custom.js') }}"></script>
 <script src="{{ asset('admin/js/cart.js') }}"></script>
 <script src="{{ asset('admin/js/cartItem.js') }}"></script>
+<script src="{{ asset('admin/js/highcharts.js') }}"></script>

@@ -8,6 +8,14 @@ function langCurency($quantity , $price)
     return $quantity*$price;
 }
 
+function langTotalCurency($price)
+{
+    if(session('language')=='vi') {
+        return $price*22000;
+    }
+    return $price;
+}
+
 function langTypeOfCurency() {
     if(session('language')=='vi') {
         return ' vnd';

@@ -21994,7 +21994,11 @@ code {
 .card .card-body {
   padding: 1.25rem 1.25rem;
 }
-
+.card .card-body2 {
+  padding: 1.25rem 1.25rem;
+  background-color: #07afbb;
+  color: white;
+}
 .card .card-body + .card-body {
   padding-top: 1rem;
 }
