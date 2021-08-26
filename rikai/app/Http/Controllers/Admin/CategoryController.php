@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Support\Facades\DB;
+use App\Enums\PermissionType;
+use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -42,15 +45,22 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        //
-        $data = $request->all();
-        $category = Category::create($data);
-        if ($category){
-            $message = 'message.add_category_success';
-            return redirect()->route('category.index')->withMessage(__($message));
-        } else {
-            $message = 'message.add_category_fail';
-            return redirect()->route('category.index')->withMessage(__($message));
+        $role = Role::where('id','=',Auth::user()->roles()->value('role_id'))->first();
+        $permissions = $role->permissions()->where('name','=',PermissionType::AddCategory)->first();
+
+        if($permissions){
+            $data = $request->all();
+            $category = Category::create($data);
+            if ($category){
+                $message = 'message.add_category_success';
+                return redirect()->route('category.index')->withMessage(__($message));
+            } else {
+                $message = 'message.add_category_fail';
+                return redirect()->route('category.index')->withMessage(__($message));
+            }
+        }else{
+            $error = 'message.sufficient_permissions';
+            return redirect()->route('bookadmin.index')->withErrors(__($error));
         }
     }
 
@@ -93,18 +103,25 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $categoryid)
     {
-        //
-        $category = $this->findCategory($categoryid);
-        $data = $request->all();
-        $category->update($data);
-        if($category){
-            $message = 'message.update_category_success';
-            return redirect()->route('category.edit',$category->id)->withMessage(__($message));
-        } else {
-            $message = 'message.update_category_fail';
-            return redirect()->route('category.edit',$category->id)->withMessage(__($message));
-        }
+        $role = Role::where('id','=',Auth::user()->roles()->value('role_id'))->first();
+        $permissions = $role->permissions()->where('name','=',PermissionType::UpdateCategory)->first();
 
+        if($permissions){
+            $category = $this->findCategory($categoryid);
+            $data = $request->all();
+            $category->update($data);
+            if($category){
+                $message = 'message.update_category_success';
+                return redirect()->route('category.edit',$category->id)->withMessage(__($message));
+            } else {
+                $message = 'message.update_category_fail';
+                return redirect()->route('category.edit',$category->id)->withMessage(__($message));
+            }    
+        }else{
+            $error = 'message.sufficient_permissions';
+            return redirect()->route('bookadmin.index')->withErrors(__($error));
+        }
+        
     }
 
     /**
@@ -115,25 +132,32 @@ class CategoryController extends Controller
      */
     public function destroy($categoryid)
     {
-        //
-        $category = $this->findCategory($categoryid);
-        if(count($category->subcategory)){
-            $subcategories = $category->subcategory;
-            foreach($subcategories as $cat)
-            {
-                DB::beginTransaction();
-                try{
-                    $cat = DB::table('category')->where('id','=',$cat->id)->delete();
-                    DB::commit();
-                }catch(Exception $e){
-                    DB::rollBack();
-                    throw new Exception($e->getMessage());
+        $role = Role::where('id','=',Auth::user()->roles()->value('role_id'))->first();
+        $permissions = $role->permissions()->where('name','=',PermissionType::DeleteCategory)->first();
+
+        if($permissions){
+            $category = $this->findCategory($categoryid);
+            if(count($category->subcategory)){
+                $subcategories = $category->subcategory;
+                foreach($subcategories as $cat)
+                {
+                    DB::beginTransaction();
+                    try{
+                        $cat = DB::table('category')->where('id','=',$cat->id)->delete();
+                        DB::commit();
+                    }catch(Exception $e){
+                        DB::rollBack();
+                        throw new Exception($e->getMessage());
+                    }
                 }
             }
+            $category->delete();
+            $message = 'message.delete_category_success';
+            return redirect()->route('category.index')->withMessage(__($message));
+        }else{
+            $error = 'message.sufficient_permissions';
+            return redirect()->route('bookadmin.index')->withErrors(__($error));
         }
-        $category->delete();
-        $message = 'message.delete_category_success';
-        return redirect()->route('category.index')->withMessage(__($message));
     }
 
     public function findCategory($categoryid){

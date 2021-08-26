@@ -45,6 +45,7 @@
             </ul>
          </div>
       </li>
+      @if(Auth::user()->roles()->value('name') === 'admin')
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
          <i class="icon-grid-2 menu-icon"></i>
@@ -55,9 +56,12 @@
             <ul class="nav flex-column sub-menu">
                <li class="nav-item"><a class="nav-link" href="{{route('user.index')}}">{{__('message.List_User')}}</a></li>
                <li class="nav-item"><a class="nav-link" href="{{route('user.create')}}">{{__('message.Add_Users')}}</a></li>
+               <li class="nav-item"><a class="nav-link" href="{{route('add.role.user')}}">{{__('message.Add_Role_Users')}}</a></li>
+               <li class="nav-item"><a class="nav-link" href="{{route('role.index')}}">{{__('message.Add_Role')}}</a></li>
             </ul>
          </div>
       </li>
+      @endif
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
          <i class="icon-contract menu-icon"></i>
@@ -70,6 +74,7 @@
             </ul>
          </div>
       </li>
+      @if(Auth::user()->roles()->value('name') === 'admin')
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
          <i class="icon-contract menu-icon"></i>
@@ -82,6 +87,8 @@
             </ul>
          </div>
       </li>
+      @endif
+      @if(Auth::user()->roles()->value('name') === 'admin')
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
          <i class="icon-columns menu-icon"></i>
@@ -94,5 +101,6 @@
             </ul>
          </div>
       </li>
+      @endif
    </ul>
 </nav>

@@ -25,7 +25,8 @@ class LoginController extends Controller
 
     public function postLogin(Request $request){
         $login = $request->only(['email','password']);
-        $login['role'] = 'admin';
+        // $login['role'] = 'admin';
+        // array_push($login, 'booker');
         if(Auth::attempt($login)){
             return redirect()->route('homeadmin.index');
         }

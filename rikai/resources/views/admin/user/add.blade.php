@@ -1,5 +1,6 @@
 @extends('admin.layout.index')
 @section('content1')
+@if(Auth::user()->roles()->value('name') === 'admin')
 <div class="row">
   <div class="col-12 grid-margin stretch-card">
     <div class="card">
@@ -66,4 +67,5 @@
     </div>
   </div>
 </div>
+@endif
 @endsection

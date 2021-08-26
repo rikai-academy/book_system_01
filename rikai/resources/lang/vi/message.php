@@ -339,6 +339,21 @@
         'weeks'=>'Tuần',
         'List_Tags'=>'Tất cả thẻ',
         'Time'=>'Thời gian',
+        'Add_Role_Users'=>'Thêm vai trò',
+        'Add_Role'=>'Thêm nghiệp vụ',
+        'add_book'=>'Thêm sách',
+        'edit_book'=>'Sửa sách',
+        'delete_book'=>'Xóa sách',
+        'add_category'=>'Thêm danh mục',
+        'edit_category'=>'Sửa danh mục',
+        'delete_category'=>'Xóa danh mục',
+        'no_role'=>'Không tim thấy vai trò',
+        'add_role_success'=>'Thêm nghiệp vụ cho vai trò thành công',
+        'add_roleuser_success'=>'Thêm người dùng vào vai trò thành công',
+        'Role'=>'Vai trò',
+        'Permissions'=>'Nghiệp vụ',
+        'accept_order'=>'Duyệt đơn mua sách',
+        'delete_order'=>'Hủy đơn mua sách',
 
     ]
 ?>

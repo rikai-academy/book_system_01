@@ -24,7 +24,9 @@
                  <th>{{__('message.Username')}}</th>
                  <th>{{__('message.Image')}}</th>
                  <th>{{__('message.Email')}}</th>
+                 @if(Auth::user()->roles()->value('name') === 'admin')
                  <th>{{__('message.Action')}}</th>
+                 @endif
                </tr>
              </thead>
              @foreach ($data["users"] as $user)
@@ -34,6 +36,7 @@
                  <td>{{ $user->name }}</td>
                  <td><img src="{{ imgSrc($user->image) }}" alt=""></td>
                  <td>{{ $user->email }}</td>
+                 @if(Auth::user()->roles()->value('name') === 'admin')
                  <td>
                    <a href="{{url('admin/user/'.$user->id.'/edit')}}">
                      <label class="badge badge-info">{{__('message.Edit')}}</label>
@@ -47,6 +50,7 @@
                      </form>
                    </a>
                  </td>
+                 @endif
                </tr>
              </tbody>
              @endforeach
