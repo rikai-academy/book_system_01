@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\CartStatus;
 use App\Models\CartItem;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Cart extends Model
 {
