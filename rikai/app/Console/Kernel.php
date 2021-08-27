@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Kernel extends ConsoleKernel
 {
@@ -22,18 +23,17 @@ class Kernel extends ConsoleKernel
 
     /**
      * Define the application's command schedule.
-     *
+     *->lastDayOfMonth('23:59')
+     *->everyMinute()
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
+            // Excel::store(new CartsExport,'accepted-request'.Carbon::now().'xlsx');
             DB::table('cart')->where('status',CartStatus::DONE)->delete();
         })->lastDayOfMonth('23:59')
-        ->before(function () {
-            return (new CartsExport)->download('accepted request-'.Carbon::now().'.xlsx');
-        })
         ->name("Monthly Request Delete")
         ->emailOutputTo(env('MAIL_TO'));
     }

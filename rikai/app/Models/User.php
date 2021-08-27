@@ -106,6 +106,7 @@ class User extends Authenticatable
         return $query->join('review','users.id','=','review.user_id')
         ->join('book','book.id','=','review.book_id')
         ->where('users.id','!=',$review->user->id)
+        ->where('book.id',$review->book->id)
         ->select('users.name', 'users.email')
         ->groupBy('users.id');
     }

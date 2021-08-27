@@ -3,13 +3,15 @@
 <div class="row">
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
-      <div class="card-body">       
-        <div style="height: 300px;width:100%">
+      <div class="card-body">
+        <div class="custom-chart-holder">
           {!! $chart["cart"]->container() !!}
-        </div>      
-        <div style="height: 300px;width:100%">
+          <a href="{{ url('admin/export/carts') }}" class="export-button">{{ __('excel.Export Excel') }}</a>
+        </div>
+        <div class="custom-chart-holder">
           {!! $chart["revenue"]->container() !!}
-        </div> 
+          <a href="{{ url('admin/export/revenue') }}" class="export-button">{{ __('excel.Export Excel') }}</a>
+        </div>
       </div>
     </div>
   </div>
