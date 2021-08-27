@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\UserController as UserController2;
 use App\Http\Controllers\Admin\ProfileController as ProfileController2;
 use App\Http\Controllers\Admin\CartController as CartController2;
 use App\Http\Controllers\Admin\LoginController as LoginController2;
+use App\Http\Controllers\Admin\ChartController as ChartController2;
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ChangeController as ChangeController1;
@@ -95,6 +96,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::get('book/{bookid}/delete', [BookController2::class, 'destroy'])->name('deletebook');
     Route::get('cart/{id}/delete', [CartController2::class, 'destroy'])->name('deletecart');
     Route::get('user/{id}/delete', [UserController2::class, 'destroy'])->name('deleteuser');
+    Route::resource('chart',ChartController2::class)->only('index');
 });
 Route::get('admin/login',[LoginController2::class,'index'])->name('admin.index');
 Route::post('admin/login', [LoginController2::class, 'postLogin'])->name('admin.login');

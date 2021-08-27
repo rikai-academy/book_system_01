@@ -294,5 +294,12 @@
         'at' => 'at',
         'buybook_successful'=>'You Buy book successfully',
         'no_user'=>'No User need find',
+        'statistics'=>'Statistics',
+        'Chart'=>'Chart',
+        'analysis'=>'analysis',
+        'order'=>'order',
+        'total-revenue'=>'Total revenue',
+        'number-of-orders'=>'Number of orders',
+        'order-done'=>'Order done',
     ]
 ?>

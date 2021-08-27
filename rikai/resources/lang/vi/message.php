@@ -306,5 +306,13 @@
         'at' => 'tại',
         'buybook_successful'=>'Bạn đã đặt hàng mua sách thành công',
         'no_user'=>'Không có người dùng cần tìm',
+        'statistics'=>'Số liệu thống kê',
+        'Chart'=>'Biểu đồ',
+        'analysis'=>'Phân tích',
+        'order'=>'Đặt hàng',
+        'total-revenue'=>'Tổng doanh thu',
+        'number-of-orders'=>'Tổng đơn đặt hàng',
+        'chart-orders'=>'Biểu đồ đặt hàng',
+        'order-done'=>'Đặt hàng thành công',
     ]
 ?>
