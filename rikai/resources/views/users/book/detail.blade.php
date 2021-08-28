@@ -158,12 +158,16 @@
                                     {{__('message.in_total')}}</p>
                               </div>
                               @foreach($reviews as $review)
+                              @if ($review->status != "hidden" || auth()->user()->id == $review->user->id || auth()->user()->role == "admin")
                               <div class="mv-user-review-item" data-reviewId="{{$review->id}}">
                                  <div class="user-infor">
                                     <img src="{{ imgSrc($review->user()->value('image')) }}" class="small-user-image" alt="">
                                     <div>
                                        <a href="{{route('review.show',[$review->id])}}">
                                           <h3 class="text-align-initial">{{$review->title}}</h3>
+                                          @if ($review->status == "hidden")
+                                              <p class="hidden-message">{{ __('message.hidden message') }}</p>
+                                          @endif
                                        </a>
                                        <div class="no-star">
                                           @for($i=0; $i< 10;$i++) @if($i<=$review->rate)
@@ -180,12 +184,31 @@
                                           </a>
                                        </p>
                                     </div>
-                                    @if(!Auth::guest() && ($review->user_id == Auth::user()->id ||
-                                    Auth::user()->role=='admin'))
-                                    <a href="{{route('review.edit',[$review->id])}}" class="left-half">
-                                       <h3>Edit</h3>
-                                    </a>
-                                    @endif
+                                    <div class="left-half review-option">
+                                       <button class="review-option-button">
+                                          <i class="fas fa-ellipsis-v"></i>
+                                       </button>
+                                       <ul class="review-option-list display_none">
+                                          @if(!Auth::guest() && ($review->user_id == Auth::user()->id ||
+                                          Auth::user()->role=='admin'))
+                                          <li><a href="{{route('review.edit',[$review->id])}}">{{ __('message.Edit') }}</a></li>
+                                          <li>
+                                             <a>
+                                                <label class="cursor-pointer" for="{{ "delete-".$review->id }}">{{ __('message.Delete') }}</label>
+                                             </a>
+                                             <input class="submit display_none" id="{{ "delete-".$review->id }}" type="submit" value="{{__('message.Delete')}}" form="{{ "delete-review".$review->id }}">
+                                          </li>
+                                          <form action="{{route('review.destroy',[$review->id])}}" class="user display_none" id="{{ "delete-review".$review->id }}" method="post">
+                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                             @method('DELETE')
+                                          </form> 
+                                          @if(($review->user_id == Auth::user()->id ||Auth::user()->role=='admin'))
+                                          {!! hiddenSubject($review,"review") !!}
+                                          @endif
+                                          @endif
+                                          <li><a class="report" reportType="review" userId="{{ auth()->user()->id }}" subjectId="{{ $review->id }}">{{ __('message.Report') }}</a></li>
+                                       </ul>
+                                    </div>
                                  </div>
                                  <p>{{$review->body}}</p>
                                  @if(!Auth::guest())
@@ -206,6 +229,7 @@
                                  </ul>
                                  @endif
                               </div>
+                              @endif
                               @endforeach
                               <div class="pagination2">
                                  {{$reviews->links("pagination::bootstrap-4")}}

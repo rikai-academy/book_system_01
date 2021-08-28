@@ -17,6 +17,7 @@ class Comment extends Model
         'user_id',
         'created_at',
         'update_at',
+        'status',
     ];
 
 

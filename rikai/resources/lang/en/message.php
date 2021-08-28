@@ -294,5 +294,10 @@
         'at' => 'at',
         'BelongToCategory' => 'Belong To Category',
         'CategoryNone' => 'Category None',
+        'Report' => 'Report',
+        'hidden message' => 'This item had been hidden by you or admin',
+        'Unhidden' => 'Unhidden',
+        'Hidden' => 'Hidden',
+        'report success' => 'report success'
     ]
 ?>

@@ -21,5 +21,9 @@ return [
     'monthly-request-report-' => 'Báo-cáo-yêu-cầu-hằng-tháng-',
     'monthly-revenue-report-' => 'Báo-cáo-lợi-nhuận-hằng-tháng-',
     'Monthly Report' => 'Báo cáo tháng',
-    'Monthly Report Content' => 'Đây là báo cáo hằng tháng được tiến hành vào ngày :time'
+    'Monthly Report Content' => 'Đây là báo cáo hằng tháng được tiến hành vào ngày :time',
+    'Report on inappropriate activity' => 'Báo cáo về hành vi không phù hợp ',
+    'Link to subject' => 'Đường dẫn tới hành vi',
+    'Type of subject' => 'Loại hành vi ',
+    'From User' => 'Từ người dùng ',
 ];

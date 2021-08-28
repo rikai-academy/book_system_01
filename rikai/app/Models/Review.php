@@ -18,6 +18,7 @@ class Review extends Model
         'rate',
         'created_at',
         'update_at',
+        'status',
     ];
 
     public function user() {

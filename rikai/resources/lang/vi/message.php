@@ -306,5 +306,11 @@
         'at' => 'tại',
         'BelongToCategory' => 'Thuộc về thể loại',
         'CategoryNone' => 'Không thuộc về thể loại nào',
+        'Report' => 'Báo cáo',
+        'hidden message' => 'Bài viết này đã bị ẩn bởi bạn hoặc admin',
+        'Unhidden' => 'Hiện bài viết',
+        'Hidden' => 'Ẩn bài viết',
+        'report success' => 'Báo cáo thành công',
+        'Link to subject' => 'Đường dẫn tới bài viết',
     ]
 ?>
