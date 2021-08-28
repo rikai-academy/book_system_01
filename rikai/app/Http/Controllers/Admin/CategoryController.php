@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         //
         $categories = Category::all();
-        return view('admin.category.list',compact('categories'));
+        return view('admin.category.list', compact('categories'));
     }
 
     /**
@@ -28,8 +28,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.category.add');
+        $categories = Category::all();
+        return view('admin.category.add')->with('categories', $categories);
     }
 
     /**
@@ -40,10 +40,10 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        //
         $data = $request->all();
+        // dd($data);
         $category = Category::create($data);
-        if ($category){
+        if ($category) {
             $message = 'message.add_category_success';
             return redirect()->route('category.index')->withMessage(__($message));
         } else {
@@ -73,9 +73,10 @@ class CategoryController extends Controller
     {
         //
         $category = $this->findCategory($categoryid);
-        if($category){
-            return view('admin.category.edit',compact('category'));
-        }else{
+        $categories = Category::all();
+        if ($category) {
+            return view('admin.category.edit', compact('category', 'categories'));
+        } else {
             $errors = 'message.no_category';
             return redirect()->route('homeadmin.index')->withErrors(__($errors));
         }
@@ -94,14 +95,13 @@ class CategoryController extends Controller
         $category = $this->findCategory($categoryid);
         $data = $request->all();
         $category->update($data);
-        if($category){
+        if ($category) {
             $message = 'message.update_category_success';
-            return redirect()->route('category.edit',$category->id)->withMessage(__($message));
+            return redirect()->route('category.edit', $category->id)->withMessage(__($message));
         } else {
             $message = 'message.update_category_fail';
-            return redirect()->route('category.edit',$category->id)->withMessage(__($message));
+            return redirect()->route('category.edit', $category->id)->withMessage(__($message));
         }
-
     }
 
     /**
@@ -119,11 +119,12 @@ class CategoryController extends Controller
         return redirect()->route('category.index')->withMessage(__($message));
     }
 
-    public function findCategory($categoryid){
+    public function findCategory($categoryid)
+    {
         $category = Category::find($categoryid);
-        if($category){
+        if ($category) {
             return $category;
-        }else{
+        } else {
             $errors = 'message.no_category';
             return redirect()->route('homeadmin.index')->withErrors(__($errors));
         }

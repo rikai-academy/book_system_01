@@ -55,7 +55,7 @@
                            </div>
                            <h5 class="newrate">New rating</h5>
                            <div class="star-widget">
-                              {{rateform()}}
+                              {!! rateform() !!}
                            </div>
                         </div>
                      </div>

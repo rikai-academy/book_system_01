@@ -30,7 +30,7 @@
                   {{__('message.Category_Book')}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </a>
                   <ul class="dropdown-menu level1">
-                     {{categorybook()}}
+                     {!! categorybook() !!}
                      <li><a href="{{route('book.index')}}">{{__('message.all_book')}}</a></li>
                   </ul>
                </li>

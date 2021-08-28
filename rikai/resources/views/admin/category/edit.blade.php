@@ -17,6 +17,20 @@
                   <input type="text" name="title" class="form-control" id="exampleInputName1" placeholder="{{$category->title}}" value="{{$category->title}}">
                </div>
                <div class="form-group">
+                  <label for="parent">{{ __('message.BelongToCategory') }}</label>
+                  <label style="display: block" for="parent">
+                     {!! categoryBelongTo($category) !!}   
+                  </label>
+                  <select class="form-control" name="parent_id" id="categorySelect2">
+                     <option value="0" >{{ __('message.CategoryNone') }}</option>
+                     @foreach($categories as $item)
+                     @if ($item->id != $category->id)
+                     <option value="{{$item->id}}" {{$item->id==$category->parent_id ?'selected':''}}>{{$item->title}}</option>
+                     @endif
+                     @endforeach
+                  </select>
+               </div>
+               <div class="form-group">
                   <label for="exampleTextarea1">{{__('message.Description')}}</label>
                   <textarea class="form-control" name="description" placeholder="{{$category->description}}" id="exampleTextarea1" rows="4">{{$category->description}}</textarea>
                </div>
