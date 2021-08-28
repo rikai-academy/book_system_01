@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\CartController as CartController2;
 use App\Http\Controllers\Admin\LoginController as LoginController2;
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChangeController as ChangeController1;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
@@ -62,14 +63,14 @@ Route::middleware(['users'])->group(function () {
     Route::get('profile/timeline/{id}', [ActivityController::class, 'show'])->name('profile.timeline');
     Route::put('change_password', [ChangeController1::class, 'changePassword'])->name('change.password');
     Route::put('change_image', [ChangeController1::class, 'changeImage'])->name('change.image');
-    Route::get('listuser',[ProfileController1::class,'listuser'])->name('listuser');
-    Route::get('like/review/{reviewid}',[ReviewController1::class,'likereview'])->name('like.review');
-    Route::get('unlike/review/{reviewid}',[ReviewController1::class,'unlikereview'])->name('unlike.review');
-    Route::get('like/comment/{commentid}',[CommentController1::class,'likecomment'])->name('like.comment');
-    Route::get('unlike/comment/{commentid}',[CommentController1::class,'unlikecomment'])->name('unlike.comment');
+    Route::get('listuser', [ProfileController1::class, 'listuser'])->name('listuser');
+    Route::get('like/review/{reviewid}', [ReviewController1::class, 'likereview'])->name('like.review');
+    Route::get('unlike/review/{reviewid}', [ReviewController1::class, 'unlikereview'])->name('unlike.review');
+    Route::get('like/comment/{commentid}', [CommentController1::class, 'likecomment'])->name('like.comment');
+    Route::get('unlike/comment/{commentid}', [CommentController1::class, 'unlikecomment'])->name('unlike.comment');
     Route::get('latestCart', [CartController::class, 'latestCart']);
-    Route::get('follow/{userid}/{followid}',[UserController1::class,'follow'])->name('follow');
-    Route::get('unfollow/{userid}/{followid}',[UserController1::class,'unfollow'])->name('unfollow');
+    Route::get('follow/{userid}/{followid}', [UserController1::class, 'follow'])->name('follow');
+    Route::get('unfollow/{userid}/{followid}', [UserController1::class, 'unfollow'])->name('unfollow');
     Route::resource('timeline', ActivityController::class);
     Route::resource('cart', CartController::class);
     Route::resource('cartItem', CartItemController::class);
@@ -81,16 +82,16 @@ Route::middleware(['users'])->group(function () {
 Route::resource('timeline', ActivityController::class);
 
 
-Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
-    Route::resource('homeadmin',HomeController1::class);
-    Route::resource('bookadmin',BookController2::class);
-    Route::resource('category',CategoryController1::class);
-    Route::resource('user',UserController2::class);
-    Route::resource('profileadmin',ProfileController2::class);
+Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
+    Route::resource('homeadmin', HomeController1::class);
+    Route::resource('bookadmin', BookController2::class);
+    Route::resource('category', CategoryController1::class);
+    Route::resource('user', UserController2::class);
+    Route::resource('profileadmin', ProfileController2::class);
     Route::post('search/user', [UserController2::class, 'search'])->name('admin.user.search');
-    Route::resource('cart',CartController2::class);
-    Route::get('cart/type/{type}',[CartController2::class,'cartType'])->name('admin.cart.type');
-    Route::get('buybook',[UserController2::class,'buybook']);
+    Route::resource('cart', CartController2::class);
+    Route::get('cart/type/{type}', [CartController2::class, 'cartType'])->name('admin.cart.type');
+    Route::get('buybook', [UserController2::class, 'buybook']);
     Route::get('logout', [LoginController2::class, 'logout'])->name('admin.logout');
     Route::get('category/{categoryid}/delete', [CategoryController1::class, 'destroy'])->name('deletecategory');
     Route::get('book/{bookid}/delete', [BookController2::class, 'destroy'])->name('deletebook');
@@ -99,8 +100,9 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::get('export/carts', [ExcelController::class, 'cartAll']);
     Route::get('export/revenue', [ExcelController::class, 'revenue']);
 });
-Route::get('admin/login',[LoginController2::class,'index'])->name('admin.index');
+Route::get('admin/login', [LoginController2::class, 'index'])->name('admin.index');
 Route::post('admin/login', [LoginController2::class, 'postLogin'])->name('admin.login');
-
-
-    
+Route::get('redirect/{driver}', [LoginController::class, 'redirectToProvider'])
+    ->name('login.provider');
+Route::get('auth/{driver}/callback', [LoginController::class, 'handleProviderCallback'])
+    ->name('login.callback');

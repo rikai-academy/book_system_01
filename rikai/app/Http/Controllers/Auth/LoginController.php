@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Library\Services\Contracts\SocialServiceInterface;
 
 class LoginController extends Controller
 {
@@ -28,15 +28,23 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/';
 
+    protected $socialService;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(SocialServiceInterface $socialServiceInterface)
     {
         $this->redirectTo = url()->previous();
         $this->middleware('guest')->except('logout');
+        $this->socialService = $socialServiceInterface;
+    }
+
+    public function redirectToProvider($driver)
+    {
+        return $this->socialService->redirectToProvider($driver)->redirect();
     }
 
     public function showLoginForm()
@@ -47,5 +55,13 @@ class LoginController extends Controller
             return view($view);
         }
         return back()->with('message', __('message.needLogin'));
+    }
+
+    public function handleProviderCallback($driver)
+    {
+        $redirectPath = $this->redirectPath();
+        $result = $this->socialService->handleProviderCallback($driver,$redirectPath);
+        return redirect($result);
+
     }
 }

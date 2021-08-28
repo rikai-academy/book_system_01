@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Library\Services\Contracts\SocialServiceInterface;
+use App\Library\Services\SocialService;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +27,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        $this->app->bind(SocialServiceInterface::class,SocialService::class);
     }
 }
