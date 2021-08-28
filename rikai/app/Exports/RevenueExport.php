@@ -11,6 +11,13 @@ use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
 class RevenueExport implements FromCollection,WithHeadings,WithColumnFormatting,WithStrictNullComparison
 {
+    private $types;
+
+    public function __construct($types)
+    {
+        $this->types = $types;
+    }
+
     public function columnFormats(): array
     {
         return [
@@ -31,7 +38,7 @@ class RevenueExport implements FromCollection,WithHeadings,WithColumnFormatting,
     public function collection()
     {
         $statistic = new Statistic();
-        $revenue = $statistic->RevenueDay(7);
+        $revenue = $statistic->RevenueDay($this->types);
         $data = collect();
         for ($i=0; $i < $revenue["labels"]->count(); $i++) { 
             $data->push([$revenue["labels"][$i],

@@ -15,13 +15,13 @@ class ExcelController extends Controller
 {
     public function cartAll() 
     {
-        $excel = new CartAllExport();
+        $excel = new CartAllExport("week");
         return Excel::download($excel, __('excel.cart-report').Carbon::now().'.xlsx');
     }
 
     public function revenue() 
     {
-        $revenue = new RevenueExport();
+        $revenue = new RevenueExport("week");
         return Excel::download($revenue, __('excel.revenue-report').Carbon::now().'.xlsx');
     }
 }

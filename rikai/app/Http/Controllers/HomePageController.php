@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CartAllExport;
+use App\Jobs\MonthlyReportJob;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HomePageController extends Controller
 {
@@ -17,6 +21,8 @@ class HomePageController extends Controller
      */
     public function index()
     {
+        // dd(storage_path("app/public/monthly.xlsx"));
+        dispatch(new MonthlyReportJob());
         Session::put('language','vi');
         $books = Book::all();
         $slides = Book::take(6)->get();
