@@ -99,6 +99,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::resource('chart',ChartController2::class)->only('index');
     Route::get('export', [ChartController2::class, 'export'])->name('chart.export');
     Route::get('exportorder', [ChartController2::class, 'exportorder'])->name('chart.exportorder');
+
 });
 Route::get('admin/login',[LoginController2::class,'index'])->name('admin.index');
 Route::post('admin/login', [LoginController2::class, 'postLogin'])->name('admin.login');

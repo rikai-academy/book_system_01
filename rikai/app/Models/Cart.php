@@ -49,7 +49,6 @@ class Cart extends Model
     }
 
     public static function countOrdersDone(){
-
         $orders = Cart::select(DB::raw('count(*) as count'), DB::raw('Date(updated_at) as date'))
             ->whereYear('updated_at', date('Y'))
             ->whereMonth('updated_at', date('m'))

@@ -316,6 +316,11 @@
         'order-done'=>'Đặt hàng thành công',
         'export'=>'Báo cáo',
         'exportorder'=>'Báo cáo mua sách',
+        'NewReview'=>'Bài đánh giá mới',
+        'Content'=>'Nội dung',
+        'review_by_you'=>'Đã viết đánh giá trên sách có bạn đánh giá',
+        'NewComment'=>'Bài bình luận mới',
+        'comment_by_you'=>'Đã viết bình luận trên sách có bạn bình luận',
 
     ]
 ?>

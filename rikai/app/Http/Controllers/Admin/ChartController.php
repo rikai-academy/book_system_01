@@ -13,7 +13,6 @@ use App\Exports\OrderStatistic;
 use App\Exports\ReportMonth;
 use App\Jobs\ExportExcel;
 
-
 class ChartController extends Controller 
 {
     /**
@@ -40,4 +39,5 @@ class ChartController extends Controller
     {
         return Excel::download(new OrderStatistic, 'order-statistic-'.date('d-m-Y').'.xlsx');
     }
+
 }
