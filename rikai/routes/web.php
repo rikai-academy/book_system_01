@@ -21,6 +21,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ChangeController as ChangeController1;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\ExcelController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,6 +96,8 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::get('book/{bookid}/delete', [BookController2::class, 'destroy'])->name('deletebook');
     Route::get('cart/{id}/delete', [CartController2::class, 'destroy'])->name('deletecart');
     Route::get('user/{id}/delete', [UserController2::class, 'destroy'])->name('deleteuser');
+    Route::get('export/carts', [ExcelController::class, 'cartAll']);
+    Route::get('export/revenue', [ExcelController::class, 'revenue']);
 });
 Route::get('admin/login',[LoginController2::class,'index'])->name('admin.index');
 Route::post('admin/login', [LoginController2::class, 'postLogin'])->name('admin.login');

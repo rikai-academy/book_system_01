@@ -8,8 +8,9 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class CartsExport implements FromQuery,WithHeadings
+class CartsExport implements FromQuery,WithHeadings,ShouldQueue
 {
     use Exportable;
 
