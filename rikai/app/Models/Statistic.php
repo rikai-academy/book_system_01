@@ -20,4 +20,11 @@ class Statistic extends Model
             }
         return $data;
     }
+
+    public static function statisticMonth(){
+        $data = Cart::countMonthOrders();
+        $data['users'] = User::count();
+        return $data;
+    }
+
 }

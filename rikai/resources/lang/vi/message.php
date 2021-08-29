@@ -314,5 +314,8 @@
         'number-of-orders'=>'Tổng đơn đặt hàng',
         'chart-orders'=>'Biểu đồ đặt hàng',
         'order-done'=>'Đặt hàng thành công',
+        'export'=>'Báo cáo',
+        'exportorder'=>'Báo cáo mua sách',
+
     ]
 ?>
