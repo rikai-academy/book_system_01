@@ -22,7 +22,7 @@ class CartAllChart extends Chart
 
     private function initData() {
         $statistic = new Statistic();
-        $data = $statistic->CartStatisticDay(7);
+        $data = $statistic->CartStatisticDay("week");
         $this->displayLegend(true);
         $this->title('Request of this week');
         $this->labels($data["labels"]);

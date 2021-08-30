@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Enums\CartStatus;
 use App\Exports\CartsExport;
+use App\Jobs\MonthlyReportJob;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -34,6 +35,9 @@ class Kernel extends ConsoleKernel
             // Excel::store(new CartsExport,'accepted-request'.Carbon::now().'xlsx');
             DB::table('cart')->where('status',CartStatus::DONE)->delete();
         })->lastDayOfMonth('23:59')
+        ->before(function () {
+            dispatch(new MonthlyReportJob);
+        })
         ->name("Monthly Request Delete")
         ->emailOutputTo(env('MAIL_TO'));
     }

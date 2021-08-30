@@ -18,5 +18,8 @@ return [
     'Comment by' => 'Comment by',
     'New review on' => 'New review on ',
     'New comment on review' => 'New comment on review',
-    
+    'monthly-request-report-' => 'monthly-request-report-',
+    'monthly-revenue-report-' => 'monthly-revenue-report-',
+    'Monthly Report' => 'Monthly Report',
+    'Monthly Report Content' => 'This is a monthly report at :time'
 ];

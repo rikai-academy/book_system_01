@@ -10,7 +10,15 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
 class CartAllExport implements FromCollection,WithHeadings,WithColumnFormatting,WithStrictNullComparison
-{    
+{
+
+    private $types;
+
+    public function __construct($types)
+    {
+        $this->types = $types;
+    }
+    
     public function columnFormats(): array
     {
         return [
@@ -33,7 +41,7 @@ class CartAllExport implements FromCollection,WithHeadings,WithColumnFormatting,
     public function collection()
     {
         $statistic = new Statistic();
-        $carts = $statistic->CartStatisticDay(7);
+        $carts = $statistic->CartStatisticDay($this->types);
         $data = collect();
         for ($i=0; $i < $carts["labels"]->count(); $i++) { 
             $data->push([$carts["labels"][$i],

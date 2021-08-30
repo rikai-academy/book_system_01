@@ -18,5 +18,8 @@ return [
     'Comment by' => 'Bình luận bởi',
     'New review on' => 'Đánh giá mới ở ',
     'New comment on review' => 'Bình luận mới ở đánh giá ',
-    
+    'monthly-request-report-' => 'Báo-cáo-yêu-cầu-hằng-tháng-',
+    'monthly-revenue-report-' => 'Báo-cáo-lợi-nhuận-hằng-tháng-',
+    'Monthly Report' => 'Báo cáo tháng',
+    'Monthly Report Content' => 'Đây là báo cáo hằng tháng được tiến hành vào ngày :time'
 ];

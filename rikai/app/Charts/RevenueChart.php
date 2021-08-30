@@ -22,7 +22,7 @@ class RevenueChart extends Chart
 
     private function initData() {
         $statistic = new Statistic();
-        $data = $statistic->RevenueDay(7);
+        $data = $statistic->RevenueDay("week");
         $this->displayLegend(true);
         $this->title('Revenue of this week');
         $this->labels($data["labels"]);
