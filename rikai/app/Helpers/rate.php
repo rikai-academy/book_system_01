@@ -1,4 +1,5 @@
 <?php
+use App\Models\Category;
  function rateform(){
     $count = 11;
     for($i=1;$i<$count;$i++){
@@ -49,4 +50,5 @@
 
    }
  }
+
 ?>

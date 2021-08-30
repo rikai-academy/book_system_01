@@ -321,6 +321,8 @@
         'review_by_you'=>'Đã viết đánh giá trên sách có bạn đánh giá',
         'NewComment'=>'Bài bình luận mới',
         'comment_by_you'=>'Đã viết bình luận trên sách có bạn bình luận',
+        'Parent_Category'=>'Danh mục cha',
+        'None'=>'Không',
 
     ]
 ?>

@@ -25,12 +25,23 @@
                      <li><a href="{{route('home.index')}}">{{__('message.Home')}} </a></li>
                   </ul>
                </li>
-               <li class="dropdown first">
+               <li class="dropdownfirst">
                   <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
                   {{__('message.Category_Book')}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </a>
                   <ul class="dropdown-menu level1">
-                     {{categorybook()}}
+                     @foreach($categoryparent as $category)
+                     <li class="dropdown">
+                     <a href="route('categoryuser.edit',[$category->id])">{{__('message.'.$category->title)}}<span class="expand">&raquo;</span>'.'</a>
+                        <ul class="child">
+                           @foreach($category->subcategory()->get() as $cat)
+                           <li class="dropdown">
+                           <a href="route('categoryuser.edit',[$cat->id])" nowrap>{{__('message.'.$cat->title)}}</a><br>
+                           </li>
+                           @endforeach
+                        </ul>
+                     </li>
+                     @endforeach
                      <li><a href="{{route('book.index')}}">{{__('message.all_book')}}</a></li>
                   </ul>
                </li>
