@@ -32,8 +32,8 @@
       <div class="row">
          <p>{{__('message.Or_via_social')}}</p>
          <div class="social-btn-2">
-            <a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
-            <a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
+            <a class="fb" href="{{ route('login.provider', 'facebook') }}"><i class="ion-social-facebook"></i>Facebook</a>
+            <a class="tw" href="{{ route('login.provider', 'google') }}"><i class="ion-social-google"></i>Google</a>
          </div>
       </div>
    </div>
