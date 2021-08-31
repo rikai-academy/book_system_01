@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use App\Models\User;
+use Socialite;
+use App\Services\SocialFacebookAccountService;
+use App\Library\Services\Contracts\SocialGoogleServiceInterface;
 
 class LoginController extends Controller
 {
@@ -20,6 +25,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    protected $socialGoogleService;
 
     /**
      * Where to redirect users after login.
@@ -33,10 +39,11 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(SocialGoogleServiceInterface $socialGoogleServiceInterface)
     {
         $this->redirectTo = url()->previous();
         $this->middleware('guest')->except('logout');
+        $this->socialGoogleService = $socialGoogleServiceInterface;
     }
 
     public function showLoginForm()
@@ -47,5 +54,17 @@ class LoginController extends Controller
             return view($view);
         }
         return back()->with('message', __('message.needLogin'));
+    }
+
+    public function redirectToProvider()
+    {
+        return $this->socialGoogleService->redirectToProvider();
+    }
+
+    public function handleProviderCallback(Request $request)
+    {
+        $result = $this->socialGoogleService->handleProviderCallback($request);
+        return $result;
+
     }
 }
