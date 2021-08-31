@@ -60,8 +60,7 @@ class BookController extends Controller
 
     public function search(Request $request){
         $name = $request->body;
-        $books = Book::where('title','like','%'.$name.'%')
-        ->orWhere('author','like','%'.$name.'%')->orwhere('rate','=',$name)->paginate(10);
+        $books = Book::search($name)->paginate(10);
         $total = count($books);
         return view('users.book.search',compact('books','total'));
     }
