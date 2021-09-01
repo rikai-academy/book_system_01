@@ -15,6 +15,7 @@ class SendReportMonth implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+
     protected $admins;
 
     /**

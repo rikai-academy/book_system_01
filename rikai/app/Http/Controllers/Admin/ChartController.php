@@ -40,4 +40,8 @@ class ChartController extends Controller
         return Excel::download(new OrderStatistic, 'order-statistic-'.date('d-m-Y').'.xlsx');
     }
 
+    public function exportOrder() 
+    {
+        return Excel::download(new OrderStatistic(), 'order-statistic-'.date('d-m-Y').'.xlsx');
+    }
 }

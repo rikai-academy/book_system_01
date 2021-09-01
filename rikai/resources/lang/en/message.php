@@ -315,6 +315,10 @@
         'Literary Fiction good' => 'Literary Fiction good',
         'cooking'=>'cooking',
         'sql'=>'sql',
+        'month'=>'Month',
+        'reportEmail'=>'Report Email',
+        'dear'=>'Dear',
+        'send-email-body'=>'Send email body',
 
     ]
 ?>

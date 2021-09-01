@@ -323,5 +323,10 @@
         'comment_by_you'=>'Đã viết bình luận trên sách có bạn bình luận',
         'Parent_Category'=>'Danh mục cha',
         'None'=>'Không',
+        'month'=>'Tháng',
+        'reportEmail'=>'Gửi Email',
+        'dear'=>'Thân mến ',
+        'send-email-body'=>'Đây là email thông báo hàng tháng',
+
     ]
 ?>
