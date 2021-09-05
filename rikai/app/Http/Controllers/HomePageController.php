@@ -20,7 +20,7 @@ class HomePageController extends Controller
         Session::put('language','vi');
         $books = Book::all();
         $slides = Book::take(6)->get();
-        $users = User::where('role','!=','admin')->take(6)->get();
+        $users = User::take(6)->get();
         $categorys = Category::take(3)->get();
         return view('users.home',compact('books','slides','users','categorys'));
     }

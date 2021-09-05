@@ -38,14 +38,6 @@
                   <a href="{{url('admin/user/'.$user->id.'/edit')}}">
                     <label class="badge badge-info">{{__('message.Edit')}}</label>
                   </a>
-                  {{-- <a>
-                    <label for="{{ "submit-delete-".$user->id }}" class="badge badge-danger">{{__('message.Delete')}}</label>
-                    <input type="submit" class="display-hidden" form="{{ "delete-".$user->id }}" id="{{ "submit-delete-".$user->id }}" {{ $user->role == "admin"?"disabled":"" }} />
-                    <form action="{{ url('admin/user/'.$user->id ) }}" method="post" id="{{ "delete-".$user->id }}">
-                      @csrf
-                      @method('DELETE')
-                    </form>
-                  </a> --}}
                   <a class="confirm" item-id="{{ $user->id }}" item-type="user" lang="{{ session('language') }}">
                     <label class="badge badge-danger">{{__('message.Delete')}}</label>
                   </a>
