@@ -9,6 +9,7 @@ use App\Library\Services\Contracts\UserServiceInterface;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\RegistrationRequest;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -37,7 +38,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.add');
+        $roles = Role::where('name','!=','Super Admin')->get();
+        return view('admin.user.add')->with('roles',$roles);
     }
 
     /**
@@ -53,6 +55,7 @@ class UserController extends Controller
         $data["user"]->email = $request->email;
         $data["user"]->password = Hash::make($request->password);
         $data["user"]->save();
+        $data["user"]->assignRole($request->role);
         if($request->hasFile('image')){
             $fileName = $this->userService->changeImage($request,$data["user"]->id);
             $data["user"]->image = $fileName;
@@ -80,8 +83,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $roles = Role::where('name','!=','Super Admin')->get();
+        $super_admin = Role::findByName('Super Admin');
         $data["user"] = User::find($id);
-        return view('admin.user.edit')->with('data',$data);
+        return view('admin.user.edit',compact('data','roles','super_admin'));
     }
 
     /**

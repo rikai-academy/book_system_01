@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\CartController as CartController2;
 use App\Http\Controllers\Admin\LoginController as LoginController2;
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChangeController as ChangeController1;
 use App\Http\Controllers\CartController;
@@ -102,6 +103,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::get('user/{id}/delete', [UserController2::class, 'destroy'])->name('deleteuser');
     Route::get('export/carts', [ExcelController::class, 'cartAll']);
     Route::get('export/revenue', [ExcelController::class, 'revenue']);
+    Route::resource('role', RoleController::class);
+    Route::get('role/{id}/delete', [RoleController::class, 'destroy'])->name('deleterole');
 });
 Route::get('admin/login', [LoginController2::class, 'index'])->name('admin.index');
 Route::post('admin/login', [LoginController2::class, 'postLogin'])->name('admin.login');

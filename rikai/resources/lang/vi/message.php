@@ -312,5 +312,14 @@
         'Hidden' => 'Ẩn bài viết',
         'report success' => 'Báo cáo thành công',
         'Link to subject' => 'Đường dẫn tới bài viết',
+        'Permission' => 'Quyền hạn',
+        'Edit_Role' => 'Chỉnh sửa quyền hạn',
+        'List_Role' => 'Danh sách vai trò',
+        'Add_Role' => 'Thêm vai trò',
+        'This role has all permission' => 'Vai trò này có mọi quyền hạn',
+        'Role placeholder' => 'vai trò 1,vai trò 2 ,......',
+        'roleCreateSuccess' => 'Tạo vai trò thành công',
+        'roleUpdateSuccess' => 'Cập nhật vai trò thành công',
+        'Role_Id' => 'Mã số'
     ]
 ?>

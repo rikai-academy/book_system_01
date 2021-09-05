@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 use App\Models\LikeComment;
 use App\Models\LikeReview;
@@ -14,7 +15,7 @@ use App\Models\LikeReview;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
     protected $table = "users";
     public $timestamps = false;
 
@@ -101,7 +102,7 @@ class User extends Authenticatable
     }
 
     public function scopeGetAllUsers($query){
-        return $query->where('role','!=','admin')->paginate(5);
+        return $query->paginate(5);
     }
 
     public function scopeReviewNotification($query,Review $review){

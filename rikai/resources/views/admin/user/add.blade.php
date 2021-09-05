@@ -21,6 +21,14 @@
             @enderror
           </div>
           <div class="form-group">
+            <label for="exampleSelectGender">{{__('message.Role')}}</label>
+            <select class="form-control" name="role" id="categorySelect2">
+               @foreach($roles as $role)
+               <option {{ $role->name == 'user'?'selected':'' }} value="{{$role->id}}">{{$role->name}}</option>
+               @endforeach
+            </select>
+         </div>
+          <div class="form-group">
             <label for="email">{{__('message.Email_Address')}}</label>
             <input type="email" class="form-control" name="email" placeholder="{{__('message.Email_Address')}}"
               id="email" value="{{ old('email')?old('email'):'' }}">

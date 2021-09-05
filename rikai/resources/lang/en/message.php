@@ -298,6 +298,15 @@
         'hidden message' => 'This item had been hidden by you or admin',
         'Unhidden' => 'Unhidden',
         'Hidden' => 'Hidden',
-        'report success' => 'report success'
+        'report success' => 'report success',
+        'Permission' => 'Permission',
+        'Edit_Role' => 'Edit Role',
+        'List_Role' => 'List Role',
+        'Add_Role' => 'Add Role',
+        'This role has all permission' => 'This role has all permission',
+        'Role placeholder' => 'role1,role2,......',
+        'roleCreateSuccess' => 'Role Create Success',
+        'roleUpdateSuccess' => 'Role Update Success',
+        'Role_Id' => 'Role Id'
     ]
 ?>
