@@ -71,4 +71,23 @@ class Cart extends Model
         return $data;
     }
 
+    public static function countMonthRevenue(){
+        $orders = Cart::where('status',CartStatus::DONE)->whereYear('updated_at',date('Y'))
+        ->whereMonth('updated_at',date('m'))->get();
+        $i = 0;
+        $data = [];
+        foreach($orders as $order){
+
+            $data[$i] = array([
+                $order->user()->value('name'),
+                $order->user()->value('email'),
+                $order->name_of_card,
+                $order->credit_card_number,
+                langTotalCurency($order->total_price),
+            ]);
+            $i++;
+        }
+        $data = collect($data);
+        return $data;
+    }
 }

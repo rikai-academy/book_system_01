@@ -27,4 +27,8 @@ class Statistic extends Model
         return $data;
     }
 
+    public static function statisticRevenue(){
+        $data = Cart::countMonthRevenue();
+        return $data;
+    }
 }
