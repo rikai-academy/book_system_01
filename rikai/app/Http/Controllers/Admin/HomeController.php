@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Book;
 
 class HomeController extends Controller
 {
@@ -19,7 +20,6 @@ class HomeController extends Controller
         $data["users"] = User::paginate(5);
         $users = User::with('roles','groups')->get();
         $roles = Role::with('users','permissions')->get();
-    
         return view('admin.layout.home')->with('data',$data,'users',$users,'roles',$roles);
     }
 
