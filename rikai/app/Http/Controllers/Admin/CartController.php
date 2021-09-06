@@ -11,6 +11,8 @@ use App\Library\Services\Contracts\CartServiceInterface;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\buybooksuccess;
 use App\Jobs\BuyBookJob;
+use App\Enums\PermissionType;
+use App\Models\Role;
 
 
 
@@ -59,17 +61,25 @@ class CartController extends Controller
      */
     public function update(Request $request, $cart_id)
     {
-        $cart = $this->findCart($cart_id);
-        if(isset($cart["errors"])){
-            return redirect()->route('homeadmin.index')->withErrors(__($cart["errors"]));
-        }
-        $checkIfSuccess = $this->cartService->updateCart($request, $cart_id);
-        if (!$checkIfSuccess) {
-            return back()->with('data', $cart)->with('checkoutFailMessage', 'message.checkoutFail');
-        }
+        $role = Role::where('id','=',Auth::user()->roles()->value('role_id'))->first();
+        $permissions = $role->permissions()->where('name','=',PermissionType::AcceptOrder)->first();
 
-        dispatch(new BuyBookJob($cart));
-        return back()->with('data',$cart)->with('requestResolve',__('message.requestResolve'));
+        if($permissions){
+            $cart = $this->findCart($cart_id);
+            if(isset($cart["errors"])){
+                return redirect()->route('homeadmin.index')->withErrors(__($cart["errors"]));
+            }
+            $checkIfSuccess = $this->cartService->updateCart($request, $cart_id);
+            if (!$checkIfSuccess) {
+                return back()->with('data', $cart)->with('checkoutFailMessage', 'message.checkoutFail');
+            }
+    
+            dispatch(new BuyBookJob($cart));
+            return back()->with('data',$cart)->with('requestResolve',__('message.requestResolve'));
+        }else{
+            $error = 'message.sufficient_permissions';
+            return redirect()->route('bookadmin.index')->withErrors(__($error));
+        }
 
     }
 
@@ -81,15 +91,24 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        $cart = $this->findCart($id);
-        if (isset($cart["errors"])) {
-            $data["carts"] = $this->cartService->getCart(CartStatus::PENDING);
-            return back()->with('data', $data)->withErrors(__($cart["errors"]));
+        $role = Role::where('id','=',Auth::user()->roles()->value('role_id'))->first();
+        $permissions = $role->permissions()->where('name','=',PermissionType::DeleteOrder)->first();
+
+        if($permissions){
+            $cart = $this->findCart($id);
+            if (isset($cart["errors"])) {
+                $data["carts"] = $this->cartService->getCart(CartStatus::PENDING);
+                return back()->with('data', $data)->withErrors(__($cart["errors"]));
+            }
+            $cart_type = $cart->status;
+            $cart->delete();
+            $data["carts"] = $this->cartService->getCart($cart_type);
+            return back()->with('data', $data);
+        }else{
+            $error = 'message.sufficient_permissions';
+            return redirect()->route('bookadmin.index')->withErrors(__($error));
         }
-        $cart_type = $cart->status;
-        $cart->delete();
-        $data["carts"] = $this->cartService->getCart($cart_type);
-        return back()->with('data', $data);
+
     }
 
     public function cartType($cart_type)

@@ -25,6 +25,7 @@ class TagController extends Controller
     {
         //
         $date = Time::Week;
+
         $tags = Tag::paginate(10);
         return view('admin.category.tag',compact('tags','date'));
     }
@@ -64,6 +65,7 @@ class TagController extends Controller
             return redirect()->route('tag.index')->withMessage(__($message));
         }
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -106,4 +108,5 @@ class TagController extends Controller
             return redirect()->route('homeadmin.index')->withErrors(__($errors));
         }
     }
+
 }

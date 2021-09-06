@@ -13,7 +13,7 @@ class ReportMonth implements FromCollection,WithHeadings
         return [
             __('message.name'),
             __('message.email'),
-            __('message.Name_on_Card'),
+            __('message.Name_on_card'),
             __('message.credit_card_number'),
             __('message.total-price'),
         ];

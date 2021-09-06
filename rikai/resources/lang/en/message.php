@@ -331,6 +331,21 @@
         'weeks'=>'week',
         'List_Tags'=>'List Tags',
         'Time'=>'Time',
+        'Add_Role_Users'=>'Add Role Users',
+        'Add_Role'=>'Add Role',
+        'add_book'=>'Add book',
+        'edit_book'=>'Edit book',
+        'delete_book'=>'Delete book',
+        'add_category'=>'Add category',
+        'edit_category'=>'Edit category',
+        'delete_category'=>'Delete category',
+        'no_role'=>'No role',
+        'add_role_success'=>'Add role success',
+        'add_roleuser_success'=>'Add roleuser success',
+        'Role'=>'Role',
+        'Permissions'=>'Permissions',
+        'accept_order'=>'Accept order',
+        'delete_order'=>'Delete order',
 
     ]
 ?>

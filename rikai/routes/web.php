@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\CartController as CartController2;
 use App\Http\Controllers\Admin\LoginController as LoginController2;
 use App\Http\Controllers\Admin\ChartController as ChartController2;
 use App\Http\Controllers\Admin\TagController as TagController2;
+use App\Http\Controllers\Admin\RoleController as RoleController2;
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ChangeController as ChangeController1;
@@ -112,6 +113,11 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::get('exportorder', [ChartController2::class, 'exportorder'])->name('chart.exportorder');
     Route::get('tag/type/{type}',[TagController2::class,'tagTime'])->name('admin.tag.type');
     Route::get('tag/{id}/delete', [TagController2::class, 'destroy'])->name('deletetag');
+    Route::get('addroleuser', [RoleController2::class, 'indexroleuser'])->name('add.role.user');
+    Route::post('addroleuser', [RoleController2::class, 'storeRole'])->name('store.role.user');
+    Route::resource('role',RoleController2::class);
+    Route::get('role/type/{type}',[RoleController2::class,'roleTypePermission'])->name('admin.role.type');
+    Route::get('roleuser/type/{type}',[RoleController2::class,'roleType'])->name('admin.roleuser.type');
 
 });
 Route::get('admin/login',[LoginController2::class,'index'])->name('admin.index');

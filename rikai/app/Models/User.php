@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\LikeComment;
 use App\Models\LikeReview;
+use App\Models\Role;
 
 
 class User extends Authenticatable
@@ -121,4 +122,13 @@ class User extends Authenticatable
         ->select('users.name', 'users.email')
         ->groupBy('users.id');
     }
+
+    public function roles(){
+        return $this->belongsToMany(Role::class,'user_role');
+    }
+     
+    public function groups(){
+        return $this->belongsToMany(Group::class,'user_group');
+    }
+    
 }
