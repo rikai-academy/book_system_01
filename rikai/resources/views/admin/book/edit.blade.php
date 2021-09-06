@@ -50,7 +50,7 @@
                </div>
                <div class="form-group">
                   <label for="exampleInputCity1">{{__('message.Image')}}</label>
-                  <img src="upload/book/{{$book->image}}" width="400px">
+                  <img src="{{asset('/upload/book/'.$book->image)}}" width="400px">
                </div>
                <div class="form-group">
                   <label for="exampleInputCity1">{{__('message.number_of_page')}}</label>
@@ -63,6 +63,10 @@
                <div class="form-group">
                   <label for="exampleInputCity1">{{__('message.price')}}</label>
                   <input type="text" name="price" class="form-control" id="exampleInputCity1" placeholder="{{__('message.price')}}" value="{{$book->price}}">
+               </div>
+               <div class="form-group">
+                  <label for="exampleInputCity1">{{__('message.Tags')}}</label>
+                  <input type="text" name="tag" class="form-control" id="exampleInputCity1" placeholder="{{__('message.Tags')}}" value="{{$book->tagList}}">
                </div>
                <button type="submit" class="btn btn-primary mr-2">{{__('message.submit')}}</button>
             </form>

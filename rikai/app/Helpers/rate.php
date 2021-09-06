@@ -1,5 +1,9 @@
 <?php
 use App\Models\Category;
+use App\Models\Tag;
+use App\Models\Book;
+use App\Models\TagBook;
+
  function rateform(){
     $count = 11;
     for($i=1;$i<$count;$i++){
@@ -118,4 +122,12 @@ function buttonread($data){
    echo '<button type="submit" 
    name="activity" class="parent-btn '.statusread($data).'" value="'.read($data).'">'.__('message.Add_to_Read').'</button>';
 }
+
+ function countTag($id){
+   $count = Tag::join('taggable_taggables','taggable_taggables.tag_id','=','taggable_tags.tag_id')
+   ->where('taggable_tags.tag_id','=',$id)->get();
+  return $count->count('tag_id');
+ }
+
+
 ?>

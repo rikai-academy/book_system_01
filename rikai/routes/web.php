@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ProfileController as ProfileController2;
 use App\Http\Controllers\Admin\CartController as CartController2;
 use App\Http\Controllers\Admin\LoginController as LoginController2;
 use App\Http\Controllers\Admin\ChartController as ChartController2;
+use App\Http\Controllers\Admin\TagController as TagController2;
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ChangeController as ChangeController1;
@@ -53,6 +54,7 @@ Route::get('/callbackgoogle', 'App\Http\Controllers\Auth\LoginController@handleP
 Route::get('/redirectfacebook', 'App\Http\Controllers\FbController@redirectToFacebook')->name("login.facebook");
 Route::get('/callbackfacebook', 'App\Http\Controllers\FbController@facebookSignin');
 Route::get('full-text-search',[BookController1::class, 'fulltextsearch'])->name('full.text.search');
+Route::get('search/{name}',[BookController1::class, 'searchTag'])->name('searchtag');
 
 
 
@@ -94,6 +96,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::resource('bookadmin',BookController2::class);
     Route::resource('category',CategoryController1::class);
     Route::resource('user',UserController2::class);
+    Route::resource('tag',TagController2::class);
     Route::resource('profileadmin',ProfileController2::class);
     Route::post('search/user', [UserController2::class, 'search'])->name('admin.user.search');
     Route::resource('cart',CartController2::class);
@@ -107,6 +110,8 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::resource('chart',ChartController2::class)->only('index');
     Route::get('export', [ChartController2::class, 'export'])->name('chart.export');
     Route::get('exportorder', [ChartController2::class, 'exportorder'])->name('chart.exportorder');
+    Route::get('tag/type/{type}',[TagController2::class,'tagTime'])->name('admin.tag.type');
+    Route::get('tag/{id}/delete', [TagController2::class, 'destroy'])->name('deletetag');
 
 });
 Route::get('admin/login',[LoginController2::class,'index'])->name('admin.index');

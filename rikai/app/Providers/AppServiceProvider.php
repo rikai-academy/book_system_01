@@ -28,6 +28,5 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $view->with('categoryparent',Category::where('parent_id','=','0')->get());
         });
-    
     }
 }
