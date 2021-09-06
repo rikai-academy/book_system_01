@@ -335,6 +335,10 @@
         'show_review_success'=>'Mở đánh giá thành công',
         'hide_comment_success'=>'Ẩn bình luận thành công',
         'show_comment_success'=>'Mở bình luận thành công',
+        'Count'=>'Số lượt',
+        'weeks'=>'Tuần',
+        'List_Tags'=>'Tất cả thẻ',
+        'Time'=>'Thời gian',
 
     ]
 ?>

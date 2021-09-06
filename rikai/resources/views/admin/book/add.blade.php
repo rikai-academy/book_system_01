@@ -57,6 +57,10 @@
                   <label for="exampleInputCity1">{{__('message.price')}}</label>
                   <input type="text" class="form-control" id="exampleInputCity1" name="price" placeholder="{{__('message.price')}}">
                </div>
+               <div class="form-group">
+                  <label for="exampleInputCity1">{{__('message.Tags')}}</label>
+                  <input type="text" class="form-control" name="tag" id="exampleInputCity1" placeholder="{{__('message.Tags')}}">
+               </div>
                <button type="submit" class="btn btn-primary mr-2">{{__('message.submit')}}</button>
             </form>
          </div>

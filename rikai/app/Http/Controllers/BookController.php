@@ -93,4 +93,11 @@ class BookController extends Controller
         $total = count($books);
         return view('users.book.search',compact('books','total'));
     }
+
+    public function searchTag($name){
+        $books = Book::withAllTags($name)->paginate(18);
+        $total = count($books);
+        return view('users.book.search',compact('books','total'));
+    }
+
 }

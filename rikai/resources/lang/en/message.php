@@ -327,6 +327,10 @@
         'show_review_success'=>'show review success',
         'hide_comment_success'=>'hide comment success',
         'show_comment_success'=>'show comment success',
+        'Count'=>'Count',
+        'weeks'=>'week',
+        'List_Tags'=>'List Tags',
+        'Time'=>'Time',
 
     ]
 ?>

@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\Book_category;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use App\Tag;
 use App\Http\Requests\BookRequest;
 use App\Library\Services\Contracts\UploadimageServiceInterface; 
 use Illuminate\Support\Facades\DB;
@@ -58,7 +59,9 @@ class BookController extends Controller
         $data = $request->all();
         $type= 'book';
         $data['image'] = $this->uploadImageService->uploadImage($request,$data,$type);
+        $tags = explode(',',$request->tag);
         $book = Book::create($data);
+        $book->tag($tags);
         $categorys = $request->input('category_id');
         foreach($categorys as $category){
             DB::beginTransaction();
@@ -157,7 +160,9 @@ class BookController extends Controller
         }
         $type = 'book';
         $data['image'] = $this->uploadImageService->uploadImage($request,$data,$type);
+        $tags = explode(',',$request->tag);
         $book->update($data);
+        $book->retag($tags);
         if($book){
             $message = 'message.update_book_success';
             return redirect()->route('bookadmin.edit',[$book->id])->withMessage(__($message));

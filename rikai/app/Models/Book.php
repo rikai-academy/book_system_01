@@ -7,12 +7,14 @@ use CartItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use Cviebrock\EloquentTaggable\Taggable;
 
 class Book extends Model
 {
     use HasFactory,SearchableTrait;
     protected $table = "book";
     public $timestamps = false;
+    use Taggable;
     protected $fillable = [
         'author',
         'title',
@@ -58,5 +60,9 @@ class Book extends Model
     
     public function categorys(){
         return $this->belongsToMany(Category::class);
+    }
+
+    public function tagsbook(){
+        return $this->hasMany(TagBook::class,'taggable_id');
     }
 }

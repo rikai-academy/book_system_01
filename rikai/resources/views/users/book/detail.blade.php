@@ -127,6 +127,12 @@
                                     <h6>{{__('message.Release_Date')}}:</h6>
                                     <p>{{$book->publish_at}}</p>
                                  </div>
+                                 <div class="sb-it">
+                                    <h6>{{__('message.Tags')}}:</h6>
+                                    @foreach($book->tags as $tag)
+                                       <a href="{{route('searchtag',[$tag->name])}}"><p>{{$tag->name}}</p></a>
+                                    @endforeach
+                                 </div>
                                  <div class="ads">
                                     <img src="images/uploads/ads1.png" alt="">
                                  </div>

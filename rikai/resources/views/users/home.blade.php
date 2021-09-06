@@ -231,8 +231,19 @@
                   @endforeach                  
                   <a href="{{ route('listuser') }}" class="btn">{{__('message.List_User')}}<i class="ion-ios-arrow-right"></i></a>
                </div>
+               <div class="celebrities">
+                  <h4 class="sb-title">{{__('message.Tags')}}</h4>
+                  @foreach($hottag as $tag)
+                  <div class="celeb-item">
+                     <div class="celeb-author">
+                        <h6><a href="{{route('searchtag',[$tag->name])}}">{{$tag->name}}</a></h6>
+                     </div>
+                  </div>
+                  @endforeach                  
+               </div>
             </div>
          </div>
+         
       </div>
    </div>
 </div>
