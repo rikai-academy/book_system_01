@@ -41,6 +41,11 @@
   padding: 5px;
 }
 
+.select2-container--default .select2-selection--multiple {
+  height: auto;
+  padding: 5px;
+}
+
 .custom-chart-holder {
   height: 300px;
   width: 100%;
@@ -95,7 +100,7 @@
   height: 20px;
 }
 
-.permission-container  p {
+.permission-container p {
   margin: auto 20px;
 }
 
@@ -106,4 +111,16 @@
 
 .disabled label {
   background-color: #ef9696;
+}
+
+.submit-action {
+  border-radius: 20px;
+  font-size: 12px;
+  line-height: 1;
+  padding: .375rem .5625rem;
+  font-weight: normal;
+}
+
+.height-10px {
+  height: 10px;
 }

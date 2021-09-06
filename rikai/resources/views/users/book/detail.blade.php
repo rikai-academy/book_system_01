@@ -138,6 +138,18 @@
                                     <h6>{{__('message.Release_Date')}}:</h6>
                                     <p>{{$book->publish_at}}</p>
                                  </div>
+                                 <div class="sb-it">
+                                    <h6>{{__('message.Tag')}}:</h6>
+                                    <div class="tag-container">
+                                       @foreach($book->tags as $tag)
+                                       <div class="tag">
+                                          <a href="{{ url('tag/'.$tag->name) }}">
+                                             {{ '#'.$tag->name }}
+                                          </a>
+                                       </div>
+                                       @endforeach
+                                    </div>
+                                 </div>
                                  <div class="ads">
                                     <img src="images/uploads/ads1.png" alt="">
                                  </div>
@@ -158,7 +170,7 @@
                                     {{__('message.in_total')}}</p>
                               </div>
                               @foreach($reviews as $review)
-                              @if ($review->status != "hidden" || auth()->user()->id == $review->user->id || auth()->user()->role == "admin")
+                              @if ($review->status != "hidden" || auth()->user()->id == $review->user->id || Auth::user()->hasRole(['Super Admin','admin','modder']))
                               <div class="mv-user-review-item" data-reviewId="{{$review->id}}">
                                  <div class="user-infor">
                                     <img src="{{ imgSrc($review->user()->value('image')) }}" class="small-user-image" alt="">
@@ -190,7 +202,7 @@
                                        </button>
                                        <ul class="review-option-list display_none">
                                           @if(!Auth::guest() && ($review->user_id == Auth::user()->id ||
-                                          Auth::user()->role=='admin'))
+                                          Auth::user()->hasRole(['Super Admin','admin','modder'])))
                                           <li><a href="{{route('review.edit',[$review->id])}}">{{ __('message.Edit') }}</a></li>
                                           <li>
                                              <a>
@@ -202,7 +214,7 @@
                                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                              @method('DELETE')
                                           </form> 
-                                          @if(($review->user_id == Auth::user()->id ||Auth::user()->role=='admin'))
+                                          @if(($review->user_id == Auth::user()->id ||Auth::user()->hasRole(['Super Admin','admin','modder'])))
                                           {!! hiddenSubject($review,"review") !!}
                                           @endif
                                           @endif

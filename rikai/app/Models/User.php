@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
-
+use Spatie\Permission\Models\Role;
 use App\Models\LikeComment;
 use App\Models\LikeReview;
 
@@ -51,6 +51,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getRole() {
+        return $this->hasMany(Role::class,'user_id');
+    }
 
     public function reviews() {
         return $this->hasMany(Review::class,'user_id');

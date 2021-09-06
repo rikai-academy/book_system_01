@@ -4,10 +4,9 @@ namespace App\Charts;
 
 use App\Enums\CartStatus;
 use ConsoleTVs\Charts\Classes\Chartjs\Chart;
-use App\Models\Cart;
 use App\Models\Statistic;
 
-class RevenueChart extends Chart
+class TagChart extends Chart
 {
     /**
      * Initializes the chart.
@@ -22,10 +21,10 @@ class RevenueChart extends Chart
 
     private function initData() {
         $statistic = new Statistic();
-        $data = $statistic->RevenueDay("week");
+        $data = $statistic->TagStatistic("week");
         $this->displayLegend(true);
-        $this->title(__('message.Revenue of this week'));
+        $this->title('Tag of all time');
         $this->labels($data["labels"]);
-        $this->dataset(__('message.Revenue'), 'line', $data["revenue"])->color('blue');
+        $this->dataset(__('message.Count'), 'bar', $data["count"])->color('green');
     }
 }

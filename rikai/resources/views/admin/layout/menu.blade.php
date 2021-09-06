@@ -79,6 +79,22 @@
          </div>
       </li>
       @endcan
+      @can('crud permissions')
+      <li class="nav-item">
+         <a class="nav-link" href="{{route('permission.index')}}" >
+         <i class="fas fa-pen-nib menu-icon"></i>
+         <span class="menu-title">{{__('message.Permissions')}}</span>
+         </a>
+      </li>
+      @endcan
+      @can('crud tag')
+      <li class="nav-item">
+         <a class="nav-link" href="{{route('tag.index')}}" >
+         <i class="fas fa-tags menu-icon"></i>
+         <span class="menu-title">{{__('message.Tag')}}</span>
+         </a>
+      </li>
+      @endcan
       @can('resolve request')
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">

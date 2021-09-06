@@ -8,4 +8,5 @@ return [
     'cart-report' => 'báo-cáo-yêu-cầu-',
     'revenue-report' => 'báo-cáo-lợi-nhuận-',
     'Export Excel' => 'Xuất file excel',
+    'tag-report' => 'báo-cáo-từ-khóa-'
 ];

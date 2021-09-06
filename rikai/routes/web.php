@@ -24,7 +24,10 @@ use App\Http\Controllers\ChangeController as ChangeController1;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TagController as UserTagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +83,7 @@ Route::middleware(['users'])->group(function () {
     Route::get('current_cart', [CartController::class, 'currentCart']);
     Route::get('cancel/{id}', [CartController::class, 'cancel']);
     Route::post('report/{id}', [ReportController::class, 'report'])->name('report');
+    Route::resource('tag', UserTagController::class);
 });
 
 
@@ -103,8 +107,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::get('user/{id}/delete', [UserController2::class, 'destroy'])->name('deleteuser');
     Route::get('export/carts', [ExcelController::class, 'cartAll']);
     Route::get('export/revenue', [ExcelController::class, 'revenue']);
+    Route::get('export/tag', [ExcelController::class, 'tag']);
     Route::resource('role', RoleController::class);
-    Route::get('role/{id}/delete', [RoleController::class, 'destroy'])->name('deleterole');
+    Route::resource('permission', PermissionController::class);
+    Route::resource('tag', TagController::class);
+    Route::get('role/{id}/delete', [RoleController::class, 'destroy']);
+    Route::get('permission/{id}/delete', [PermissionController::class, 'destroy']);
+    Route::get('tag/{id}/delete', [TagController::class, 'destroy']);
 });
 Route::get('admin/login', [LoginController2::class, 'index'])->name('admin.index');
 Route::post('admin/login', [LoginController2::class, 'postLogin'])->name('admin.login');

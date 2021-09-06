@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Http\Requests\BookRequest;
 use App\Library\Services\Contracts\UploadimageServiceInterface; 
 use Illuminate\Support\Facades\DB;
+use Spatie\Tags\Tag;
 
 class BookController extends Controller
 {
@@ -44,7 +45,8 @@ class BookController extends Controller
     {
         //
         $categorys = Category::all();
-        return view('admin.book.add',compact('categorys'));
+        $tags = Tag::all();
+        return view('admin.book.add',compact('categorys','tags'));
     }
 
     /**
@@ -60,6 +62,8 @@ class BookController extends Controller
         $data['image'] = $this->uploadImageService->uploadImage($request,$data,$type);
         $book = Book::create($data);
         $categorys = $request->input('category_id');
+        $tags = $request->input('tag_name');
+        $book->syncTags($tags);
         foreach($categorys as $category){
             DB::beginTransaction();
             try{
@@ -104,7 +108,12 @@ class BookController extends Controller
         //
         $book = $this->findBook($bookid);
         $category = Category::all();
-        return view('admin.book.edit',compact('book','category'));
+        $tags = Tag::all();
+        $hasTag = [];
+        foreach ($book->tags as $item) {
+            $hasTag[] = $item->name;
+        }
+        return view('admin.book.edit',compact('book','category','tags','hasTag'));
     }
 
     /**
@@ -122,6 +131,10 @@ class BookController extends Controller
         $categorybooks = Book_Category::where('book_id','=',$bookid)->get();
         $categorys = $request->input('category_id');
         $categoryvalue=[];
+        $tags = $request->input('tag_name');
+        if($tags) {
+            $book->syncTags($tags);
+        }
         foreach($categorybooks as $categorybook){
             $categoryvalue[] = $categorybook['category_id'];
         }

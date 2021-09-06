@@ -8,6 +8,7 @@ $(function () {
 
 $(document).ready(function() {
     $("#categorySelect2").select2();
+    $("#tagSelect2").select2();
     $(".category-button").click(function (){
         $("#categorySelect2").val($(this).attr("id"));
         $('#categorySelect2').trigger("change");

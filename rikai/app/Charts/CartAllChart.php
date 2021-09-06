@@ -24,10 +24,10 @@ class CartAllChart extends Chart
         $statistic = new Statistic();
         $data = $statistic->CartStatisticDay("week");
         $this->displayLegend(true);
-        $this->title('Request of this week');
+        $this->title(__('message.Request of this week'));
         $this->labels($data["labels"]);
-        $this->dataset(CartStatus::DONE, 'line', $data["done"])->color('green');
-        $this->dataset(CartStatus::PENDING, 'line', $data["pending"])->color('blue');
-        $this->dataset(CartStatus::CANCEL, 'line', $data["cancel"])->color('red');
+        $this->dataset(__('message.'.CartStatus::DONE), 'line', $data["done"])->color('green');
+        $this->dataset(__('message.'.CartStatus::PENDING), 'line', $data["pending"])->color('blue');
+        $this->dataset(__('message.'.CartStatus::CANCEL), 'line', $data["cancel"])->color('red');
     }
 }

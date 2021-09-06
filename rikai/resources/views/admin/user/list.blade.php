@@ -13,6 +13,7 @@
             <option value="id" >{{__('message.Id')}}</option>
             <option value="name">{{__('message.Username')}}</option>
             <option value="email">{{__('message.Email')}}</option>
+            <option value="role">{{__('message.Role')}}</option>
           </select>
           <button type="submit" class="display-hidden"></button>
         </form>

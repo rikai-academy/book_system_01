@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\CartsExport;
 use App\Exports\RevenueExport;
+use App\Exports\TagExport;
 use App\Models\Statistic;
 use Carbon\Carbon;
 
@@ -23,5 +24,11 @@ class ExcelController extends Controller
     {
         $revenue = new RevenueExport("week");
         return Excel::download($revenue, __('excel.revenue-report').Carbon::now().'.xlsx');
+    }
+
+    public function tag() 
+    {
+        $tag = new TagExport("week");
+        return Excel::download($tag, __('excel.tag-report').Carbon::now().'.xlsx');
     }
 }

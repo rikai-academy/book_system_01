@@ -12,6 +12,10 @@
           {!! $chart["revenue"]->container() !!}
           <a href="{{ url('admin/export/revenue') }}" class="export-button">{{ __('excel.Export Excel') }}</a>
         </div>
+        <div class="custom-chart-holder">
+          {!! $chart["tag"]->container() !!}
+          <a href="{{ url('admin/export/tag') }}" class="export-button">{{ __('excel.Export Excel') }}</a>
+        </div>
       </div>
     </div>
   </div>
@@ -22,4 +26,5 @@
 <script src="{{ asset('/admin/js/Chart.min.js') }}" charset="utf-8"></script>
 {!! $chart["cart"]->script() !!}
 {!! $chart["revenue"]->script() !!}
+{!! $chart["tag"]->script() !!}
 @endsection

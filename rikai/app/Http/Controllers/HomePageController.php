@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+use Spatie\Tags\Tag;
 
 class HomePageController extends Controller
 {
@@ -22,7 +23,8 @@ class HomePageController extends Controller
         $slides = Book::take(6)->get();
         $users = User::take(6)->get();
         $categorys = Category::take(3)->get();
-        return view('users.home',compact('books','slides','users','categorys'));
+        $tags = Tag::all();
+        return view('users.home',compact('books','slides','users','categorys','tags'));
     }
 
 }
