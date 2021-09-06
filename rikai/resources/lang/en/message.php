@@ -292,5 +292,7 @@
         'favorite' => 'Mark book as favorite',
         'unfavorite' => 'Unmark book as favorite',
         'at' => 'at',
+        'BelongToCategory' => 'Belong To Category',
+        'CategoryNone' => 'Category None',
     ]
 ?>

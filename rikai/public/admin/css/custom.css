@@ -43,7 +43,7 @@
 
 .custom-chart-holder {
   height: 300px;
-  width:100%;
+  width: 100%;
   position: relative;
   margin-bottom: 50px;
 }
@@ -64,4 +64,17 @@
   background-color: #3fdb3f;
   text-decoration: none;
   color: black;
+}
+
+.category-button {
+  background-color: #504b8e;
+  border: none;
+  color: white;
+  padding: 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 12px;
 }

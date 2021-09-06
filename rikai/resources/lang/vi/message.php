@@ -304,5 +304,7 @@
         'favorite' => 'Đánh dấu sách yêu thích',
         'unfavorite' => 'Bỏ đánh dấu sách yêu thích',
         'at' => 'tại',
+        'BelongToCategory' => 'Thuộc về thể loại',
+        'CategoryNone' => 'Không thuộc về thể loại nào',
     ]
 ?>

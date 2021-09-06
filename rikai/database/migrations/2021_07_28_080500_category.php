@@ -16,6 +16,7 @@ class Category extends Migration
         Schema::create('category', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
+            $table->integer('parent_id')->default(0);
             $table->longText('description');
         });
     }

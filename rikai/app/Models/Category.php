@@ -14,13 +14,26 @@ class Category extends Model
     protected $fillable = [
         'description',
         'title',
+        'parent_id'
     ];
 
-    public function bookCategory() {
-        return $this->hasMany(Book_Category::class,'category_id');
+    public function bookCategory()
+    {
+        return $this->hasMany(Book_Category::class, 'category_id');
     }
 
-    public function books(){
+    public function books()
+    {
         return $this->belongsToMany(Book::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class,'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class,'parent_id');
     }
 }
