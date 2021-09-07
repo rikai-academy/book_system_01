@@ -99,9 +99,9 @@ function categoryBelongTo(Category $category)
    $parent = explode('-',categoryParent($category));
    $category_id = array_reverse($parent);
    array_shift($category_id);
-   $category_item ='';
+   $result ='';
    foreach ($category_id as $key => $item_id) {
-      $category_item .= '<div class="category-button" id="'.$item_id.'">'.Category::find($item_id)->title.'</div>';
+      $result .= '<div class="category-button" id="'.$item_id.'">'.Category::find($item_id)->title.'</div>';
    }
-   return $category_item;
+   return $result;
 }

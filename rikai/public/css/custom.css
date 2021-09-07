@@ -208,3 +208,38 @@ th {
   margin-right: 10px;
   color: #42709e;
 }
+
+.review-option {
+  position: relative;
+  padding: 5px;
+}
+
+.review-option-list {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  background-color: white;
+  width: max-content;
+}
+
+.review-option-list li {
+  padding: 3px 10px;
+}
+
+.review-option-list li a {
+  cursor: pointer;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.review-option-button {
+  border: none;
+  background-color: transparent;
+  color: #f8367a;
+}
+
+.hidden-message {
+  color: red;
+}

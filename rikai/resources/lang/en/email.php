@@ -21,5 +21,10 @@ return [
     'monthly-request-report-' => 'monthly-request-report-',
     'monthly-revenue-report-' => 'monthly-revenue-report-',
     'Monthly Report' => 'Monthly Report',
-    'Monthly Report Content' => 'This is a monthly report at :time'
+    'Monthly Report Content' => 'This is a monthly report at :time',
+    'Report on inappropriate activity' => 'Report on inappropriate activity ',
+    'Link to subject' => 'Link to subject',
+    'Type of subject' => 'Type of subject ',
+    'From User' => 'From User ',
+    'Link to subject' => 'Link to subject',
 ];

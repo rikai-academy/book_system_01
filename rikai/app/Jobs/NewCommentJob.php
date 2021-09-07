@@ -45,7 +45,9 @@ class NewCommentJob implements ShouldQueue
                 Mail::to($user->email)->queue($email);
             }
             $email = new ReceiveComment($this->comment);
-            Mail::to($this->comment->review->user->email)->queue($email);        
+            if ($this->comment->user->id != $this->comment->review->user->id) {
+                Mail::to($this->comment->review->user->email)->queue($email);        
+            }
         }, function () {
             return $this->release(2);
         });

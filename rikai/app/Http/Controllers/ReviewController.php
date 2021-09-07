@@ -73,7 +73,7 @@ class ReviewController extends Controller
     {
         //
         $review = Review::where('id','=',$reviewId)->first();
-        $id = Auth::user()->id;
+        $id = auth()->user()?auth()->user()->id:'' ;
         $currentuser = User::find($id);
         if ($review){
             $book = Book::find($review->book_id);

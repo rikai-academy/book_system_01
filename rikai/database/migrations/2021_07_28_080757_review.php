@@ -20,6 +20,7 @@ class Review extends Migration
             $table->string('title');
             $table->longText('body');
             $table->integer('rate');
+            $table->enum('status', ['normal', 'hidden'])->default('normal');
             $table->timestamps();
 
             $table->foreign('book_id')->references('id')->on('book')->onDelete('cascade');

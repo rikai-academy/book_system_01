@@ -23,6 +23,8 @@ use App\Http\Controllers\ChangeController as ChangeController1;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\ReportController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,6 +78,7 @@ Route::middleware(['users'])->group(function () {
     Route::resource('cartItem', CartItemController::class);
     Route::get('current_cart', [CartController::class, 'currentCart']);
     Route::get('cancel/{id}', [CartController::class, 'cancel']);
+    Route::post('report/{id}', [ReportController::class, 'report'])->name('report');
 });
 
 

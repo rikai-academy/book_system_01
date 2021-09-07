@@ -54,6 +54,7 @@
                   <div class="comments">
                      <h4>{{$totalcomment}} {{__('message.Comments')}}</h4>
                      @foreach($comments as $comment)
+                     @if ($comment->status != "hidden" || auth()->user()->id == $review->user->id || auth()->user()->role == "admin")
                      <div class="cmt-item flex-it">
                         <div class="author-infor width-100">
                            <div class="flex-it2">
@@ -61,23 +62,42 @@
                                  <h6><a href="#">
                                        {{$comment->user()->value('name')}}
                                     </a>
+                                    @if ($comment->status == "hidden")
+                                     <p class="hidden-message">{{ __('message.hidden message') }}</p>
+                                    @endif
                                  </h6>
                                  <span class="time"> {{$comment->created_at}}</span>
                               </div>
-                              <div class="left-half">
-                                 <a class="rep-btn"
-                                    href="{{route('comment.edit',[$comment->id])}}">{{__('message.Edit')}}</a>
-                                 <input type="submit" class="deletecomment custom-input" value="{{__('message.Delete')}}"
-                                    form="delete-comment">
+                              <div class="left-half review-option">
+                                 <button class="review-option-button">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                 </button>
+                                 <ul class="review-option-list display_none">
+                                    @if(!Auth::guest() && ($review->user_id == Auth::user()->id ||
+                                    Auth::user()->role=='admin'))
+                                    <li><a href="{{route('comment.edit',[$comment->id])}}"">{{ __('message.Edit') }}</a></li>
+                                    <li>
+                                       <a>
+                                          <label class="cursor-pointer" for="{{ "delete-".$comment->id }}">{{ __('message.Delete') }}</label>
+                                       </a>
+                                       <input type="submit" class="display_none" value="{{__('message.Delete')}}" id="{{ "delete-".$comment->id }}"
+                                       form="{{ "delete-comment-".$comment->id }}">
+                                    </li>
+                                    <form action="{{url('comment/'.$comment->id)}}" class="user" id="{{ "delete-comment-".$comment->id }}"
+                                       method="post">
+                                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                       @method('DELETE')
+                                    </form>
+                                    @if(($comment->user_id == Auth::user()->id ||Auth::user()->role=='admin'))
+                                    {!! hiddenSubject($comment,"comment") !!}
+                                    @endif
+                                    @endif
+                                    <li><a class="report" reportType="comment" userId="{{ auth()->user()->id }}" subjectId="{{ $comment->id }}">{{ __('message.Report') }}</a></li>
+                                 </ul>
                               </div>
                            </div>
                            <p>{{$comment->body}}</p>
                            <div>
-                              <form action="{{url('comment/'.$comment->id)}}" class="user" id="delete-comment"
-                                 method="post">
-                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                 @method('DELETE')
-                              </form>
                               @if(!Auth::guest())
                               <ul class="nav nav-pills">
                                  <li role="presentation">
@@ -98,6 +118,7 @@
                            </div>
                         </div>
                      </div>
+                     @endif
                      @endforeach
                   </div>
                   <div class="comment-form">
