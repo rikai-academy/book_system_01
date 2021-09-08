@@ -8580,6 +8580,7 @@ li p{
   border-right:#CCC 1px solid; width:100%;}
 .child li a{
   color: #0a4b8c;
+  padding: 10px 15px;
 }
 ul{
   list-style: none;
@@ -8603,10 +8604,10 @@ li:hover {
 .expand{
   font-size:12px;
   float:right;
-  margin-right:5px;
 }
 .dropdownfirst .dropdown-menu.level1 li a {
   color: #020d18;
+  padding: 10px 15px;
 }
 .hidereview{
   position:absolute;

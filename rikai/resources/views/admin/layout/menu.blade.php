@@ -6,7 +6,6 @@
          <span class="menu-title">{{__('message.Home')}}</span>
          </a>
       </li>
-      @if(Auth::user()->roles()->value('name') === 'admin')
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
          <i class="icon-layout menu-icon"></i>
@@ -20,7 +19,6 @@
             </ul>
          </div>
       </li>
-      @endif
       @if(Auth::user()->roles()->value('name') === 'admin' || Auth::user()->roles()->value('name') === 'booker')
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
@@ -68,7 +66,6 @@
          </div>
       </li>
       @endif
-      @if(Auth::user()->roles()->value('name') === 'admin')
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
          <i class="icon-contract menu-icon"></i>
@@ -81,7 +78,6 @@
             </ul>
          </div>
       </li>
-      @endif
       @if(Auth::user()->roles()->value('name') === 'admin')
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
@@ -106,6 +102,20 @@
          <div class="collapse" id="form-elements">
             <ul class="nav flex-column sub-menu">
                <li class="nav-item"><a class="nav-link" href="{{route('tag.index')}}">{{__('message.List_Tags')}}</a></li>
+            </ul>
+         </div>
+      </li>
+      @endif
+      @if(Auth::user()->roles()->value('name') === 'admin')
+      <li class="nav-item">
+         <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+         <i class="icon-grid-2 menu-icon"></i>
+         <span class="menu-title">{{__('message.Manager_Review_Comment')}}</span>
+         <i class="menu-arrow"></i>
+         </a>
+         <div class="collapse" id="tables">
+            <ul class="nav flex-column sub-menu">
+            <li class="nav-item"><a class="nav-link" href="{{route('managebook.index')}}">{{__('message.List_Book')}}</a></li>
             </ul>
          </div>
       </li>
