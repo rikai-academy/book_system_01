@@ -333,5 +333,9 @@
         'Request of this week' => 'Request of this week',
         'Revenue of this week' => 'Revenue of this week',
         'Revenue' => 'Revenue',
+        'created' => ' has been created',
+        'updated' => ' has been updated',
+        'deleted' => ' has been deleted',
+        'Notification' => 'Notification',
     ]
 ?>

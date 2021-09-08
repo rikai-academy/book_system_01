@@ -9,8 +9,11 @@ use App\Models\Book_category;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Http\Requests\BookRequest;
-use App\Library\Services\Contracts\UploadimageServiceInterface; 
+use App\Library\Services\Contracts\UploadimageServiceInterface;
+use App\Models\User;
+use App\Notifications\BookNotification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Spatie\Tags\Tag;
 
 class BookController extends Controller
@@ -63,7 +66,9 @@ class BookController extends Controller
         $book = Book::create($data);
         $categorys = $request->input('category_id');
         $tags = $request->input('tag_name');
-        $book->syncTags($tags);
+        if($tags) {
+            $book->syncTags($tags);
+        }
         foreach($categorys as $category){
             DB::beginTransaction();
             try{

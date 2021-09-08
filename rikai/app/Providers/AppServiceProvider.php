@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Book;
+use App\Observers\BookObserver;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+        Book::observe(BookObserver::class);
+
+        View::composer('*', function ($view) {
+            $view->with('user', Auth::user());
+        });
     }
 }

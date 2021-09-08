@@ -346,5 +346,9 @@
         'Request of this week' => 'Yêu cầu trong tuần',
         'Revenue of this week' => 'Lợi nhuận trong tuần',
         'Revenue' => 'Lợi nhuận',
+        'created' => ' đã được tạo',
+        'updated' => ' đã được cập nhật',
+        'deleted' => ' đã bị xóa',
+        'Notification' => 'Thông báo',
     ]
 ?>

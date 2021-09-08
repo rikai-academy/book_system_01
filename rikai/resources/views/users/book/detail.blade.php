@@ -218,7 +218,7 @@
                                           {!! hiddenSubject($review,"review") !!}
                                           @endif
                                           @endif
-                                          <li><a class="report" reportType="review" userId="{{ auth()->user()->id }}" subjectId="{{ $review->id }}">{{ __('message.Report') }}</a></li>
+                                          <li><a class="report" reportType="review" userId="{{ auth()->user()?auth()->user()->id:'0' }}" subjectId="{{ $review->id }}">{{ __('message.Report') }}</a></li>
                                        </ul>
                                     </div>
                                  </div>

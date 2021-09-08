@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             // Excel::store(new CartsExport,'accepted-request'.Carbon::now().'xlsx');
             DB::table('cart')->where('status',CartStatus::DONE)->delete();
-        })->lastDayOfMonth('23:59')
+        })->everyMinute()
         ->before(function () {
             dispatch(new MonthlyReportJob);
         })
