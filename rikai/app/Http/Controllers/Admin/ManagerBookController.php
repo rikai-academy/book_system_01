@@ -21,7 +21,7 @@ class ManagerBookController extends Controller
     {
         //
         $books = Book::all();
-        return view('admin.book.manager',compact('books'));
+        return view('admin.book.manage',compact('books'));
     }
 
     /**
