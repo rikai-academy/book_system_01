@@ -18,7 +18,7 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            if(Auth::user()->roles()->value('name') === 'admin' || Auth::user()->roles()->value('name') === 'booker' || Auth::user()->roles()->value('name') === 'manager'){
+            if(Auth::user()->roles()->value('name') === 'admin' || Auth::user()->roles()->value('name') === 'booker' || Auth::user()->roles()->value('name') === 'manager' || Auth::user()->role === 'admin'){
                 return $next($request);
             }else{
                 Auth::logout();
