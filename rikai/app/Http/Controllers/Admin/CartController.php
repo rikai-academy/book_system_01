@@ -81,7 +81,7 @@ class CartController extends Controller
     
             dispatch(new BuyBookJob($cart));
             $action = NotificationEnum::AcceptOrder;
-            Notification::send($users , new OrderNotification($book->title,$action));
+            Notification::send($users , new OrderNotification($cart->id,$action));
             return back()->with('data',$cart)->with('requestResolve',__('message.requestResolve'));
         }else{
             $error = 'message.sufficient_permissions';
@@ -113,7 +113,7 @@ class CartController extends Controller
             $cart->delete();
             $data["carts"] = $this->cartService->getCart($cart_type);
             $action = NotificationEnum::DeleteOrder;
-            Notification::send($users , new OrderNotification($book->title,$action));
+            Notification::send($users , new OrderNotification($cart->id,$action));
             return back()->with('data', $data);
         }else{
             $error = 'message.sufficient_permissions';

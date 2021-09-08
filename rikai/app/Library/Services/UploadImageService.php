@@ -36,7 +36,7 @@ class UploadimageService implements UploadimageServiceInterface {
         }
         else
         {
-            return $data['image'] = null;
+            return $data['image'] = 'default.jpg';
         }
     }
 

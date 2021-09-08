@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\LoginController as LoginController2;
 use App\Http\Controllers\Admin\ChartController as ChartController2;
 use App\Http\Controllers\Admin\TagController as TagController2;
 use App\Http\Controllers\Admin\RoleController as RoleController2;
+use App\Http\Controllers\Admin\ManagerBookController as ManagerBookController2;
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ChangeController as ChangeController1;
@@ -99,6 +100,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
     Route::resource('user',UserController2::class);
     Route::resource('tag',TagController2::class);
     Route::resource('profileadmin',ProfileController2::class);
+    Route::resource('managebook',ManagerBookController2::class);
     Route::post('search/user', [UserController2::class, 'search'])->name('admin.user.search');
     Route::resource('cart',CartController2::class);
     Route::get('cart/type/{type}',[CartController2::class,'cartType'])->name('admin.cart.type');

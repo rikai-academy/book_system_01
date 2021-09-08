@@ -38,7 +38,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        $categories = Category::where('parent_id','=','0')->get();
+        $categories = Category::all();
         return view('admin.category.add',compact('categories'));
     }
 

@@ -6,7 +6,6 @@
          <span class="menu-title">{{__('message.Home')}}</span>
          </a>
       </li>
-      @if(Auth::user()->roles()->value('name') === 'admin')
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
          <i class="icon-layout menu-icon"></i>
@@ -20,7 +19,6 @@
             </ul>
          </div>
       </li>
-      @endif
       @if(Auth::user()->roles()->value('name') === 'admin' || Auth::user()->roles()->value('name') === 'booker')
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
@@ -68,7 +66,6 @@
          </div>
       </li>
       @endif
-      @if(Auth::user()->roles()->value('name') === 'admin')
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
          <i class="icon-contract menu-icon"></i>
@@ -81,7 +78,6 @@
             </ul>
          </div>
       </li>
-      @endif
       @if(Auth::user()->roles()->value('name') === 'admin')
       <li class="nav-item">
          <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
