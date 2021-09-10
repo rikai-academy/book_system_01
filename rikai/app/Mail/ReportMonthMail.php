@@ -39,7 +39,7 @@ class ReportMonthMail extends Mailable
         $pathstatistic = storage_path('app\public\report-statistic-month-'.$date.'.xlsx');
         $pathorder = storage_path('app\public\report-order-month-'.$date.'.xlsx');
         return $this->view('admin.email.report',['date'=> $date])
-        ->subject(__('message.report-month, :date', ['date' => $date]))
+        ->subject(__('report-month, :date', ['date' => $date]))
         ->attach($pathstatistic)
         ->attach($pathorder);
     }

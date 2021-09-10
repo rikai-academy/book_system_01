@@ -250,8 +250,6 @@
         'delete_comment_success'=>'Xóa bình luận thành công ',
         'update_book_success'=>'Cập nhật sách thành công',
         'update_book_fail'=>'Cập nhật sách thất bại',
-        'add_category_success'=>'Thêm sách thành công',
-        'add_category_fail'=>'Thêm sách thất bại',
         'delete_book_success'=>'Xóa sách thành công',
         'publish_at'=>'Ngày phát hành',
         'author_is_not_null'=>'Tác giả không được bỏ trống',
@@ -354,6 +352,8 @@
         'Permissions'=>'Nghiệp vụ',
         'accept_order'=>'Duyệt đơn mua sách',
         'delete_order'=>'Hủy đơn mua sách',
-
+        'Edit_Tags'=>'Sửa thẻ',
+        'Name_Tags'=>'Tên thẻ',
+        'Notifications'=>'Thông báo',
     ]
 ?>

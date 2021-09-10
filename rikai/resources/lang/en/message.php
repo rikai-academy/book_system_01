@@ -346,6 +346,9 @@
         'Permissions'=>'Permissions',
         'accept_order'=>'Accept order',
         'delete_order'=>'Delete order',
+        'Edit_Tags'=>'Edit Tags',
+        'Name_Tags'=>'Name Tags',
+        'Notifications'=>'Notifications',
 
     ]
 ?>

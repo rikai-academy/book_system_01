@@ -32,11 +32,11 @@
                   <ul class="dropdown-menu level1">
                      @foreach($categoryparent as $category)
                      <li class="dropdown">
-                     <a href="{{route('categoryuser.edit',[$category->id])}}">{{__('message.'.$category->title)}}<span class="expand">&raquo;</span>'.'</a>
+                     <a href="{{route('categoryuser.edit',[$category->id])}}">{{__('message.'.$category->title)}}<span class="expand">&raquo;</span></a>
                         <ul class="child">
                            @foreach($category->subcategory()->get() as $cat)
                            <li class="dropdown">
-                           <a href="{{route('categoryuser.edit',[$cat->id])}}" nowrap>{{__('message.'.$cat->title)}}</a><br>
+                           <a href="{{route('categoryuser.edit',[$cat->id])}}" nowrap>{{$cat->title}}</a><br>
                            </li>
                            @endforeach
                         </ul>
