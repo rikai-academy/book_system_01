@@ -11,6 +11,12 @@ class Activity extends Model
     use HasFactory;
     protected $table = "activity";
 
+    protected $fillable = [
+        'book_id',
+        'user_id',
+        'type_id',
+    ];
+
     public $timestamps = false;
 
     public function user() {
