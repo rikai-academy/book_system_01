@@ -16,6 +16,7 @@ use App\Enums\FavoriteStatus;
 use App\Enums\ReadStatus;
 use App\Enums\ActivityType;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Tags\Tag;
 
 class BookController extends Controller
 {
@@ -40,7 +41,6 @@ class BookController extends Controller
      */
     public function show($bookId)
     {
-        //
         $book = Book::find($bookId);
         if($book){
             $book_id = $book->id;
@@ -62,7 +62,8 @@ class BookController extends Controller
         $name = $request->body;
         $books = Book::search($name)->paginate(10);
         $total = count($books);
-        return view('users.book.search',compact('books','total'));
+        $tags = Tag::orderBy('count','desc')->limit(20)->get();
+        return view('users.book.search',compact('books','total','tags'));
     }
 
 

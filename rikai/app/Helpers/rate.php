@@ -51,7 +51,8 @@ function follow($user)
 
 function categorySubMenu($category)
 {
-   $data = '<li class="sub-li">' . '<a href="' . route('categoryuser.edit', [$category->id]) . '">' . $category->title . '</a>';
+   $data = '<li class="sub-li">' . '<a href="' . route('categoryuser.edit', [$category->id]) . '">' . $category->title;
+   $data .= $category->children->count()>0?'<i class="fas fa-chevron-right"></i></a>':'</a>';
    if ($category->children) {
       $data .= '<ul >';
       foreach ($category->children as $child) {
@@ -69,8 +70,10 @@ function categorybook()
    $data = '';
    foreach ($categorys as $category) {
       $data .= '<li class="drp-li">';
-      $data .= '<a href="' . route('categoryuser.edit', [$category->id]) . '">' . __('message.' . $category->title) . '</a>';
+      $data .= '<a href="' . route('categoryuser.edit', [$category->id]) . '">' . __('message.' . $category->title);
+      $data .= $category->children->count()>0?'<i class="fas fa-chevron-right"></i></a>':'</a>';
       if ($category->children) {
+         
          $data .= '<ul class="submenu">';
          foreach ($category->children as $child) {
             $data .= categorySubMenu($child);

@@ -7,10 +7,11 @@ use CartItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\FullTextSearch;
+use Spatie\Tags\HasTags;
 
 class Book extends Model
 {
-    use HasFactory,FullTextSearch;
+    use HasFactory,HasTags,FullTextSearch;
     protected $table = "book";
     public $timestamps = false;
     protected $fillable = [

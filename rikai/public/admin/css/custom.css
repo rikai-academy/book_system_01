@@ -41,6 +41,11 @@
   padding: 5px;
 }
 
+.select2-container--default .select2-selection--multiple {
+  height: auto;
+  padding: 5px;
+}
+
 .custom-chart-holder {
   height: 300px;
   width: 100%;
@@ -77,4 +82,45 @@
   font-size: 16px;
   margin: 4px 2px;
   border-radius: 12px;
+}
+
+.sidebar .nav .nav-item .nav-link i.menu-icon {
+  width: 16px;
+  height: 17px;
+}
+
+.permission-container {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.permission {
+  width: 20px;
+  height: 20px;
+}
+
+.permission-container p {
+  margin: auto 20px;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+.disabled label {
+  background-color: #ef9696;
+}
+
+.submit-action {
+  border-radius: 20px;
+  font-size: 12px;
+  line-height: 1;
+  padding: .375rem .5625rem;
+  font-weight: normal;
+}
+
+.height-10px {
+  height: 10px;
 }

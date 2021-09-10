@@ -243,3 +243,26 @@ th {
 .hidden-message {
   color: red;
 }
+
+.tag-container {
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.tag {
+  margin: 3px;
+  padding: 3px;
+}
+
+.tag a {
+  text-decoration: none;
+  background-color: #dd003f;
+  color: #fad6e0;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+.celebrities {
+  margin: 10px 0px;
+}
