@@ -28,6 +28,17 @@
             @enderror
           </div>
           <div class="form-group">
+            <label for="exampleSelectGender">{{__('message.Role')}}</label>
+            <select class="form-control" name="role" id="categorySelect2">
+               @foreach($roles as $role)
+               <option {{ $data["user"]->hasRole($role->name)?'selected':'' }} value="{{$role->id}}">{{$role->name}}</option>
+               @endforeach
+               @if($data["user"]->hasRole($super_admin->name))
+               <option selected value="{{$super_admin->id}}">{{$super_admin->name}}</option>
+               @endif
+            </select>
+         </div>
+          <div class="form-group">
             <label for="email">{{__('message.Email_Address')}}</label>
             <input type="email" class="form-control" name="email" placeholder="{{__('message.Email_Address')}}"
               id="email" value="{{ $data["user"]->email }}">

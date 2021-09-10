@@ -10,6 +10,12 @@ class ActivityType extends Model
     use HasFactory;
     protected $table = "activity_type";
 
+    public $timestamps = false;
+
+    protected $fillable = [
+        'type',
+    ];
+
     public function activity() {
         return $this->hasMany(Activity::class,'type_id');
     }

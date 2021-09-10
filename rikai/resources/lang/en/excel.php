@@ -8,4 +8,5 @@ return [
     'cart-report' => 'cart-report-',
     'revenue-report' => 'revenue-report-',
     'Export Excel' => 'Export Excel',
+    'tag-report' => 'tag-report-'
 ];

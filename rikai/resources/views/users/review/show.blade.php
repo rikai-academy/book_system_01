@@ -73,8 +73,8 @@
                                     <i class="fas fa-ellipsis-v"></i>
                                  </button>
                                  <ul class="review-option-list display_none">
-                                    @if(!Auth::guest() && ($review->user_id == Auth::user()->id ||
-                                    Auth::user()->role=='admin'))
+                                    @if(!Auth::guest() && ($comment->user_id == Auth::user()->id ||
+                                    Auth::user()->hasRole(['admin', 'modder'])))
                                     <li><a href="{{route('comment.edit',[$comment->id])}}"">{{ __('message.Edit') }}</a></li>
                                     <li>
                                        <a>

@@ -13,7 +13,7 @@
             <div class="alert alert-success">
                {{session('msg')}}
             </div>
-            @endif 
+            @endif
             <div class="topbar-filter">
                <p>{{__('message.Found')}} <span>{{$total}} {{__('message.Books')}}</span> {{__('message.in_total')}}</p>
             </div>
@@ -35,6 +35,25 @@
                </select>
                <div style="text-align:center">
                   {{$books->links()}}
+               </div>
+            </div>
+         </div>
+         <div class="col-md-4">
+            <div class="sidebar">
+               <div class="ads">
+                  <img src="images/uploads/ads1.png" alt="" width="336" height="296">
+               </div>
+               <div class="celebrities">
+                  <h4 class="sb-title">{{__('message.Tag')}}</h4>
+                  <div class="tag-container">
+                     @foreach ($tags as $tag)
+                     <div class="tag">
+                        <a href="{{ url('tag/'.$tag->name) }}">
+                           {{ '#'.$tag->name }}
+                        </a>
+                     </div>
+                     @endforeach
+                  </div>
                </div>
             </div>
          </div>

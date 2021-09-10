@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Cart;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Spatie\Tags\Tag;
 
 class Statistic extends Model
 {
@@ -38,6 +39,18 @@ class Statistic extends Model
             $result = DB::table('cart')->select(DB::raw('SUM(total_price) as revenue'))->whereDate('created_at', $when)->where('status',CartStatus::DONE)->pluck('revenue');
             $data["labels"]->push($when);
             $data["revenue"]->push($result[0]?$result[0]:0);
+        }
+        return $data;
+    }
+
+    public function TagStatistic($types){
+        $data["labels"] = collect([]);
+        $data["count"] = collect([]);
+        $days = $this->calcDay($types);
+        $tags = Tag::orderBy('count','desc')->limit(20)->get();
+        foreach ($tags as $tag) {
+            $data["labels"]->push($tag->name);
+            $data["count"]->push($tag->count);
         }
         return $data;
     }

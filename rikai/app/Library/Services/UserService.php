@@ -19,7 +19,12 @@ class UserService implements UserServiceInterface
 
     public function searchBy($search, $search_by)
     {
-        $users = User::where($search_by,'like','%'.$search.'%')->paginate(5);
+        if ($search_by == "role") {
+            $users = User::role($search)->paginate(5);
+        }
+        else {
+            $users = User::where($search_by,'like','%'.$search.'%')->paginate(5);
+        }
         return $users;
     }
 
