@@ -24,8 +24,8 @@ class RevenueChart extends Chart
         $statistic = new Statistic();
         $data = $statistic->RevenueDay("week");
         $this->displayLegend(true);
-        $this->title('Revenue of this week');
+        $this->title(__('message.Revenue of this week'));
         $this->labels($data["labels"]);
-        $this->dataset("Revenue", 'line', $data["revenue"])->color('blue');
+        $this->dataset(__('message.Revenue'), 'line', $data["revenue"])->color('blue');
     }
 }

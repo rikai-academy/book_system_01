@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,7 +26,8 @@ class LoginController extends Controller
 
     public function postLogin(Request $request){
         $login = $request->only(['email','password']);
-        $login['role'] = 'admin';
+        // $user = User::where('email',)
+        // $login['role'] = 'admin';
         if(Auth::attempt($login)){
             return redirect()->route('homeadmin.index');
         }
